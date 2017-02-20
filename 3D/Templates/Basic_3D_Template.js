@@ -42,10 +42,15 @@ Basic_3D_Template.prototype.postInit = function(){
 
 }
 
-Basic_3D_Template.prototype.render = function() {
+Basic_3D_Template.prototype.preRender = function(){
+
+}
+
+Basic_3D_Template.prototype.render = function(){
   var self = this;
-    window.requestAnimationFrame(function(){self.render});
-    this.renderer.render(this.scene, this.camera);
+  this.preRender();
+  this.renderer.render(this.scene, this.camera);
+  window.requestAnimationFrame(function(){self.render();});
 }
 
 Basic_3D_Template.prototype.handleResize = function() {
