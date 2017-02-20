@@ -18,3 +18,28 @@ Basic_3D_Template.prototype.setContainer = function(containerID){
     throw new Error("ContainerID must be a valid String");
   }
 };
+
+Basic_3D_Template.prototype.init = function() {
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+    this.renderer = new THREE.WebGLRenderer();
+    this.renderer.setClearColor(0x000000, 1.0);
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.shadowMapEnabled = true;
+
+    this.camera.position.x = 15;
+    this.camera.position.y = 16;
+    this.camera.position.z = 13;
+    this.camera.lookAt(this.scene.position);
+
+    document.body.appendChild(this.renderer.domElement);
+
+    this.render();
+}
+
+
+Basic_3D_Template.prototype.render = function() {
+    window.requestAnimationFrame(this.render);
+    this.renderer.render(this.scene, this.camera);
+}
