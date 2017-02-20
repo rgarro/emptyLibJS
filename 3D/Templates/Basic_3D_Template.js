@@ -32,14 +32,24 @@ Basic_3D_Template.prototype.init = function() {
     this.camera.position.y = 16;
     this.camera.position.z = 13;
     this.camera.lookAt(this.scene.position);
-
+    this.postInit();
     document.body.appendChild(this.renderer.domElement);
 
     this.render();
 }
 
+Basic_3D_Template.prototype.postInit = function(){
+
+}
 
 Basic_3D_Template.prototype.render = function() {
-    window.requestAnimationFrame(this.render);
+  var self = this;
+    window.requestAnimationFrame(function(){self.render});
     this.renderer.render(this.scene, this.camera);
+}
+
+Basic_3D_Template.prototype.handleResize = function() {
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
 }
