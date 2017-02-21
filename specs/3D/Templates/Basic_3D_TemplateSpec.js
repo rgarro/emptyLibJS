@@ -21,4 +21,31 @@ describe("Basic_3D_Template",function(){
 		expect(bT.camera).toBeNull();
 	});
 
+	it("has an int ini_camera_x",function(){
+		expect(bT.ini_camera_x).toBeNumber();
+		expect(bT).toHaveNumber('ini_camera_x');
+		expect(bT.ini_camera_x).toBeGreaterThan(0);
+	});
+
+	it("has an int ini_camera_y",function(){
+		expect(bT.ini_camera_y).toBeNumber();
+		expect(bT).toHaveNumber('ini_camera_y');
+		expect(bT.ini_camera_y).toBeGreaterThan(0);
+	});
+
+	it("has an int ini_camera_z",function(){
+		expect(bT.ini_camera_z).toBeNumber();
+		expect(bT).toHaveNumber('ini_camera_z');
+		expect(bT.ini_camera_z).toBeGreaterThan(0);
+	});
+
+	it("has setCamera method",function(){
+		expect(bT).toHaveMethod('setCamera');
+	});
+
+	it("calling setCamera set camera to perspective camera object",function(){
+		bt.setCamera();
+		expect(bT.camera.isPerspectiveCamera).toBeTrue();
+	});
+
 });

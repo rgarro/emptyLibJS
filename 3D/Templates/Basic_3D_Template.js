@@ -3,6 +3,7 @@ function Basic_3D_Template(){
   this.renderer = null;
   this.scene = null;
   this.camera = null;
+  
   if(typeof arguments[0] != 'undefined'){
     this.setContainer(arguments[0]);
   }
