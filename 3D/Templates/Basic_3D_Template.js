@@ -3,7 +3,11 @@ function Basic_3D_Template(){
   this.renderer = null;
   this.scene = null;
   this.camera = null;
-  
+  this.ini_camera_x = 15;
+  this.ini_camera_y = 16;
+  this.ini_camera_z =13;
+  this.is_camera_set = false;
+  this.cameraControl = null;
   if(typeof arguments[0] != 'undefined'){
     this.setContainer(arguments[0]);
   }
@@ -22,21 +26,31 @@ Basic_3D_Template.prototype.setContainer = function(containerID){
 
 Basic_3D_Template.prototype.init = function() {
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-
+    this.setCamera();
+    this.camera.lookAt(this.scene.position);
+    this.setControl();
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setClearColor(0x000000, 1.0);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.shadowMapEnabled = true;
 
-    this.camera.position.x = 15;
-    this.camera.position.y = 16;
-    this.camera.position.z = 13;
-    this.camera.lookAt(this.scene.position);
+
     this.postInit();
     document.body.appendChild(this.renderer.domElement);
 
     this.render();
+}
+
+Basic_3D_Template.prototype.setCamera = function(){
+  this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+  this.camera.position.x = this.ini_camera_x;
+  this.camera.position.y = this.ini_camera_y;
+  this.camera.position.z = this.ini_camera_z;
+  this.is_camera_set = true;
+}
+
+Basic_3D_Template.prototype.setControl = function(){
+
 }
 
 Basic_3D_Template.prototype.postInit = function(){

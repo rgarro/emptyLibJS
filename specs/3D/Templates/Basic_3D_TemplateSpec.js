@@ -39,13 +39,27 @@ describe("Basic_3D_Template",function(){
 		expect(bT.ini_camera_z).toBeGreaterThan(0);
 	});
 
+	it("has a boolean is_camera_set",function(){
+		expect(bT.is_camera_set).toBeBoolean();
+		expect(bT.is_camera_set).toBeFalse();
+	});
+
+	it("has a null cameraControl",function(){
+		expect(bT.cameraControl).toBeNull();
+	});
+
 	it("has setCamera method",function(){
 		expect(bT).toHaveMethod('setCamera');
 	});
 
 	it("calling setCamera set camera to perspective camera object",function(){
-		bt.setCamera();
-		expect(bT.camera.isPerspectiveCamera).toBeTrue();
+		bT.setCamera();
+		expect(bT.camera.frustumCulled).toBeTrue();
+		expect(bT.is_camera_set).toBeTrue();
+	});
+
+	it("has setControl method",function(){
+		expect(bT).toHaveMethod('setControl');
 	});
 
 });
