@@ -15,7 +15,6 @@ _02.prototype = Object.create(Basic_3D_Template.prototype);
 _02.prototype.constructor = _02;
 
 _02.prototype.postInit = function(){
-
   var sphereGeometry = new THREE.SphereGeometry(15,30,30);
   var sphereMaterial = new THREE.MeshNormalMaterial();
   var earthMesh = new THREE.Mesh(sphereGeometry,sphereMaterial);
