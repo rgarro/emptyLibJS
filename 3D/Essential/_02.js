@@ -8,6 +8,7 @@ function _02(p){
   this.ini_camera_x = 35;
   this.ini_camera_y = 36;
   this.ini_camera_z = 33;
+  this.cloudGeometry = null;
 }
 
 _02.prototype = Object.create(Basic_3D_Template.prototype);
@@ -16,17 +17,22 @@ _02.prototype.constructor = _02;
 
 _02.prototype.postInit = function(){
   var sphereGeometry = new THREE.SphereGeometry(15,30,30);
-  //var sphereMaterial = new THREE.MeshNormalMaterial();
   var sphereMaterial = this.createEarthMaterial();
   var earthMesh = new THREE.Mesh(sphereGeometry,sphereMaterial);
   this.scene.add(earthMesh);
+  this.cloudGeometry = new THREE.SphereGeometry(sphereGeometry.parameters.radius*1.01,30,30);
+  var cloudMesh = new THREE.Mesh(this.cloudGeometry,this.createCloudMaterial());
+  this.scene.add(cloudMesh);
+}
+
+_02.prototype.createCloudMaterial = function(){
+  var material =  this.getTexturedMaterial("/emptyLibJS/assets/textures/planets/fair_clouds_4k.png");
+  material.transparent = true;
+  return material;
 }
 
 _02.prototype.createEarthMaterial = function(){
-  var earthTexture = THREE.ImageUtils.loadTexture("/emptyLibJS/assets/textures/planets/earthmap4k.jpg");
-  var earthMaterial = new THREE.MeshBasicMaterial();
-  earthMaterial.map = earthTexture;
-  return earthMaterial;
+  return this.getTexturedMaterial("/emptyLibJS/assets/textures/planets/earthmap4k.jpg");
 }
 
 _02.prototype.setControl = function(){

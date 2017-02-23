@@ -1,3 +1,8 @@
+/**
+ * Basic 3D Template
+ *
+ * @author Rolando <rolando@emptyart.xyz>
+ */
 function Basic_3D_Template(){
   this.container = null;
   this.renderer = null;
@@ -12,6 +17,9 @@ function Basic_3D_Template(){
     this.setContainer(arguments[0]);
   }
 }
+
+//Texture Utilities
+Basic_3D_Template.prototype = Object.create(Texture.prototype);
 
 Basic_3D_Template.prototype.setContainer = function(containerID){
   if(typeof containerID == 'string'){
