@@ -26,13 +26,13 @@ _02.prototype.postInit = function(){
 }
 
 _02.prototype.createCloudMaterial = function(){
-  var material =  this.getTexturedMaterial("/emptyLibJS/assets/textures/planets/fair_clouds_4k.png");
+  var material =  this.getTexturedMaterial("/assets/textures/planets/fair_clouds_4k.png");
   material.transparent = true;
   return material;
 }
 
 _02.prototype.createEarthMaterial = function(){
-  return this.getTexturedMaterial("/emptyLibJS/assets/textures/planets/earthmap4k.jpg");
+  return this.getTexturedMaterial("/assets/textures/planets/earthmap4k.jpg");
 }
 
 _02.prototype.setControl = function(){
