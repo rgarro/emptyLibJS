@@ -16,9 +16,17 @@ _02.prototype.constructor = _02;
 
 _02.prototype.postInit = function(){
   var sphereGeometry = new THREE.SphereGeometry(15,30,30);
-  var sphereMaterial = new THREE.MeshNormalMaterial();
+  //var sphereMaterial = new THREE.MeshNormalMaterial();
+  var sphereMaterial = this.createEarthMaterial();
   var earthMesh = new THREE.Mesh(sphereGeometry,sphereMaterial);
   this.scene.add(earthMesh);
+}
+
+_02.prototype.createEarthMaterial = function(){
+  var earthTexture = THREE.ImageUtils.loadTexture("/emptyLibJS/assets/textures/planets/earthmap4k.jpg");
+  var earthMaterial = new THREE.MeshBasicMaterial();
+  earthMaterial.map = earthTexture;
+  return earthMaterial;
 }
 
 _02.prototype.setControl = function(){
