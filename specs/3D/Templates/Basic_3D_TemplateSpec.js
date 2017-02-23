@@ -44,6 +44,16 @@ describe("Basic_3D_Template",function(){
 		expect(bT.is_camera_set).toBeFalse();
 	});
 
+	it("has a boolean show_control_gui",function(){
+		expect(bT.show_control_gui).toBeBoolean();
+		expect(bT.show_control_gui).toBeFalse();
+	});
+
+	it("has a boolean show_stats",function(){
+		expect(bT.show_stats).toBeBoolean();
+		expect(bT.show_stats).toBeFalse();
+	});
+
 	it("has a null cameraControl",function(){
 		expect(bT.cameraControl).toBeNull();
 	});
