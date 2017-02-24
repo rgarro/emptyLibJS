@@ -6,6 +6,6 @@ describe("Texture Util",function(){
 	});
 
 	it("has getTexturedMaterial method",function(){
-		expect(tU).toHaveMethod('getTexturedMaterial');;
+		expect(tU).toHaveMethod('getTexturedMaterial');
 	});
 });

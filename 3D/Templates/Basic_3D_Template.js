@@ -13,6 +13,9 @@ function Basic_3D_Template(){
   this.ini_camera_z =13;
   this.is_camera_set = false;
   this.cameraControl = null;
+  this.show_control_gui = false;
+  this.show_stats = false;
+  this.ds = null;
   if(typeof arguments[0] != 'undefined'){
     this.setContainer(arguments[0]);
   }
@@ -20,6 +23,7 @@ function Basic_3D_Template(){
 
 //Texture Utilities
 Basic_3D_Template.prototype = Object.create(Texture.prototype);
+
 
 Basic_3D_Template.prototype.setContainer = function(containerID){
   if(typeof containerID == 'string'){
@@ -33,6 +37,9 @@ Basic_3D_Template.prototype.setContainer = function(containerID){
 };
 
 Basic_3D_Template.prototype.init = function() {
+    if(this.show_stats || this.show_control_gui){
+      this.ds = new DataStats();
+    }
     this.scene = new THREE.Scene();
     this.setCamera();
     this.camera.lookAt(this.scene.position);
@@ -41,11 +48,17 @@ Basic_3D_Template.prototype.init = function() {
     this.renderer.setClearColor(0x000000, 1.0);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.shadowMapEnabled = true;
-
-
     this.postInit();
     document.body.appendChild(this.renderer.domElement);
-
+    if(this.show_control_gui){
+      control = new function () {
+          this.rotationSpeed = 0.001;
+      };
+      this.ds.addControlGui(control);
+    }
+    if(this.show_stats){
+      this.ds.addStatsObject();
+    }
     this.render();
 }
 
