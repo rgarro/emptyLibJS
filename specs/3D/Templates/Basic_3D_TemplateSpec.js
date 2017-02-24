@@ -66,6 +66,10 @@ describe("Basic_3D_Template",function(){
 		expect(bT).toHaveMethod('setLights');
 	});
 
+	it("has l Light object",function(){
+		expect(bT.l).toHaveMethod('getSpot');
+	});
+
 	it("calling setCamera set camera to perspective camera object",function(){
 		bT.setCamera();
 		expect(bT.camera.frustumCulled).toBeTrue();

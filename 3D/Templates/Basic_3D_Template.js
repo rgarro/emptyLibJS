@@ -15,7 +15,8 @@ function Basic_3D_Template(){
   this.cameraControl = null;
   this.show_control_gui = false;
   this.show_stats = false;
-  this.ds = null;
+  this.ds = null;//datastats object
+  this.l = new Light();
   if(typeof arguments[0] != 'undefined'){
     this.setContainer(arguments[0]);
   }
@@ -59,7 +60,12 @@ Basic_3D_Template.prototype.init = function() {
     if(this.show_stats){
       this.ds.addStatsObject();
     }
+    this.setLights();
     this.render();
+}
+
+Basic_3D_Template.prototype.setLights = function(){
+
 }
 
 Basic_3D_Template.prototype.setCamera = function(){

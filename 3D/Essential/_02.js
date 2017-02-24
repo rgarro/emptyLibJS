@@ -11,6 +11,7 @@ function _02(p){
   this.show_stats = true;
   this.show_control_gui = true;
   Basic_3D_Template.call(this.p);
+  this.l = new Light();
 }
 
 _02.prototype = Object.create(Basic_3D_Template.prototype);
@@ -27,6 +28,15 @@ _02.prototype.postInit = function(){
   var cloudMesh = new THREE.Mesh(this.cloudGeometry,this.createCloudMaterial());
   cloudMesh.name = 'clouds';
   this.scene.add(cloudMesh);
+}
+
+_02.prototype.setLights = function(){
+  // now add some better lighting
+  var ambientLight = this.l.getAmbient(0x9d2020,'ambient');
+  this.scene.add(ambientLight);
+  // add sunlight light
+  var directionalLight = this.l.getDirectional(0xffffff,'directional',new THREE.Vector3(100,10,-50));
+  this.scene.add(directionalLight);
 }
 
 _02.prototype.createCloudMaterial = function(){
@@ -47,4 +57,6 @@ _02.prototype.preRender = function(){
   this.cameraControl.update();
   this.scene.getObjectByName('earth').rotation.y+=control.rotationSpeed;
   this.scene.getObjectByName('clouds').rotation.y+=control.rotationSpeed*1.1;
+  //this.scene.getObjectByName('ambient').color = new THREE.Color(control.ambientLightColor);
+  //this.scene.getObjectByName('directional').color = new THREE.Color(control.directionalLightColor);
 }
