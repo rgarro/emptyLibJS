@@ -7,7 +7,7 @@ function Kalero(){
   this.ini_camera_x = 35;
   this.ini_camera_y = 36;
   this.ini_camera_z = 33;
-
+  this.tank = null;
   this.show_stats = true;
   this.show_control_gui = true;
 
@@ -20,7 +20,13 @@ Kalero.prototype = Object.create(Game.prototype);
 Kalero.prototype.constructor = Kalero;
 
 Kalero.prototype.postInit = function(){
-
+  var p = this;
+  var loader = new THREE.JSONLoader();
+  loader.load("/emptyLibJS/3D/Games/Kalero/assets/Tank_T_72.json",function(model){
+    var material = new THREE.MeshNormalMaterial();
+    var mesh = new THREE.Mesh(model,material);
+    p.scene.add(mesh);
+  });
 }
 
 Kalero.prototype.setLights = function(){
