@@ -22,7 +22,7 @@ Kalero.prototype.constructor = Kalero;
 Kalero.prototype.postInit = function(){
   var p = this;
   var loader = new THREE.JSONLoader();
-  loader.load("/emptyLibJS/3D/Games/Kalero/assets/Tank_T_72.json",function(model){
+  loader.load("/emptyLibJS/3D/Games/Kalero/assets/german-panzer-ww2-ausf-b.json",function(model){
     var material = new THREE.MeshNormalMaterial();
     var mesh = new THREE.Mesh(model,material);
     p.scene.add(mesh);
