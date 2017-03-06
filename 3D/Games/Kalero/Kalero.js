@@ -10,7 +10,7 @@ function Kalero(){
   this.tank = null;
   this.show_stats = true;
   this.show_control_gui = true;
-
+  this.control = null;
   this.l = new Light();
   Game.call(this.p);
 }
@@ -21,11 +21,35 @@ Kalero.prototype.constructor = Kalero;
 
 Kalero.prototype.postInit = function(){
   var p = this;
+  //var loader = new THREE.ObjectLoader();
   var loader = new THREE.JSONLoader();
-  loader.load("/emptyLibJS/3D/Games/Kalero/assets/german-panzer-ww2-ausf-b.json",function(model){
-    var material = new THREE.MeshNormalMaterial();
+loader.load("/emptyLibJS/3D/Games/Kalero/assets/a3.json",function(model,materials){
+//console.log(model);
+    var material = new THREE.MeshPhongMaterial();
+    //var material = new THREE.MultiMaterial(materials);
+    material.color = 0xF47a42;
     var mesh = new THREE.Mesh(model,material);
+    //mesh.translateY(-0.5);
+    //mesh.scale = new THREE.Vector3(3,3,3);
     p.scene.add(mesh);
+
+    // now add some better lighting
+    var ambientLight = new THREE.AmbientLight(0x111111);
+    ambientLight.name='ambient';
+    p.scene.add(ambientLight);
+
+    // add sunlight (light
+    var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position = new THREE.Vector3(100,10,-50);
+    directionalLight.name='directional';
+    p.scene.add(directionalLight);
+
+    this.control = new function () {
+        this.rotationSpeed = 0.001;
+        this.ambientLightColor = ambientLight.color.getHex();
+        this.directionalLightColor = directionalLight.color.getHex();
+    };
+
   });
 }
 
@@ -44,4 +68,7 @@ Kalero.prototype.setControl = function(){
 
 Kalero.prototype.preRender = function(){
   this.cameraControl.update();
+
+  this.scene.getObjectByName('ambient').color = new THREE.Color(0x111111);
+  this.scene.getObjectByName('directional').color = new THREE.Color(0xffffff);
 }
