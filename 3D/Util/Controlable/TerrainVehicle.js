@@ -8,6 +8,9 @@ function TerrainVehicle(){
   this.geometry = null;
   this.vehicleMesh = null;
   this.isParentSet = false;
+  this.vehicleMeshName = "terrainVehicle";
+  this.pixelsPerSecond = 20;
+  this.clock = new THREE.Clock();
 }
 
 
@@ -20,6 +23,10 @@ TerrainVehicle.prototype.preInit = function(){
 
 }
 
+TerrainVehicle.prototype.postInit = function(){
+
+}
+
 TerrainVehicle.prototype.loadModel = function(modelUrl){
   if(this.isParentSet){
     var loader = new THREE.JSONLoader();
@@ -29,9 +36,9 @@ TerrainVehicle.prototype.loadModel = function(modelUrl){
       //var material = new THREE.MultiMaterial(materials);
       //material.color = 0xF47a42;
       p.vehicleMesh = new THREE.Mesh(model,material);
-      p.vehicleMesh.name = "vehicle";
-      //mesh.translateY(-0.5);
-      //mesh.scale = new THREE.Vector3(3,3,3);
+      p.vehicleMesh.name = this.vehicleMeshName;
+      //p.vehicleMesh.translateY(-0.5);
+      //p.vehicleMesh.scale = new THREE.Vector3(5,5,5);
       p.parent.scene.add(p.vehicleMesh);
     });
   }else{
@@ -40,9 +47,37 @@ TerrainVehicle.prototype.loadModel = function(modelUrl){
 }
 
 TerrainVehicle.prototype.initListeners = function(){
-
+  this.clock = new THREE.Clock();
+  var p = this;
+  window.addEventListener("keypress",function(e){
+    p.controlActions(e.key);
+  });
 }
 
 TerrainVehicle.prototype.init = function(){
+  this.preInit();
+  this.initListeners();
+  this.postInit();
+}
 
+TerrainVehicle.prototype.controlActions = function(keyCode){
+console.log(keyCode);
+console.log(this.vehicleMeshName);
+  var delta = this.clock.getDelta(); // seconds.
+  var moveDistance = this.pixelsPerSecond * delta; // 200 pixels per second
+  var rotateAngle = Math.PI / 2 * delta;   // pi/2 radians (90 degrees) per second
+
+  // move forwards/backwards/left/right
+	if(keyCode == "w" || keyCode == "W"){
+    this.vehicleMesh.translateZ(-moveDistance);
+  }
+	if(keyCode == "s" || keyCode == "S"){
+		this.vehicleMesh.translateZ(moveDistance);
+  }
+	if(keyCode == "q" || keyCode == "Q"){
+		this.vehicleMesh.translateX(-moveDistance);
+  }
+	if (keyCode == "e" || keyCode == "E"){
+		this.vehicleMesh.translateX(moveDistance);
+  }
 }

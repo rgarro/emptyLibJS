@@ -1,5 +1,7 @@
 function Tank(){
   this.parent = null;
+  this.vehicleMeshName = "elTanque";
+  this.pixelsPerSecond = 5;
   TerrainVehicle.call(this.p);
 }
 
