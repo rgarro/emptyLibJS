@@ -23,7 +23,7 @@ Kalero.prototype.postInit = function(){
   var p = this;
   //var loader = new THREE.ObjectLoader();
   var loader = new THREE.JSONLoader();
-loader.load("/emptyLibJS/3D/Games/Kalero/assets/ultimate-tank.json",function(model,materials){
+loader.load("/emptyLibJS/3D/Games/Kalero/assets/T43.json",function(model,materials){
 //console.log(model);
     var material = new THREE.MeshPhongMaterial();
     //var material = new THREE.MultiMaterial(materials);
