@@ -30,4 +30,7 @@ describe("TerrainVehicle controlable",function(){
     expect(tv).toHaveMethod('initListeners');
   });
 
+  it("has init method",function(){
+    expect(tv).toHaveMethod('init');
+  });
 });

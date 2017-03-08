@@ -21,36 +21,26 @@ Kalero.prototype.constructor = Kalero;
 
 Kalero.prototype.postInit = function(){
   var p = this;
-  //var loader = new THREE.ObjectLoader();
-  var loader = new THREE.JSONLoader();
-loader.load("/emptyLibJS/3D/Games/Kalero/assets/helicopter.json",function(model,materials){
-//console.log(model);
-    var material = new THREE.MeshPhongMaterial();
-    //var material = new THREE.MultiMaterial(materials);
-    //material.color = 0xF47a42;
-    var mesh = new THREE.Mesh(model,material);
-    //mesh.translateY(-0.5);
-    //mesh.scale = new THREE.Vector3(3,3,3);
-    p.scene.add(mesh);
+  this.tank = new Tank();
+  this.tank.setParent(this);
+  this.tank.loadModel("/emptyLibJS/3D/Games/Kalero/assets/T43.json");
 
-    // now add some better lighting
-    var ambientLight = new THREE.AmbientLight(0xF47a42);
-    ambientLight.name='ambient';
-    p.scene.add(ambientLight);
+  // now add some better lighting
+  var ambientLight = new THREE.AmbientLight(0xF47a42);
+  ambientLight.name='ambient';
+  p.scene.add(ambientLight);
 
-    // add sunlight (light
-    var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position = new THREE.Vector3(100,10,-50);
-    directionalLight.name='directional';
-    p.scene.add(directionalLight);
+  // add sunlight (light
+  var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+  directionalLight.position = new THREE.Vector3(100,10,-50);
+  directionalLight.name='directional';
+  p.scene.add(directionalLight);
 
-    this.control = new function () {
-        this.rotationSpeed = 0.001;
-        this.ambientLightColor = ambientLight.color.getHex();
-        this.directionalLightColor = directionalLight.color.getHex();
-    };
-
-  });
+  this.control = new function () {
+      this.rotationSpeed = 0.001;
+      this.ambientLightColor = ambientLight.color.getHex();
+      this.directionalLightColor = directionalLight.color.getHex();
+  };
 }
 
 Kalero.prototype.setLights = function(){
