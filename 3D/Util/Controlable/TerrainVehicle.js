@@ -10,6 +10,8 @@ function TerrainVehicle(){
   this.isParentSet = false;
   this.vehicleMeshName = "terrainVehicle";
   this.pixelsPerSecond = 20;
+  this.scale = 2;
+  this.vehicleColor = 0xFFFFFF;
   this.clock = new THREE.Clock();
 }
 
@@ -34,11 +36,13 @@ TerrainVehicle.prototype.loadModel = function(modelUrl){
     loader.load(modelUrl,function(model,materials){
       var material = new THREE.MeshPhongMaterial();
       //var material = new THREE.MultiMaterial(materials);
-      //material.color = 0xF47a42;
+      //material.color = p.vehicleColor;
       p.vehicleMesh = new THREE.Mesh(model,material);
+      //p.vehicleMesh.setColor(p.vehicleColor);
       p.vehicleMesh.name = this.vehicleMeshName;
       //p.vehicleMesh.translateY(-0.5);
       //p.vehicleMesh.scale = new THREE.Vector3(5,5,5);
+      p.vehicleMesh.scale.set(p.scale,p.scale,p.scale);
       p.parent.scene.add(p.vehicleMesh);
     });
   }else{

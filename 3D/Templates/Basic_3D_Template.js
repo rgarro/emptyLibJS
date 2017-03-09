@@ -16,6 +16,7 @@ function Basic_3D_Template(){
   this.show_control_gui = false;
   this.show_stats = false;
   this.ds = null;//datastats object
+  this.clearColor = 0x000000;
   this.l = new Light();
   if(typeof arguments[0] != 'undefined'){
     this.setContainer(arguments[0]);
@@ -46,7 +47,7 @@ Basic_3D_Template.prototype.init = function() {
     this.camera.lookAt(this.scene.position);
     this.setControl();
     this.renderer = new THREE.WebGLRenderer();
-    this.renderer.setClearColor(0x000000, 1.0);
+    this.renderer.setClearColor(this.clearColor, 1.0);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.shadowMapEnabled = true;
     this.postInit();
