@@ -90,10 +90,10 @@ Basic_3D_Template.prototype.preRender = function(){
 }
 
 Basic_3D_Template.prototype.render = function(){
-  var self = this;
+  //var self = this;
   this.preRender();
   this.renderer.render(this.scene, this.camera);
-  window.requestAnimationFrame(function(){self.render();});
+  window.requestAnimationFrame((function(){this.render();}).bind(this));
 }
 
 Basic_3D_Template.prototype.handleResize = function() {

@@ -32,19 +32,20 @@ TerrainVehicle.prototype.postInit = function(){
 TerrainVehicle.prototype.loadModel = function(modelUrl){
   if(this.isParentSet){
     var loader = new THREE.JSONLoader();
-    var p = this;
-    loader.load(modelUrl,function(model,materials){
-      var material = new THREE.MeshPhongMaterial();
+    //var p = this;
+    loader.load(modelUrl,(function(model,materials){
+      //var material = new THREE.MeshPhongMaterial();
+      var material = new THREE.MeshBasicMaterial();
       //var material = new THREE.MultiMaterial(materials);
-      //material.color = p.vehicleColor;
-      p.vehicleMesh = new THREE.Mesh(model,material);
-      //p.vehicleMesh.setColor(p.vehicleColor);
-      p.vehicleMesh.name = this.vehicleMeshName;
+      material.color.set(this.vehicleColor);
+      this.vehicleMesh = new THREE.Mesh(model,material);
+      //this.vehicleMesh.setColor(this.vehicleColor);
+      this.vehicleMesh.name = this.vehicleMeshName;
       //p.vehicleMesh.translateY(-0.5);
       //p.vehicleMesh.scale = new THREE.Vector3(5,5,5);
-      p.vehicleMesh.scale.set(p.scale,p.scale,p.scale);
-      p.parent.scene.add(p.vehicleMesh);
-    });
+      this.vehicleMesh.scale.set(this.scale,this.scale,this.scale);
+      this.parent.scene.add(this.vehicleMesh);
+    }).bind(this));
   }else{
     throw new Error("Needs a Game parent object");
   }
@@ -52,10 +53,9 @@ TerrainVehicle.prototype.loadModel = function(modelUrl){
 
 TerrainVehicle.prototype.initListeners = function(){
   this.clock = new THREE.Clock();
-  var p = this;
-  window.addEventListener("keypress",function(e){
-    p.controlActions(e.key);
-  });
+  window.addEventListener("keypress",(function(e){
+    this.controlActions(e.key);
+  }).bind(this));
 }
 
 TerrainVehicle.prototype.init = function(){
@@ -65,8 +65,8 @@ TerrainVehicle.prototype.init = function(){
 }
 
 TerrainVehicle.prototype.controlActions = function(keyCode){
-console.log(keyCode);
-console.log(this.vehicleMeshName);
+//console.log(keyCode);
+//console.log(this.vehicleMeshName);
   var delta = this.clock.getDelta(); // seconds.
   var moveDistance = this.pixelsPerSecond * delta; // 200 pixels per second
   var rotateAngle = Math.PI / 2 * delta;   // pi/2 radians (90 degrees) per second

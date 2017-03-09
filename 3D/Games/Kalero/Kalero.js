@@ -2,6 +2,7 @@
  * Caterpillar White Stone War
  *
  * @author Rolando <rolando@emptyart.xyz>
+ *
  */
 function Kalero(){
   this.ini_camera_x = 35;
@@ -33,7 +34,7 @@ Kalero.prototype.postInit = function(){
 Kalero.prototype.loadTank = function(){
   this.tank = new Tank();
   this.tank.setParent(this);
-  this.tank.loadModel("/emptyLibJS/3D/Games/Kalero/assets/T43.json");
+  this.tank.loadModel(this.tank.modelUrl);
   this.tank.init();
 }
 
