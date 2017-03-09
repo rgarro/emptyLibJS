@@ -12,9 +12,13 @@ function Tank(){
   this.pixelsPerSecond = 25;
   this.vehicleMesh = null;
   this.scale = 13;
-  this.vehicleColor = 0xD945D9;
+  this.vehicleColor = 0x0FFA65;
   TerrainVehicle.call(this.p);
 }
 
 Tank.prototype = Object.create(TerrainVehicle.prototype);
 Tank.prototype.constructor = Tank;
+
+Tank.prototype.beforeForward = function(){
+  //play Diesel engine sound here
+}
