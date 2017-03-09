@@ -19,6 +19,11 @@ function Tank(){
 Tank.prototype = Object.create(TerrainVehicle.prototype);
 Tank.prototype.constructor = Tank;
 
+Tank.prototype.preInit = function(){
+  //createjs.Sound.registerSound("/sounds/Mechanic-Public_D-139_hifi.mp3", 'fwdSound');
+}
+
 Tank.prototype.beforeForward = function(){
   //play Diesel engine sound here
+  //createjs.Sound.play('fwdSound');
 }
