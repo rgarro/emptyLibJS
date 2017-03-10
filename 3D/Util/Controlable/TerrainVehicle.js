@@ -40,6 +40,7 @@ TerrainVehicle.prototype.loadModel = function(modelUrl){
       this.vehicleMesh.name = this.vehicleMeshName;
       this.vehicleMesh.scale.set(this.scale,this.scale,this.scale);
       this.parent.scene.add(this.vehicleMesh);
+      //this.vehicleMesh.rotation.y = -360;
     }).bind(this));
   }else{
     throw new Error("Needs a Game parent object");
@@ -67,7 +68,8 @@ TerrainVehicle.prototype.controlActions = function(keyCode){
   var delta = this.clock.getDelta(); // seconds.
   var moveDistance = this.pixelsPerSecond * delta; // 200 pixels per second
   var rotateAngle = Math.PI / 2 * delta;   // pi/2 radians (90 degrees) per second
-
+  var rot = false;
+  var rg = null;
   // move forwards/backwards/left/right
 	if(keyCode == "w" || keyCode == "W"){
     this.beforeForward();
@@ -82,4 +84,30 @@ TerrainVehicle.prototype.controlActions = function(keyCode){
 	if (keyCode == "e" || keyCode == "E"){
 		this.vehicleMesh.translateX(moveDistance);
   }
+  // rotate left/right/up/down
+	var rotation_matrix = new THREE.Matrix4().identity();
+  if(keyCode == "a" || keyCode == "A"){
+    rotation_matrix = new THREE.Matrix4().makeRotationY(rotateAngle);
+    rot = true;
+    rg = rotateAngle;
+  }
+  if(keyCode == "d" || keyCode == "D"){
+    rotation_matrix = new THREE.Matrix4().makeRotationY(-rotateAngle);
+    rot = true;
+    rg = -rotateAngle;
+  }
+	if(keyCode == "r" || keyCode == "R"){
+    rotation_matrix = new THREE.Matrix4().makeRotationX(rotateAngle);
+  }
+
+	if (keyCode == "f" || keyCode == "F"){
+    rotation_matrix = new THREE.Matrix4().makeRotationX(-rotateAngle);
+
+  }
+  if(rot){
+    this.vehicleMesh.matrix.multiply(rotation_matrix);
+    this.vehicleMesh.rotation.y = rg;
+		//this.vehicleMesh.rotation.setEulerFromRotationMatrix(this.vehicleMesh.matrix);
+  }
+
 }
