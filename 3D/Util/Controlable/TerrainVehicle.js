@@ -13,6 +13,13 @@ function TerrainVehicle(){
   this.scale = 2;
   this.vehicleColor = 0xFFFFFF;
   this.clock = new THREE.Clock();
+  this.rotationAngleStep = 10;
+  this.moveForwardKey = "w";
+  this.moveBackwardKey = "s";
+  this.turnLeftKey = "a";
+  this.turnRightKey = "d";
+  this.displaceRightKey = "q";
+  this.displaceLeftKey = "e";
 }
 
 
@@ -52,6 +59,9 @@ TerrainVehicle.prototype.initListeners = function(){
   window.addEventListener("keypress",(function(e){
     this.controlActions(e.key);
   }).bind(this));
+  window.addEventListener("keydown",(function(e){
+    this.controlActions(e.key);
+  }).bind(this));
 }
 
 TerrainVehicle.prototype.init = function(){
@@ -64,50 +74,45 @@ TerrainVehicle.prototype.beforeForward = function(){
 
 }
 
+TerrainVehicle.prototype.beforeTurn = function(){
+
+}
+
+TerrainVehicle.prototype.beforeBackward = function(){
+
+}
+
 TerrainVehicle.prototype.controlActions = function(keyCode){
   var delta = this.clock.getDelta(); // seconds.
   var moveDistance = this.pixelsPerSecond * delta; // 200 pixels per second
   var rotateAngle = Math.PI / 2 * delta;   // pi/2 radians (90 degrees) per second
-  var rot = false;
+  var willRotate = false;
   var rg = null;
   // move forwards/backwards/left/right
-	if(keyCode == "w" || keyCode == "W"){
+	if(keyCode == this.moveForwardKey || keyCode == this.moveForwardKey.toUpperCase()){
     this.beforeForward();
     this.vehicleMesh.translateZ(-moveDistance);
   }
-	if(keyCode == "s" || keyCode == "S"){
+	if(keyCode == this.moveBackwardKey || keyCode == this.moveBackwardKey.toUpperCase()){
+    this.beforeBackward();
 		this.vehicleMesh.translateZ(moveDistance);
   }
-	if(keyCode == "q" || keyCode == "Q"){
+	if(keyCode == this.displaceRightKey || keyCode == this.displaceRightKey.toUpperCase()){
 		this.vehicleMesh.translateX(-moveDistance);
   }
-	if (keyCode == "e" || keyCode == "E"){
+	if (keyCode == this.displaceLeftKey || keyCode == this.displaceLeftKey.toUpperCase()){
 		this.vehicleMesh.translateX(moveDistance);
   }
-  // rotate left/right/up/down
-	var rotation_matrix = new THREE.Matrix4().identity();
-  if(keyCode == "a" || keyCode == "A"){
-    rotation_matrix = new THREE.Matrix4().makeRotationY(rotateAngle);
-    rot = true;
-    rg = rotateAngle;
+  if(keyCode == this.turnLeftKey || keyCode == this.turnLeftKey.toUpperCase()){
+    willRotate = true;
+    rg = - this.rotationAngleStep;
   }
-  if(keyCode == "d" || keyCode == "D"){
-    rotation_matrix = new THREE.Matrix4().makeRotationY(-rotateAngle);
-    rot = true;
-    rg = -rotateAngle;
+  if(keyCode == this.turnRightKey || keyCode == this.turnRightKey.toUpperCase()){
+    willRotate = true;
+    rg = this.rotationAngleStep;
   }
-	if(keyCode == "r" || keyCode == "R"){
-    rotation_matrix = new THREE.Matrix4().makeRotationX(rotateAngle);
+  if(willRotate){
+    this.beforeTurn();
+    this.vehicleMesh.rotation.y = this.vehicleMesh.rotation.y + rg;
   }
-
-	if (keyCode == "f" || keyCode == "F"){
-    rotation_matrix = new THREE.Matrix4().makeRotationX(-rotateAngle);
-
-  }
-  if(rot){
-    this.vehicleMesh.matrix.multiply(rotation_matrix);
-    this.vehicleMesh.rotation.y = rg;
-		//this.vehicleMesh.rotation.setEulerFromRotationMatrix(this.vehicleMesh.matrix);
-  }
-
 }
