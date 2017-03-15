@@ -18,6 +18,7 @@ _3DTools.prototype.getMeshBoxedDimentions = function(mesh,scale){
   ret.x = position.x;
   ret.y = position.y;
   ret.z = position.z;
-  ret.rotationY = mesh.rotation.y
+  ret.rotationY = mesh.rotation.y;
+  ret.rotationX = mesh.rotation.x;
   return ret;
 }

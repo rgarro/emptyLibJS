@@ -29,6 +29,8 @@ Kalero.prototype.postInit = function(){
   this.floorAndSky();
   this.loadTank();
   this.setLights();
+  var axisHelper = new THREE.AxisHelper( 5 );
+this.scene.add(axisHelper);
 }
 
 Kalero.prototype.loadTank = function(){

@@ -57,8 +57,8 @@ Tank.prototype.beforeTurn = function(){
 Tank.prototype.drawTrack = function(trackDirection){
   this.parent.scene.updateMatrixWorld(true);
   var m = this.tools.getMeshBoxedDimentions(this.vehicleMesh,this.scale);
-//console.log(m);
-  var track = new Tracks(m.width,m.height,m.x,m.y,m.rotationY);
+console.log(m);
+  var track = new Tracks(m.width,m.height,m.x,m.y,m.z,m.rotationY,m.rotationX);
   this.parent.scene.add(track.mesh);
   this.tracks.push(track);
 }
