@@ -1,2 +1,20 @@
-# emptyLibJS
-under the jasmine spec dots. html , javascript and css did and oath to live and die together for the glory of the Huawei .. 
+emptyLibJS
+=======
+
+html5,javascript and css did and oath to live and die together for the glory of the Huawei ..
+
+```html
+
+
+<script type="text/javascript">
+			$(document).ready(function(){
+        var app = new Kalero();
+        app.init();
+			});
+</script>		
+
+```
+
+
+
+[![Maneje Despacio](https://raw.githubusercontent.com/rgarro/emptyLibJS/dfb656a41caf12688f33d948fd57393c280271b3/3D/Games/Kalero/assets/KaleroScreenShot.png)]
