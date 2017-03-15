@@ -18,6 +18,14 @@ describe("TerrainVehicle controlable",function(){
     expect(tv).toHaveMember('vehicleMesh');
   });
 
+  it("has tools member",function(){
+    expect(tv).toHaveMember('tools');
+  });
+
+  it("tools property is typeof _3DTools",function(){
+    expect((typeof tv.tools == "_3DTools")).toBeTrue();
+  });
+
   it("has preInit method",function(){
     expect(tv).toHaveMethod('preInit');
   });
