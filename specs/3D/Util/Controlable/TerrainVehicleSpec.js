@@ -23,7 +23,8 @@ describe("TerrainVehicle controlable",function(){
   });
 
   it("tools property is typeof _3DTools",function(){
-    expect((typeof tv.tools == "_3DTools")).toBeTrue();
+    expect(tv.tools).toBeObject();
+    expect(tv.tools).toHaveMethod('getMeshBoxedDimentions');
   });
 
   it("has preInit method",function(){

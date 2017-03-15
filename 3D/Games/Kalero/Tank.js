@@ -22,6 +22,7 @@ function Tank(){
   this.displaceLeftKey = "e";
   this.tracks = [];
   TerrainVehicle.call(this.p);
+  this.tools = new _3DTools();
 }
 
 Tank.prototype = Object.create(TerrainVehicle.prototype);
@@ -54,17 +55,10 @@ Tank.prototype.beforeTurn = function(){
 }
 
 Tank.prototype.drawTrack = function(trackDirection){
-  this.vehicleMesh.geometry.computeBoundingBox();
-  var width = this.vehicleMesh.geometry.boundingBox.max.x - this.vehicleMesh.geometry.boundingBox.min.x;
-  var height = this.vehicleMesh.geometry.boundingBox.max.z - this.vehicleMesh.geometry.boundingBox.min.z;
   this.parent.scene.updateMatrixWorld(true);
-  var position = new THREE.Vector3();
-  position.setFromMatrixPosition(this.vehicleMesh.matrixWorld);
-  var x = position.x;
-  var y = position.y;
-  var z = position.z;
-  var rotationY = this.vehicleMesh.rotation.y
-  var track = new Tracks(width,height,x,y,rotationY);
+  var m = this.tools.getMeshBoxedDimentions(this.vehicleMesh,this.scale);
+//console.log(m);
+  var track = new Tracks(m.width,m.height,m.x,m.y,m.rotationY);
   this.parent.scene.add(track.mesh);
   this.tracks.push(track);
 }

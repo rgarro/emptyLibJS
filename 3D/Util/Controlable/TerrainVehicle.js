@@ -20,10 +20,8 @@ function TerrainVehicle(){
   this.turnRightKey = "d";
   this.displaceRightKey = "q";
   this.displaceLeftKey = "e";
+  this.tools = new _3DTools();
 }
-
-TerrainVehicle.prototype = Object.create(TerrainVehicle.prototype);
-TerrainVehicle.prototype.constructor = TerrainVehicle;
 
 TerrainVehicle.prototype.setParent = function(game){
   this.parent = game;
