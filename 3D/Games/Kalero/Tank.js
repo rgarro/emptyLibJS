@@ -60,5 +60,6 @@ Tank.prototype.drawTrack = function(trackDirection){
 console.log(m);
   var track = new Tracks(m.width,m.height,m.x,m.y,m.z,m.rotationY,m.rotationX);
   this.parent.scene.add(track.mesh);
+  track.doTimedFade();
   this.tracks.push(track);
 }

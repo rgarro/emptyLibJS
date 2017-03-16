@@ -25,14 +25,4 @@ Game.prototype.floorAndSky = function(){
 	floor.position.y = -0.5;
 	floor.rotation.x = Math.PI / 2;
 	this.scene.add(floor);
-	// SKYBOX/FOG
-	//var skyBoxGeometry = new THREE.CubeGeometry( 10000, 10000, 10000 );
-  var skyBoxGeometry = new THREE.BoxGeometry( 10000, 10000, 10000 );
-	//var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0x9999ff, side: THREE.BackSide } );
-  var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0x9999ff } );
-	var skyBox = new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
-//skyBox.scale.set(-1,1,1);
-  skyBox.name = "skyBox";
-  this.scene.add(skyBox);
-	//this.scene.fog = new THREE.FogExp2( 0x9999ff, 0.00025 );
 }

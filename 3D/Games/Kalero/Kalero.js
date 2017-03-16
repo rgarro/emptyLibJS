@@ -47,7 +47,7 @@ Kalero.prototype.setLights = function(){
   this.scene.add(ambientLight);
 
    //add sunlight (light
-  /*var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+  /*var directionalLight = new THREE.DirectionalLight(0xffff55, 1);
   directionalLight.position = new THREE.Vector3(100,10,-50);
   directionalLight.name='directional';
   this.scene.add(directionalLight);*/

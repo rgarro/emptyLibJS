@@ -7,8 +7,16 @@ function Tracks(width,height,x,y,z,rotationY,rotationX){
   this.geometry = null;
   this.material = null;
   this.mesh = null;
+  this.fadingFrameTime = 1000;
   this.trackTextureUrl = "/emptyLibJS/3D/Games/Kalero/assets/tracks.png";
+  TimedFadeable.call(this.p);
+  this.loadProp(width,height,x,y,z,rotationY,rotationX);
+}
 
+Tracks.prototype = Object.create(TimedFadeable.prototype);
+Tracks.prototype.constructor = Tracks;
+
+Tracks.prototype.loadProp = function(width,height,x,y,z,rotationY,rotationX){
   var trackTexture = new THREE.ImageUtils.loadTexture(this.trackTextureUrl);
   trackTexture.wrapS = trackTexture.wrapT = THREE.RepeatWrapping;
   //trackTexture.repeat.set( 10, 10 );
@@ -21,8 +29,4 @@ function Tracks(width,height,x,y,z,rotationY,rotationX){
   this.mesh.position.z = z;
   this.mesh.rotation.x = (Math.PI / 2);
   this.mesh.rotation.z = rotationY;
-  TimedFadeable.call(this.p);
-}
-
-Tracks.prototype = Object.create(TimedFadeable.prototype);
-Tracks.prototype.constructor = Tracks;
+};
