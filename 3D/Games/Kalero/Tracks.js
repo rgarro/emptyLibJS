@@ -21,6 +21,7 @@ Tracks.prototype.loadProp = function(width,height,x,y,z,rotationY,rotationX){
   trackTexture.wrapS = trackTexture.wrapT = THREE.RepeatWrapping;
   //trackTexture.repeat.set( 10, 10 );
   this.material = new THREE.MeshBasicMaterial( { map: trackTexture, side: THREE.DoubleSide } );
+  this.material.transparent = true;
   this.geometry = new THREE.PlaneGeometry(width, height/3, 10, 10);
   this.mesh = new THREE.Mesh(this.geometry,this.material);
   //track.name = "";

@@ -11,4 +11,4 @@ var SmokeEmitter = (function(){
   return SmokeEmitter;
 }).();
 
-oE.SmokeEmitter = SmokeEmitter;
+eO.SmokeEmitter = SmokeEmitter;
