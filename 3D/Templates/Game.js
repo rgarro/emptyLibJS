@@ -4,7 +4,7 @@
  * @author Rolando <rolando@emptyart.xyz>
  */
 function Game(){
-  this.clearColor = 0x000000;
+  this.clearColor = 0xa3e1ff;
   this.floorTextureUrl = '/emptyLibJS/3D/Games/Kalero/assets/checkerboard.jpg';
   Basic_3D_Template.call(this.p);
 }
@@ -25,4 +25,9 @@ Game.prototype.floorAndSky = function(){
 	floor.position.y = -0.5;
 	floor.rotation.x = Math.PI / 2;
 	this.scene.add(floor);
+  //sky
+  var skyboxGeometry = new THREE.CubeGeometry(10000, 10000, 10000);
+  var skyboxMaterial = new THREE.MeshBasicMaterial({ color: 0xa3e1ff, side: THREE.BackSide });
+  var skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial);
+  this.scene.add(skybox);
 }

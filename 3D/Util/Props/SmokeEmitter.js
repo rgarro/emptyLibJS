@@ -4,11 +4,11 @@
  * @author Rolando <rolando@emptyart.xyz>
  */
 var SmokeEmitter = (function(){
-  function SmokeEmitter(){
-
+  function SmokeEmitter(scene){
+    this.scene = scene
   }
 
   return SmokeEmitter;
-}).();
+})();
 
 eO.SmokeEmitter = SmokeEmitter;
