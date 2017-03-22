@@ -21,6 +21,7 @@ function Tank(){
   this.displaceRightKey = "q";
   this.displaceLeftKey = "e";
   this.tracks = [];
+  this.propsRemover = null;
   TerrainVehicle.call(this.p);
   this.tools = new _3DTools();
 }
@@ -31,6 +32,10 @@ Tank.prototype.constructor = Tank;
 Tank.prototype.preInit = function(){
   createjs.Sound.registerSound("/mp3/rolling_-ryan_pud-8115_hifi.mp3", 'fwdSound');
   createjs.Sound.registerSound("/mp3/spaz_scr-Jerimee_-7440_hifi.mp3", 'turnSound');
+}
+
+Tank.prototype.postInit = function(){
+  this.propsRemover = new eO.PropsRemover(this.parent.scene);
 }
 
 Tank.prototype.beforeForward = function(){
@@ -57,9 +62,12 @@ Tank.prototype.beforeTurn = function(){
 Tank.prototype.drawTrack = function(trackDirection){
   this.parent.scene.updateMatrixWorld(true);
   var m = this.tools.getMeshBoxedDimentions(this.vehicleMesh,this.scale);
-console.log(m);
   var track = new Tracks(m.width,m.height,m.x,m.y,m.z,m.rotationY,m.rotationX);
+  track.propsRemover = this.propsRemover;
+  track.propMeshName = "track" + this.tracks.length;
+  track.index = this.tracks.length;
   this.parent.scene.add(track.mesh);
+  track.propArray = this.tracks;
   track.doTimedFade();
   this.tracks.push(track);
 }

@@ -9,7 +9,11 @@ function TimedFadeable(){
   this.mesh = null;
   this.trackTextureUrl = "/emptyLibJS/3D/Games/Kalero/assets/checkerboard.jpg";
   this.fadingFrameTime = 3000;
-  this.is_faded = false; 
+  this.is_faded = false;
+  this.propsRemover = null;
+  this.propMeshName = null;
+  this.index = null;
+  this.propArray = null;
 }
 
 TimedFadeable.prototype.doTimedFade = function(){
@@ -21,7 +25,10 @@ TimedFadeable.prototype.doTimedFade = function(){
     }.bind(this),ftime);
   }else{
     this.is_faded = true;
-    //some delegate should be removing this
+    if(this.propMeshName.length > 0 && this.propsRemover != null){
+      this.propsRemover.remove(this.propMeshName);
+      this.propArray.splice(this.index,1);
+    }
   }
 };
 

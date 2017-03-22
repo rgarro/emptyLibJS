@@ -9,7 +9,11 @@ function Tracks(width,height,x,y,z,rotationY,rotationX){
   this.mesh = null;
   this.fadingFrameTime = 1000;
   this.trackTextureUrl = "/emptyLibJS/3D/Games/Kalero/assets/tracks.png";
-  this.is_faded = false; 
+  this.is_faded = false;
+  this.propsRemover = null;
+  this.propMeshName = null;
+  this.index = null;
+  this.propArray = null;
   TimedFadeable.call(this.p);
   this.loadProp(width,height,x,y,z,rotationY,rotationX);
 }
