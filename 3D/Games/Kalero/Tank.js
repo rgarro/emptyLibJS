@@ -23,7 +23,8 @@ function Tank(){
   this.tracks = [];
   this.propsRemover = null;
   TerrainVehicle.call(this.p);
-  this.tools = new _3DTools();
+  this.tools = new eO._3DTools();
+  this.muffler = null;
 }
 
 Tank.prototype = Object.create(TerrainVehicle.prototype);
@@ -36,6 +37,7 @@ Tank.prototype.preInit = function(){
 
 Tank.prototype.postInit = function(){
   this.propsRemover = new eO.PropsRemover(this.parent.scene);
+  this.muffler = new eO.SmokeEmitter(this.parent.scene);
 }
 
 Tank.prototype.beforeForward = function(){
@@ -62,6 +64,7 @@ Tank.prototype.beforeTurn = function(){
 Tank.prototype.drawTrack = function(trackDirection){
   this.parent.scene.updateMatrixWorld(true);
   var m = this.tools.getMeshBoxedDimentions(this.vehicleMesh,this.scale);
+  this.muffler.doSmoke();//do smoke needs to hook a render event and coordinates
   var track = new Tracks(m.width,m.height,m.x,m.y,m.z,m.rotationY,m.rotationX);
   track.propsRemover = this.propsRemover;
   track.propMeshName = "track" + this.tracks.length;
