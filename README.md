@@ -17,4 +17,4 @@ html5,javascript and css did and oath to live and die together for the glory of 
 
 
 
-[![Maneje Despacio](https://raw.githubusercontent.com/rgarro/emptyLibJS/dfb656a41caf12688f33d948fd57393c280271b3/3D/Games/Kalero/assets/KaleroScreenShot.png)]
+[![Maneje Despacio](https://raw.githubusercontent.com/rgarro/emptyLibJS/master/3D/Games/Kalero/assets/KaleroScreenShot.png)]
