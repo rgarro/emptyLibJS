@@ -7,24 +7,44 @@ var SmokeEmitter = (function(){
   function SmokeEmitter(scene){
     this.scene = scene
     this.textureUrl = "/emptyLibJS/3D/Games/Kalero/assets/smoke.png";
+    this.smokeParticles = null;
+    this.smoke = null;
+    this.smokeColor = 0x111111;
+    this.smokeSize = 50;
+    this.transparent = true;
+    this.smokeX = -150;
   }
 
   SmokeEmitter.prototype.doSmoke = function(){
-    var smokeParticles = new THREE.Geometry;
+    this.smokeParticles = new THREE.Geometry;
     for (var i = 0; i < 300; i++) {
       var particle = new THREE.Vector3(Math.random() * 32 - 16, Math.random() * 230, Math.random() * 32 - 16);
-      smokeParticles.vertices.push(particle);
+      this.smokeParticles.vertices.push(particle);
     }
     var smokeTexture = THREE.ImageUtils.loadTexture(this.textureUrl);
-    var smokeMaterial = new THREE.ParticleBasicMaterial({ map: smokeTexture, transparent: true, blending: THREE.AdditiveBlending, size: 50, color: 0x111111 });
-    var smoke = new THREE.ParticleSystem(smokeParticles, smokeMaterial);
-    smoke.sortParticles = true;
-    smoke.position.x = -150;
-    this.scene.add(smoke);
+    var smokeMaterial = new THREE.ParticleBasicMaterial({ map: smokeTexture, transparent: this.transparent, blending: THREE.AdditiveBlending, size: this.smokeSize, color: this.smokeColor });
+    this.smoke = new THREE.ParticleSystem(this.smokeParticles, smokeMaterial);
+    this.smoke.sortParticles = true;
+    this.smoke.position.x = this.smokeX;
+    this.scene.add(this.smoke);
   }
 
   SmokeEmitter.prototype.onRender = function(){
-    console.log("rendering smoke ,,");
+    var delta = clock.getDelta();
+	//cube.rotation.y -= delta;
+	//particleSystem.rotation.y += delta;
+
+	var particleCount = this.smokeParticles.vertices.length;
+	while (particleCount--) {
+		var particle = this.smokeParticles.vertices[particleCount];
+		particle.y += delta * 50;
+		if (particle.y >= 230) {
+			particle.y = Math.random() * 16;
+			particle.x = Math.random() * 32 - 16;
+			particle.z = Math.random() * 32 - 16;
+		}
+	}
+	this.smokeParticles.__dirtyVertices = true;
   }
 
   return SmokeEmitter;

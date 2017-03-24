@@ -22,6 +22,7 @@ var TerrainVehicle = (function(){
     this.turnRightKey = "d";
     this.displaceRightKey = "q";
     this.displaceLeftKey = "e";
+    this.is_running = false;
     this.tools = new _3DTools();
   }
 
