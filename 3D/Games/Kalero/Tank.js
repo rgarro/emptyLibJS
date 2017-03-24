@@ -67,8 +67,9 @@ Tank.prototype.beforeTurn = function(){
 Tank.prototype.drawTrack = function(trackDirection){
   this.parent.scene.updateMatrixWorld(true);
   var m = this.tools.getMeshBoxedDimentions(this.vehicleMesh,this.scale);
-  this.muffler.doSmoke();//do smoke needs to hook a render event and coordinates
   this.muffler.smokeX = m.x;
+  this.muffler.smokeY = m.y;
+  this.muffler.doSmoke();//do smoke needs to hook a render event and coordinates
   var track = new Tracks(m.width,m.height,m.x,m.y,m.z,m.rotationY,m.rotationX);
   track.propsRemover = this.propsRemover;
   track.propMeshName = "track" + this.tracks.length;

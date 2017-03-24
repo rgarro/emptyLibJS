@@ -13,6 +13,7 @@ var SmokeEmitter = (function(){
     this.smokeSize = 50;
     this.transparent = true;
     this.smokeX = -150;
+    this.smokeY = 0;
   }
 
   SmokeEmitter.prototype.doSmoke = function(){
@@ -26,6 +27,7 @@ var SmokeEmitter = (function(){
     this.smoke = new THREE.ParticleSystem(this.smokeParticles, smokeMaterial);
     this.smoke.sortParticles = true;
     this.smoke.position.x = this.smokeX;
+    this.smoke.position.y = this.smokeY;
     this.scene.add(this.smoke);
   }
 
