@@ -23,6 +23,10 @@ var SmokeEmitter = (function(){
     this.scene.add(smoke);
   }
 
+  SmokeEmitter.prototype.onRender = function(){
+    console.log("rendering smoke ,,");
+  }
+
   return SmokeEmitter;
 })();
 

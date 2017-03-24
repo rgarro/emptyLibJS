@@ -71,4 +71,5 @@ Kalero.prototype.preRender = function(){
   this.cameraControl.update();
   this.scene.getObjectByName('ambient').color = new THREE.Color(0x111111);
   //this.scene.getObjectByName('directional').color = new THREE.Color(0xffffff);
+  this.tank.muffler.onRender();
 }
