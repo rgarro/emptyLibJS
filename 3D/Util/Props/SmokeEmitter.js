@@ -26,4 +26,4 @@ var SmokeEmitter = (function(){
   return SmokeEmitter;
 })();
 
-eO.SmokeEmitter = SmokeEmitter;
+eO.Util.Props.SmokeEmitter = SmokeEmitter;

@@ -27,4 +27,4 @@
    return _3DTools;
 })();
 
-eO._3DTools = _3DTools;
+eO.Util._3DTools = _3DTools;

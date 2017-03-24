@@ -23,11 +23,11 @@ function Tank(){
   this.tracks = [];
   this.propsRemover = null;
   TerrainVehicle.call(this.p);
-  this.tools = new eO._3DTools();
+  this.tools = new eO.Util._3DTools();
   this.muffler = null;
 }
 
-Tank.prototype = Object.create(TerrainVehicle.prototype);
+Tank.prototype = Object.create(eO.Util.Controlable.TerrainVehicle.prototype);
 Tank.prototype.constructor = Tank;
 
 Tank.prototype.preInit = function(){
@@ -36,8 +36,8 @@ Tank.prototype.preInit = function(){
 }
 
 Tank.prototype.postInit = function(){
-  this.propsRemover = new eO.PropsRemover(this.parent.scene);
-  this.muffler = new eO.SmokeEmitter(this.parent.scene);
+  this.propsRemover = new eO.Util.PropsRemover(this.parent.scene);
+  this.muffler = new eO.Util.Props.SmokeEmitter(this.parent.scene);
 }
 
 Tank.prototype.beforeForward = function(){

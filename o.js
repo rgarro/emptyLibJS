@@ -41,3 +41,6 @@
  */
 //here starts emptyObject
 var eO = {};
+eO.Util = {};
+eO.Util.Props = {};
+eO.Util.Controlable = {};

@@ -17,4 +17,4 @@
  })();
 
 
-eO.PropsRemover = PropsRemover;
+eO.Util.PropsRemover = PropsRemover;
