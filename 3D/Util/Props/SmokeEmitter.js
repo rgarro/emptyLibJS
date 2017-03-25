@@ -14,11 +14,13 @@ var SmokeEmitter = (function(){
     this.transparent = true;
     this.smokeX = -150;
     this.smokeY = 0;
+    this.smokeZ = 0;
+    this.density = 175;//300
+    this.smokeParticles = new THREE.Geometry;
   }
 
   SmokeEmitter.prototype.doSmoke = function(){
-    this.smokeParticles = new THREE.Geometry;
-    for (var i = 0; i < 300; i++) {
+    for (var i = 0; i < this.density; i++) {
       var particle = new THREE.Vector3(Math.random() * 32 - 16, Math.random() * 230, Math.random() * 32 - 16);
       this.smokeParticles.vertices.push(particle);
     }
@@ -28,6 +30,7 @@ var SmokeEmitter = (function(){
     this.smoke.sortParticles = true;
     this.smoke.position.x = this.smokeX;
     this.smoke.position.y = this.smokeY;
+    this.smoke.position.z = this.smokeZ;
     this.scene.add(this.smoke);
   }
 

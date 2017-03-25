@@ -26,7 +26,7 @@ Game.prototype.floorAndSky = function(){
 	floor.rotation.x = Math.PI / 2;
 	this.scene.add(floor);
   //sky
-  var skyboxGeometry = new THREE.CubeGeometry(10000, 10000, 10000);
+  var skyboxGeometry = new THREE.BoxGeometry(10000, 10000, 10000);
   var skyboxMaterial = new THREE.MeshBasicMaterial({ color: 0xa3e1ff, side: THREE.BackSide });
   var skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial);
   this.scene.add(skybox);

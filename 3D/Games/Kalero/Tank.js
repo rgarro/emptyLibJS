@@ -48,7 +48,6 @@ Tank.prototype.beforeForward = function(){
 }
 
 Tank.prototype.playEngine = function(){
-  //play Diesel engine sound here
   var s = createjs.Sound.play('fwdSound');
   s.volume = 0.04;
 }
@@ -69,7 +68,8 @@ Tank.prototype.drawTrack = function(trackDirection){
   var m = this.tools.getMeshBoxedDimentions(this.vehicleMesh,this.scale);
   this.muffler.smokeX = m.x;
   this.muffler.smokeY = m.y;
-  this.muffler.doSmoke();//do smoke needs to hook a render event and coordinates
+  this.muffler.smokeZ = m.z;
+  this.muffler.doSmoke();
   var track = new Tracks(m.width,m.height,m.x,m.y,m.z,m.rotationY,m.rotationX);
   track.propsRemover = this.propsRemover;
   track.propMeshName = "track" + this.tracks.length;
