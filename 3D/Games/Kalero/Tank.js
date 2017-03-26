@@ -68,7 +68,7 @@ Tank.prototype.drawTrack = function(trackDirection){
   var m = this.tools.getMeshBoxedDimentions(this.vehicleMesh,this.scale);
   this.muffler.density = 12;//pase riteve
   this.muffler.smokeX = m.x;
-  this.muffler.smokeY = m.y - 50;
+  this.muffler.smokeY = m.y;
   this.muffler.smokeZ = m.z - 50;
   this.muffler.doSmoke();
   var track = new Tracks(m.width,m.height,m.x,m.y,m.z,m.rotationY,m.rotationX);

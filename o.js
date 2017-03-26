@@ -41,6 +41,9 @@
  */
 //here starts emptyObject
 var eO = {};
+eO._3D = {};
 eO.Util = {};
 eO.Util.Props = {};
 eO.Util.Controlable = {};
+eO._3D = {};
+eO._3D.Templates = {};

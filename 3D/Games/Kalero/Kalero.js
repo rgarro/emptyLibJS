@@ -18,7 +18,7 @@ function Kalero(){
   Game.call(this.p);
 }
 
-Kalero.prototype = Object.create(Game.prototype);
+Kalero.prototype = Object.create(eO._3D.Templates.Game.prototype);
 
 Kalero.prototype.constructor = Kalero;
 
