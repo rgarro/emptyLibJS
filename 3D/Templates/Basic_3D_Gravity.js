@@ -94,10 +94,10 @@ var Basic_3D_Gravity = (function(){
 
   Basic_3D_Gravity.prototype.floorAndSky = function(){
     // Loader
-    loader = new THREE.TextureLoader();
+    var loader = new THREE.TextureLoader();
 		// Materials
-		var ground_material = Physijs.createMaterial(
-			new THREE.MeshLambertMaterial({ map: loader.load(this.floorTextureUrl}),
+    ground_material = Physijs.createMaterial(
+			new THREE.MeshLambertMaterial({ map: loader.load( '/images/rocks.jpg' ) }),
 			.8, // high friction
 			.4 // low restitution
 		);
