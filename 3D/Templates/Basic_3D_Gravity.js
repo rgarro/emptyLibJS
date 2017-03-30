@@ -93,31 +93,20 @@ var Basic_3D_Gravity = (function(){
   }
 
   Basic_3D_Gravity.prototype.floorAndSky = function(){
-    // Loader
-    var loader = new THREE.TextureLoader();
-		// Materials
-    ground_material = Physijs.createMaterial(
-			new THREE.MeshLambertMaterial({ map: loader.load( '/images/rocks.jpg' ) }),
-			.8, // high friction
-			.4 // low restitution
-		);
+    var floorTexture = new THREE.ImageUtils.loadTexture(this.floorTextureUrl);
+  	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
+  	floorTexture.repeat.set( 10, 10 );
+  	var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
+    var ground_material = Physijs.createMaterial(floorMaterial,.8,.4);
 		ground_material.map.wrapS = ground_material.map.wrapT = THREE.RepeatWrapping;
 		ground_material.map.repeat.set( 3, 3 );
-
 		var ground_geometry = new THREE.PlaneGeometry(1000,1000,10,10);
 		for ( var i = 0; i < ground_geometry.vertices.length; i++ ) {
 			var vertex = ground_geometry.vertices[i];
 		}
 		ground_geometry.computeFaceNormals();
 		ground_geometry.computeVertexNormals();
-		// If your plane is not square as far as face count then the HeightfieldMesh
-		// takes two more arguments at the end: # of x faces and # of z faces that were passed to THREE.PlaneMaterial
-		this.ground = new Physijs.HeightfieldMesh(
-				ground_geometry,
-				ground_material,
-				0 // mass
-		);
-
+		this.ground = new Physijs.HeightfieldMesh(ground_geometry,ground_material,0);
     this.ground.name = "floor";
     this.ground.position.y = -0.5;
     //this.ground.rotation.x = Math.PI / 2;
@@ -152,6 +141,7 @@ var Basic_3D_Gravity = (function(){
 
   Basic_3D_Gravity.prototype.render = function(){
     this.preRender();
+    this.scene.simulate(); 
     this.renderer.render(this.scene, this.camera);
     window.requestAnimationFrame((function(){this.render();}).bind(this));
   }

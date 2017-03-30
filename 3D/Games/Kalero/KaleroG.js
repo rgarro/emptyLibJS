@@ -42,6 +42,14 @@
 
      var axisHelper = new THREE.AxisHelper( 5 );
      this.scene.add(axisHelper);
+
+     // Box
+        box = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(50,50,50),
+            new THREE.MeshBasicMaterial({ color: 0x888888 })
+        );
+        box.y = 10;
+        this.scene.add( box );
    }
 
    KaleroG.prototype.setControl = function(){
