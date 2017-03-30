@@ -23,7 +23,7 @@ var TerrainVehicle = (function(){
     this.displaceRightKey = "q";
     this.displaceLeftKey = "e";
     this.is_running = false;
-    this.tools = new _3DTools();
+    this.tools = new eO.Util._3DTools();
   }
 
   TerrainVehicle.prototype.setParent = function(game){

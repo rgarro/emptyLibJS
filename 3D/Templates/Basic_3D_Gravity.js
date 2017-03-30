@@ -141,7 +141,7 @@ var Basic_3D_Gravity = (function(){
 
   Basic_3D_Gravity.prototype.render = function(){
     this.preRender();
-    this.scene.simulate(); 
+    this.scene.simulate();
     this.renderer.render(this.scene, this.camera);
     window.requestAnimationFrame((function(){this.render();}).bind(this));
   }
