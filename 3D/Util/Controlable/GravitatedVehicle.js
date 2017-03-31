@@ -33,7 +33,7 @@ var GravitatedVehicle = (function(){
       loader.load(modelUrl,(function(model,materials){
         var material = new THREE.MeshPhongMaterial();
         material.color.set(this.vehicleColor);
-        this.vehicleMesh = new Physijs.BoxMesh(model,material);
+        this.vehicleMesh = new Physijs.Mesh(model,material);
         this.vehicleMesh.name = this.vehicleMeshName;
 				this.vehicleMesh.position.y = 0;
         this.vehicleMesh.position.x = 0;

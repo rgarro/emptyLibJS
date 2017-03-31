@@ -48,12 +48,12 @@ console.log(this.axisHelper.position.z);
      this.scene.add(this.axisHelper);
 
      // Box
-        /*box = new Physijs.BoxMesh(
+        box = new Physijs.BoxMesh(
             new THREE.CubeGeometry(50,50,50),
             new THREE.MeshBasicMaterial({ color: 0x888888 })
         );
         box.y = 10;
-        this.scene.add( box );*/
+        this.scene.add( box );
       this.loadTank();
    }
 
@@ -65,7 +65,7 @@ console.log(this.axisHelper.position.z);
      this.tank = new TankG();
      this.tank.setParent(this);
      this.tank.loadModel(this.tank.modelUrl);
-     
+
      //this.tank.init();
    }
 

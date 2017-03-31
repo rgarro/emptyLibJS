@@ -89,7 +89,7 @@ var Basic_3D_Gravity = (function(){
 
   Basic_3D_Gravity.prototype.initScene = function(){
     this.scene = new Physijs.Scene;
-		this.scene.setGravity(new THREE.Vector3( 0, -30, 0 ));//params for gravity
+		this.scene.setGravity(new THREE.Vector3(0,-30,0));//params for gravity
   }
 
   Basic_3D_Gravity.prototype.floorAndSky = function(){
