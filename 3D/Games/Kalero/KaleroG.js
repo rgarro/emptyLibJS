@@ -42,9 +42,6 @@
      this.camera.lookAt(this.scene.position);
 
     this.axisHelper = new THREE.AxisHelper( 5 );
-console.log(this.axisHelper.position.x);
-console.log(this.axisHelper.position.y);
-console.log(this.axisHelper.position.z);
      this.scene.add(this.axisHelper);
 
      // Box
@@ -53,7 +50,8 @@ console.log(this.axisHelper.position.z);
             new THREE.MeshBasicMaterial({ color: 0x888888 })
         );
         box.y = 10;
-        this.scene.add( box );
+        box.x = -100;
+        this.scene.add(box);
       this.loadTank();
    }
 
@@ -65,12 +63,14 @@ console.log(this.axisHelper.position.z);
      this.tank = new TankG();
      this.tank.setParent(this);
      this.tank.loadModel(this.tank.modelUrl);
-
-     //this.tank.init();
+     this.tank.init();
    }
 
    KaleroG.prototype.preRender = function(){
      this.cameraControl.update();
+     if(this.tank.is_running){
+         this.tank.muffler.onRender();
+     }
    }
 
    return KaleroG;
