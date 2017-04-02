@@ -31,8 +31,13 @@ var GravitatedVehicle = (function(){
     if(this.isParentSet){
       var loader = new THREE.JSONLoader();
       loader.load(modelUrl,(function(model,materials){
-        var material = new THREE.MeshPhongMaterial();
-        material.color.set(this.vehicleColor);
+        var friction = 0.3;
+        var restitution = 0.9;
+        var material = Physijs.createMaterial(
+            new THREE.MeshDepthMaterial({ color: this.vehicleColor }),
+            friction,
+            restitution
+        );
         this.vehicleMesh = new Physijs.Mesh(model,material);
         this.vehicleMesh.name = this.vehicleMeshName;
 				this.vehicleMesh.position.y = 0;

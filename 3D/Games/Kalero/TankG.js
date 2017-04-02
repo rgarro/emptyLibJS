@@ -13,7 +13,7 @@ function TankG(){
   this.pixelsPerSecond = 25;
   this.vehicleMesh = null;
   this.scale = 13;
-  this.vehicleColor = 0x0FFA65;
+  this.vehicleColor = 0xf98c0f;
   this.rotationAngleStep = 6;
   this.moveForwardKey = "w";
   this.moveBackwardKey = "s";
