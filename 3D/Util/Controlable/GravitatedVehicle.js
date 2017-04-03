@@ -80,7 +80,6 @@ var GravitatedVehicle = (function(){
 
   GravitatedVehicle.prototype.initListeners = function(){
     window.addEventListener('keydown',(function(ev){
-//console.log(ev.keyCode);
           this.controlActions(ev.key);
 					/*switch(ev.keyCode){
 						case 37: // left
@@ -107,7 +106,6 @@ var GravitatedVehicle = (function(){
 							this.input.direction = null;
 							break;
 						case 38: // forward
-            console.log("asdf");
 							this.input.power = null;
 							break;
 						case 39: // right

@@ -43,7 +43,7 @@
 var eO = {};
 eO._3D = {};
 eO.Util = {};
+eO._3D.Factories = {};
 eO.Util.Props = {};
 eO.Util.Controlable = {};
-eO._3D = {};
 eO._3D.Templates = {};

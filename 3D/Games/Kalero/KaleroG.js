@@ -30,6 +30,7 @@
      this.l = new Light();
      eO._3D.Templates.GravityGame.call(this.p);
      this.axisHelper = null;
+     this.SkyBox = null;
    }
 
    KaleroG.prototype = Object.create(eO._3D.Templates.GravityGame.prototype);
@@ -42,11 +43,14 @@
      this.camera.lookAt(this.scene.position);
 
     this.axisHelper = new THREE.AxisHelper( 5 );
-     this.scene.add(this.axisHelper);
-
+    this.scene.add(this.axisHelper);
+    this.SkyBox = eO._3D.Factories.SkyBoxFactory("images/dawnmountain-",".png",1200);
+    this.SkyBox.name = "cielo";
+    this.SkyBox.applyMatrix( new THREE.Matrix4().makeScale( 1, 1, - 1 ) );
+    this.scene.add(this.SkyBox);
      // Box
         box = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(50,50,50),
+            new THREE.BoxGeometry(50,50,50),
             new THREE.MeshBasicMaterial({ color: 0x888888 })
         );
         box.y = 10;
