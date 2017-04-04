@@ -41,6 +41,9 @@ var Basic_3D_Gravity = (function(){
     this.clearColor = 0xa3e1ff;
     this.floorTextureUrl = '/emptyLibJS/3D/Games/Kalero/assets/checkerboard.jpg';
     this.ground = null;
+    this.xGravity = 0;
+    this.yGravity = -30;
+    this.zGravity = 0;
     if(typeof arguments[0] != 'undefined'){
       this.setContainer(arguments[0]);
     }
@@ -66,10 +69,10 @@ var Basic_3D_Gravity = (function(){
       this.camera.lookAt(this.scene.position);
       this.setControl();
       this.renderer = new THREE.WebGLRenderer();
-      //this.renderer.setClearColor(this.clearColor, 1.0);
+    this.renderer.setClearColor(this.clearColor, 1.0);
       this.renderer.setSize(window.innerWidth, window.innerHeight);
-      //this.renderer.shadowMapEnabled = true;
-      //this.renderer.shadowMapSoft = true;
+    this.renderer.shadowMapEnabled = true;
+    this.renderer.shadowMapSoft = true;
       this.floorAndSky();
       this.postInit();
       this.floorAndSky();
@@ -89,7 +92,7 @@ var Basic_3D_Gravity = (function(){
 
   Basic_3D_Gravity.prototype.initScene = function(){
     this.scene = new Physijs.Scene;
-		this.scene.setGravity(new THREE.Vector3(0,-30,0));//params for gravity
+		this.scene.setGravity(new THREE.Vector3(this.xGravity,this.yGravity,this.zGravity));//params for gravity
   }
 
   Basic_3D_Gravity.prototype.floorAndSky = function(){

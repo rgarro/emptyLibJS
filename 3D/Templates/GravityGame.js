@@ -8,6 +8,9 @@ var GravityGame = (function(){
   function GravityGame(){
     this.clearColor = 0xa3e1ff;
     this.floorTextureUrl = '/emptyLibJS/3D/Games/Kalero/assets/checkerboard.jpg';
+    this.xGravity = 0;
+    this.yGravity = -30;
+    this.zGravity = 0;
     Basic_3D_Gravity.call(this.p);
   }
 
