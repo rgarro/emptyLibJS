@@ -45,5 +45,6 @@ eO._3D = {};
 eO.Util = {};
 eO._3D.Factories = {};
 eO.Util.Props = {};
+eO._3D.Util.Props = {};
 eO.Util.Controlable = {};
 eO._3D.Templates = {};

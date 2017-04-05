@@ -29,6 +29,7 @@ function TankG(){
   this.muffler = null;
   this.is_running = false;
   this.input = {power: null,direction: null,steering: 0};
+  this.shellLoader = null;
 }
 
 TankG.prototype = Object.create(eO.Util.Controlable.GravitatedVehicle.prototype);
@@ -37,6 +38,7 @@ TankG.prototype.constructor = TankG;
 TankG.prototype.preInit = function(){
   createjs.Sound.registerSound("/mp3/rolling_-ryan_pud-8115_hifi.mp3", 'fwdSound');
   createjs.Sound.registerSound("/mp3/spaz_scr-Jerimee_-7440_hifi.mp3", 'turnSound');
+  this.shellLoader = new ShellLoader();
 }
 
 TankG.prototype.postInit = function(){
