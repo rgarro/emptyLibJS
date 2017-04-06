@@ -43,6 +43,7 @@
 var eO = {};
 eO._3D = {};
 eO.Util = {};
+eO._3D.Util = {};
 eO._3D.Factories = {};
 eO.Util.Props = {};
 eO._3D.Util.Props = {};
