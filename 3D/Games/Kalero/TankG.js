@@ -30,6 +30,7 @@ function TankG(){
   this.is_running = false;
   this.input = {power: null,direction: null,steering: 0};
   this.shellLoader = null;
+  //this.Gun =
 }
 
 TankG.prototype = Object.create(eO.Util.Controlable.GravitatedVehicle.prototype);
