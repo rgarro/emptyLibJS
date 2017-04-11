@@ -30,7 +30,7 @@ function TankG(){
   this.is_running = false;
   this.input = {power: null,direction: null,steering: 0};
   this.shellLoader = null;
-  //this.Gun =
+  this.Gun = null;
 }
 
 TankG.prototype = Object.create(eO.Util.Controlable.GravitatedVehicle.prototype);
@@ -45,6 +45,15 @@ TankG.prototype.preInit = function(){
 TankG.prototype.postInit = function(){
   this.propsRemover = new eO.Util.PropsRemover(this.parent.scene);
   this.muffler = new eO.Util.Props.SmokeEmitter(this.parent.scene);
+this.Gun = new eO._3D.Util.Props.Throwable();
+  window.addEventListener("keypress",(function(e){
+    if(e.key == "x"){
+      this.parent.scene.updateMatrixWorld(true);
+      var m = this.tools.getMeshBoxedDimentions(this.vehicleMesh,this.scale);
+console.log(m);
+      this.Gun.doThrow(m.x,m.y+50,m.z);
+    }
+  }).bind(this));
 }
 
 TankG.prototype.beforeForward = function(){
