@@ -84,7 +84,7 @@ var Throwable = (function(){
 				this.quat.set(0,0,0,1);
 				var ballBody = this.createRigidBody(ball,ballShape,ballMass,this.pos, this.quat);
 				this.pos.multiplyScalar(24);
-				this.ballBody.setLinearVelocity(new Ammo.btVector3(this.pos.x+this.distance,this.pos.y+this.distance,this.pos.z+this.distance));
+				ballBody.setLinearVelocity(new Ammo.btVector3(this.pos.x+this.distance,this.pos.y+this.distance,this.pos.z+this.distance));
   }
 
   return Throwable;
