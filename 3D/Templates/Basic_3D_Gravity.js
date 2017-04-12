@@ -44,6 +44,15 @@ var Basic_3D_Gravity = (function(){
     this.xGravity = 0;
     this.yGravity = -30;
     this.zGravity = 0;
+    this.rigidBodies = [];
+    this.gravityConstant = 7.8;
+    this.collisionConfiguration = null;
+    this.dispatcher = null;
+    this.broadphase = null;
+    this.solver = null;
+    this.physicsWorld = null;
+
+
     if(typeof arguments[0] != 'undefined'){
       this.setContainer(arguments[0]);
     }
@@ -74,6 +83,7 @@ var Basic_3D_Gravity = (function(){
     this.renderer.shadowMapEnabled = true;
     this.renderer.shadowMapSoft = true;
       this.floorAndSky();
+      this.initPhysics();
       this.postInit();
       this.floorAndSky();
       document.body.appendChild(this.renderer.domElement);
@@ -88,6 +98,16 @@ var Basic_3D_Gravity = (function(){
       }
       this.setLights();
       this.render();
+  }
+
+  Basic_3D_Gravity.prototype.initPhysics = function(){
+    this.gravityConstant = 7.8;
+    this.collisionConfiguration = new Ammo.btDefaultCollisionConfiguration();
+    this.dispatcher = new Ammo.btCollisionDispatcher(this.collisionConfiguration);
+    this.broadphase = new Ammo.btDbvtBroadphase();
+    this.solver = new Ammo.btSequentialImpulseConstraintSolver();
+    this.physicsWorld = new Ammo.btDiscreteDynamicsWorld(this.dispatcher,this.broadphase,this.solver,this.collisionConfiguration);
+    this.physicsWorld.setGravity( new Ammo.btVector3( 0, - this.gravityConstant, 0 ) );
   }
 
   Basic_3D_Gravity.prototype.initScene = function(){
@@ -154,6 +174,47 @@ var Basic_3D_Gravity = (function(){
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(window.innerWidth, window.innerHeight);
   }
+
+  Basic_3D_Gravity.prototype.createRigidBody = function(object,physicsShape,mass,pos,quat,vel,angVel){
+			if ( pos ) {
+			    object.position.copy( pos );
+			}
+			else {
+			    pos = object.position;
+			}
+			if ( quat ) {
+			    object.quaternion.copy( quat );
+			}
+			else {
+			    quat = object.quaternion;
+			}
+			var transform = new Ammo.btTransform();
+			transform.setIdentity();
+			transform.setOrigin( new Ammo.btVector3( pos.x, pos.y, pos.z ) );
+			transform.setRotation( new Ammo.btQuaternion( quat.x, quat.y, quat.z, quat.w ) );
+			var motionState = new Ammo.btDefaultMotionState( transform );
+			var localInertia = new Ammo.btVector3( 0, 0, 0 );
+			physicsShape.calculateLocalInertia( mass, localInertia );
+			var rbInfo = new Ammo.btRigidBodyConstructionInfo( mass, motionState, physicsShape, localInertia );
+			var body = new Ammo.btRigidBody( rbInfo );
+			body.setFriction( 0.5 );
+			if ( vel ) {
+			    body.setLinearVelocity( new Ammo.btVector3( vel.x, vel.y, vel.z ) );
+			}
+			if ( angVel ) {
+			    body.setAngularVelocity( new Ammo.btVector3( angVel.x, angVel.y, angVel.z ) );
+			}
+			object.userData.physicsBody = body;
+			object.userData.collided = false;
+			this.scene.add( object );
+			if ( mass > 0 ) {
+				this.rigidBodies.push( object );
+				// Disable deactivation
+				body.setActivationState( 4 );
+			}
+			this.physicsWorld.addRigidBody( body );
+			return body;
+		}
 
   return Basic_3D_Gravity;
 })();

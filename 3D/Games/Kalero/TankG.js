@@ -45,12 +45,12 @@ TankG.prototype.preInit = function(){
 TankG.prototype.postInit = function(){
   this.propsRemover = new eO.Util.PropsRemover(this.parent.scene);
   this.muffler = new eO.Util.Props.SmokeEmitter(this.parent.scene);
-this.Gun = new eO._3D.Util.Props.Throwable();
+  this.Gun = new eO._3D.Util.Props.Throwable();
+  this.Gun.game = this.parent;
   window.addEventListener("keypress",(function(e){
     if(e.key == "x"){
       this.parent.scene.updateMatrixWorld(true);
       var m = this.tools.getMeshBoxedDimentions(this.vehicleMesh,this.scale);
-console.log(m);
       this.Gun.doThrow(m.x,m.y+50,m.z);
     }
   }).bind(this));
