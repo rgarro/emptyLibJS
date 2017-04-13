@@ -32,3 +32,4 @@ var FlyingThing = (function(){
 
   return FlyingThing;
 })();
+eO._3D.Util.AI.FlyingThing = FlyingThing;
