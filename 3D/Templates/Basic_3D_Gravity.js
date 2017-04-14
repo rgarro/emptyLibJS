@@ -51,8 +51,18 @@ var Basic_3D_Gravity = (function(){
     this.broadphase = null;
     this.solver = null;
     this.physicsWorld = null;
-
-
+    this.time = 0;
+    this.transformAux1 = new Ammo.btTransform();
+    this.impactPoint = new THREE.Vector3();
+		this.impactNormal = new THREE.Vector3();
+    this.objectsToRemove = [];
+		for (var i = 0; i < 500; i++) {
+		   this. objectsToRemove[i] = null;
+		}
+		this.numObjectsToRemove = 0;
+    this.convexBreaker = new THREE.ConvexObjectBreaker();
+    this.tempBtVec3_1 = new Ammo.btVector3( 0, 0, 0 );
+    this.margin = 0.05;
     if(typeof arguments[0] != 'undefined'){
       this.setContainer(arguments[0]);
     }
@@ -164,9 +174,125 @@ var Basic_3D_Gravity = (function(){
 
   Basic_3D_Gravity.prototype.render = function(){
     this.preRender();
+    var deltaTime = clock.getDelta();
+		this.updatePhysics(deltaTime);
+    this.time += deltaTime;
     this.scene.simulate();
     this.renderer.render(this.scene, this.camera);
     window.requestAnimationFrame((function(){this.render();}).bind(this));
+  }
+
+  Basic_3D_Gravity.prototype.updatePhysics = function(deltaTime){
+			// Step world
+			this.physicsWorld.stepSimulation( deltaTime, 10 );
+			// Update rigid bodies
+			for ( var i = 0, il = this.rigidBodies.length; i < il; i++ ) {
+				var objThree = this.rigidBodies[ i ];
+				var objPhys = objThree.userData.physicsBody;
+				var ms = objPhys.getMotionState();
+				if (ms) {
+					ms.getWorldTransform(this.transformAux1);
+					var p = this.transformAux1.getOrigin();
+					var q = this.transformAux1.getRotation();
+					objThree.position.set( p.x(), p.y(), p.z() );
+					objThree.quaternion.set( q.x(), q.y(), q.z(), q.w() );
+					objThree.userData.collided = false;
+				}
+			}
+			for ( var i = 0, il = this.dispatcher.getNumManifolds(); i < il; i ++ ) {
+
+				var contactManifold = this.dispatcher.getManifoldByIndexInternal( i );
+				var rb0 = contactManifold.getBody0();
+				var rb1 = contactManifold.getBody1();
+
+				var threeObject0 = Ammo.castObject( rb0.getUserPointer(), Ammo.btVector3 ).threeObject;
+				var threeObject1 = Ammo.castObject( rb1.getUserPointer(), Ammo.btVector3 ).threeObject;
+
+				if ( ! threeObject0 && ! threeObject1 ) {
+					continue;
+				}
+
+				var userData0 = threeObject0 ? threeObject0.userData : null;
+				var userData1 = threeObject1 ? threeObject1.userData : null;
+
+				var breakable0 = userData0 ? userData0.breakable : false;
+				var breakable1 = userData1 ? userData1.breakable : false;
+
+				var collided0 = userData0 ? userData0.collided : false;
+				var collided1 = userData1 ? userData1.collided : false;
+
+				if ( ( ! breakable0 && ! breakable1 ) || ( collided0 && collided1 ) ) {
+					continue;
+				}
+
+				var contact = false;
+				var maxImpulse = 0;
+				for ( var j = 0, jl = contactManifold.getNumContacts(); j < jl; j ++ ) {
+					var contactPoint = contactManifold.getContactPoint( j );
+					if ( contactPoint.getDistance() < 0 ) {
+						contact = true;
+						var impulse = contactPoint.getAppliedImpulse();
+						if ( impulse > maxImpulse ) {
+							maxImpulse = impulse;
+							var pos = contactPoint.get_m_positionWorldOnB();
+							var normal = contactPoint.get_m_normalWorldOnB();
+							this.impactPoint.set( pos.x(), pos.y(), pos.z() );
+							this.impactNormal.set( normal.x(), normal.y(), normal.z() );
+						}
+						break;
+					}
+				}
+
+				// If no point has contact, abort
+				if ( ! contact ) {
+					continue;
+				}
+
+				// Subdivision
+
+				var fractureImpulse = 250;
+
+				if ( breakable0 && !collided0 && maxImpulse > fractureImpulse ) {
+
+					var debris = convexBreaker.subdivideByImpact( threeObject0, impactPoint, impactNormal , 1, 2, 1.5 );
+
+					var numObjects = debris.length;
+					for ( var j = 0; j < numObjects; j++ ) {
+
+						this.createDebrisFromBreakableObject( debris[ j ] );
+
+					}
+
+					this.objectsToRemove[ this.numObjectsToRemove++ ] = threeObject0;
+					userData0.collided = true;
+
+				}
+
+				if ( breakable1 && !collided1 && maxImpulse > fractureImpulse ) {
+
+					var debris = convexBreaker.subdivideByImpact( threeObject1, impactPoint, impactNormal , 1, 2, 1.5 );
+
+					var numObjects = debris.length;
+					for ( var j = 0; j < numObjects; j++ ) {
+
+						this.createDebrisFromBreakableObject( debris[ j ] );
+
+					}
+
+					this.objectsToRemove[ this.numObjectsToRemove++ ] = threeObject1;
+					userData1.collided = true;
+
+				}
+
+			}
+
+			for ( var i = 0; i < numObjectsToRemove; i++ ) {
+
+			    this.removeDebris( this.objectsToRemove[ i ] );
+
+			}
+			this.numObjectsToRemove = 0;
+
   }
 
   Basic_3D_Gravity.prototype.handleResize = function() {
@@ -215,6 +341,42 @@ var Basic_3D_Gravity = (function(){
 			this.physicsWorld.addRigidBody( body );
 			return body;
 		}
+
+    Basic_3D_Gravity.prototype.createParalellepipedWithPhysics = function( sx, sy, sz, mass, pos, quat, material ) {
+    			var object = new THREE.Mesh( new THREE.BoxGeometry( sx, sy, sz, 1, 1, 1 ), material );
+    			var shape = new Ammo.btBoxShape( new Ammo.btVector3( sx * 0.5, sy * 0.5, sz * 0.5 ) );
+    			shape.setMargin(this.margin);
+    			this.createRigidBody( object, shape, mass, pos, quat );
+    			return object;
+    		}
+
+    		Basic_3D_Gravity.prototype.createDebrisFromBreakableObject = function( object ) {
+    			object.castShadow = true;
+    			object.receiveShadow = true;
+    			var shape = this.createConvexHullPhysicsShape( object.geometry.vertices );
+    			shape.setMargin( margin );
+    			var body = this.createRigidBody( object, shape, object.userData.mass, null, null, object.userData.velocity, object.userData.angularVelocity );
+    			// Set pointer back to the three object only in the debris objects
+    			var btVecUserData = new Ammo.btVector3( 0, 0, 0 );
+    			btVecUserData.threeObject = object;
+    			body.setUserPointer( btVecUserData );
+    		}
+
+    		Basic_3D_Gravity.prototype.removeDebris = function(object) {
+    			this.scene.remove(object);
+    			this.physicsWorld.removeRigidBody( object.userData.physicsBody );
+    		}
+
+    		Basic_3D_Gravity.prototype.createConvexHullPhysicsShape = function( points ) {
+    			var shape = new Ammo.btConvexHullShape();
+    			for ( var i = 0, il = points.length; i < il; i++ ) {
+    				var p = points[ i ];
+    				this.tempBtVec3_1.setValue( p.x, p.y, p.z );
+    				var lastOne = ( i === ( il - 1 ) );
+    				shape.addPoint( this.tempBtVec3_1, lastOne );
+    			}
+    			return shape;
+    		}
 
   return Basic_3D_Gravity;
 })();
