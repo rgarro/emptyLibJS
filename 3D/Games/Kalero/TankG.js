@@ -51,7 +51,7 @@ TankG.prototype.postInit = function(){
     if(e.key == "x"){
       this.parent.scene.updateMatrixWorld(true);
       var m = this.tools.getMeshBoxedDimentions(this.vehicleMesh,this.scale);
-      this.Gun.doThrow(m.x,m.y+50,m.z);
+      this.Gun.doThrow(m.x+10,m.y+50,m.z+10);
     }
   }).bind(this));
 }

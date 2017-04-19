@@ -31,6 +31,8 @@
      this.xGravity = 0;
      this.yGravity = -30;
      this.zGravity = 0;
+     this.rigidBodies = [];
+     this.transformAux1 = new Ammo.btTransform();
      eO._3D.Templates.GravityGame.call(this.p);
      this.axisHelper = null;
      this.SkyBox = null;
