@@ -21,7 +21,11 @@ var Orbitator = (function(){
     this.meshName = "";
     this.centerMeshName = "";
     this.radiusLength = 300;
-    this.altitude = 300;
+    this.altitude = 300;//y
+    this.origin = {x:0,y:0,z:0};
+    this.angle = 0;
+    this.speed = 3;
+    this.clockWise = true;
   }
 
   Orbitator.prototype.setGame = function(game){
@@ -30,7 +34,14 @@ var Orbitator = (function(){
   }
 
   Orbitator.prototype.loadModel = function(modelUrl){
-    
+
+  }
+
+  Orbitator.prototype.onRender = function(){
+    var rad =  this.angle * (Math.PI/180);
+    this.mesh.x = this.mesh.x + this.radiusLength * Math.cos(rad);
+    this.mesh.z = this.mesh.z + this.radiusLength * Math.sin(rad);
+    this.angle = (this.clockWise ? this.angle + this.speed : this.angle - this.speed);
   }
 
   return Orbitator;
