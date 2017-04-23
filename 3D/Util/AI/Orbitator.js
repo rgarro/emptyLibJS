@@ -23,9 +23,11 @@ var Orbitator = (function(){
     this.radiusLength = 300;
     this.altitude = 300;//y
     this.origin = {x:0,y:0,z:0};
-    this.angle = 0;
+    this.angle = 45;
     this.speed = 3;
     this.clockWise = true;
+    this.modelLoaded = false;
+    this.scale = 2;
   }
 
   Orbitator.prototype.setGame = function(game){
@@ -34,14 +36,27 @@ var Orbitator = (function(){
   }
 
   Orbitator.prototype.loadModel = function(modelUrl){
-
+    var loader = new THREE.JSONLoader();
+    loader.load(modelUrl,(function(model,materials){
+      var material = new THREE.MeshPhongMaterial();
+      material.color.set(0x0FFA65);
+//console.log(materials);
+    this.mesh = new THREE.Mesh(model, material);
+      this.mesh.name = this.meshName;
+      this.mesh.scale.set(this.scale,this.scale,this.scale);
+      this.mesh.position.y = this.altitude;
+      this.game.scene.add(this.mesh);
+      this.modelLoaded = true;
+    }).bind(this));
   }
 
   Orbitator.prototype.onRender = function(){
-    var rad =  this.angle * (Math.PI/180);
-    this.mesh.x = this.mesh.x + this.radiusLength * Math.cos(rad);
-    this.mesh.z = this.mesh.z + this.radiusLength * Math.sin(rad);
-    this.angle = (this.clockWise ? this.angle + this.speed : this.angle - this.speed);
+    if(this.modelLoaded){
+      var rad =  this.angle * (Math.PI/180);
+      this.mesh.position.x = this.mesh.position.x + this.radiusLength * Math.cos(rad);
+      this.mesh.position.z = this.mesh.position.z + this.radiusLength * Math.sin(rad);
+      this.angle = (this.clockWise ? this.angle + this.speed : this.angle - this.speed);
+    }
   }
 
   return Orbitator;

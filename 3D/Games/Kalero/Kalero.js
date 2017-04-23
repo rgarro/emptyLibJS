@@ -9,6 +9,8 @@ function Kalero(){
   this.ini_camera_y = 36;
   this.ini_camera_z = 33;
   this.tank = null;
+  this.bgHelicopter = null;
+  this.heliFlying = false;
   this.show_stats = true;
   this.show_control_gui = true;
   this.control = null;
@@ -28,9 +30,19 @@ Kalero.prototype.postInit = function(){
   this.camera.lookAt(this.scene.position);
   this.floorAndSky();
   this.loadTank();
+  this.loadHelicopter();
   this.setLights();
   var axisHelper = new THREE.AxisHelper( 5 );
 this.scene.add(axisHelper);
+}
+
+Kalero.prototype.loadHelicopter = function(){
+  this.bgHelicopter = new Helicoptero();
+  this.bgHelicopter.setGame(this);
+  this.bgHelicopter.loadModel(this.bgHelicopter.modelUrl);
+  //this.bgHelicopter.init();
+  //this.bgHelicopter.mesh.y = 500;
+  this.heliFlying = true;
 }
 
 Kalero.prototype.loadTank = function(){
@@ -74,4 +86,5 @@ Kalero.prototype.preRender = function(){
   if(this.tank.is_running){
       this.tank.muffler.onRender();
   }
+  this.bgHelicopter.onRender();
 }
