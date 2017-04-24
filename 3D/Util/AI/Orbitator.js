@@ -14,6 +14,7 @@ var Orbitator = (function(){
 
   function Orbitator(){
     this.modelUrl = "/emptyLibJS/3D/Games/Kalero/assets/mi28/Mi28.json";
+    this.textureUrl = "/emptyLibJS/3D/Games/Kalero/assets/mi28/Mi28NA.png";
     this.game = null;
     this.geometry = null;
     this.mesh = null;
@@ -38,24 +39,33 @@ var Orbitator = (function(){
   Orbitator.prototype.loadModel = function(modelUrl){
     var loader = new THREE.JSONLoader();
     loader.load(modelUrl,(function(model,materials){
-      var material = new THREE.MeshPhongMaterial();
-      material.color.set(0x0FFA65);
-//console.log(materials);
-    this.mesh = new THREE.Mesh(model, material);
+      var texture = THREE.ImageUtils.loadTexture(this.textureUrl);
+      var material = new THREE.MeshBasicMaterial({map:texture});
+      this.mesh = new THREE.Mesh(model, material);
       this.mesh.name = this.meshName;
       this.mesh.scale.set(this.scale,this.scale,this.scale);
       this.mesh.position.y = this.altitude;
       this.game.scene.add(this.mesh);
       this.modelLoaded = true;
+      this.postLoad();
     }).bind(this));
+  }
+
+  Orbitator.prototype.postLoad = function(){
+
+  }
+
+  Orbitator.prototype.postRender = function(){
+    
   }
 
   Orbitator.prototype.onRender = function(){
     if(this.modelLoaded){
       var rad =  this.angle * (Math.PI/180);
-      this.mesh.position.x = this.mesh.position.x + this.radiusLength * Math.cos(rad);
-      this.mesh.position.z = this.mesh.position.z + this.radiusLength * Math.sin(rad);
+      this.mesh.position.x = this.origin.x + this.radiusLength * Math.cos(rad);
+      this.mesh.position.z = this.origin.z + this.radiusLength * Math.sin(rad);
       this.angle = (this.clockWise ? this.angle + this.speed : this.angle - this.speed);
+      this.postRender();
     }
   }
 
