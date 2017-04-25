@@ -29,12 +29,19 @@ Helicoptero.prototype.constructor = Helicoptero;
 
 Helicoptero.prototype.postLoad = function(){
   this.mesh.rotation.y = -90;
+  this.initPropeller();
 }
 
 Helicoptero.prototype.initPropeller = function(){
   this.propeller = new HeliPropeller();
+  this.propeller.origin.y = this.altitude + 10;
+  this.propeller.setGame(this.game);
+  this.propeller.loadModel("/cube/");
 }
 
 Helicoptero.prototype.postRender = function(){
   this.mesh.rotation.y = this.mesh.rotation.y - 0.05;
+  this.propeller.mesh.position.x = this.mesh.position.x;
+  this.propeller.mesh.position.z = this.mesh.position.z;
+  this.propeller.onRender();
 }

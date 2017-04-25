@@ -94,6 +94,6 @@ Kalero.prototype.preRender = function(){
   if(this.tank.is_running){
       this.tank.muffler.onRender();
   }
-  //this.bgHelicopter.onRender();
+  this.bgHelicopter.onRender();
   this.condor.onRender();
 }
