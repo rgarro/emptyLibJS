@@ -8,7 +8,7 @@
 function Tank(){
   this.parent = null;
   this.vehicleMeshName = "elTanque";
-  this.modelUrl = "/emptyLibJS/3D/Games/Kalero/assets/T43.json";
+  this.modelUrl = "/emptyLibJS/3D/Games/Kalero/assets/T_34_85.json";
   this.pixelsPerSecond = 25;
   this.vehicleMesh = null;
   this.scale = 13;
