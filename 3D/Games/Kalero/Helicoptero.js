@@ -30,6 +30,9 @@ Helicoptero.prototype.constructor = Helicoptero;
 Helicoptero.prototype.postLoad = function(){
   this.mesh.rotation.y = -90;
   this.initPropeller();
+  createjs.Sound.registerSound("/mp3/Helicopt-Diode111-8858_hifi.mp3", 'heliSound');
+  var s = createjs.Sound.play('heliSound');
+  s.volume = 0.02;
 }
 
 Helicoptero.prototype.initPropeller = function(){
