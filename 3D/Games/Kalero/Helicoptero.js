@@ -21,6 +21,8 @@ function Helicoptero(){
   this.modelLoaded = false;
   this.scale = 11;
   this.propeller = null;
+  this.rudder = null;
+  createjs.Sound.registerSound("/mp3/Helicopt-Diode111-8858_hifi.mp3", 'heliSound');
   eO._3D.Util.AI.Orbitator.call(this.p);
 }
 
@@ -28,11 +30,10 @@ Helicoptero.prototype = Object.create(eO._3D.Util.AI.Orbitator.prototype);
 Helicoptero.prototype.constructor = Helicoptero;
 
 Helicoptero.prototype.postLoad = function(){
+  var s = createjs.Sound.play('heliSound',{loop:1000});
+  s.volume = 1;//the fucking volume has to move from camera radius 
   this.mesh.rotation.y = -90;
   this.initPropeller();
-  createjs.Sound.registerSound("/mp3/Helicopt-Diode111-8858_hifi.mp3", 'heliSound');
-  var s = createjs.Sound.play('heliSound');
-  s.volume = 0.02;
 }
 
 Helicoptero.prototype.initPropeller = function(){
