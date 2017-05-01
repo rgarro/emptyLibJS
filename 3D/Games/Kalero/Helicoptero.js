@@ -31,9 +31,18 @@ Helicoptero.prototype.constructor = Helicoptero;
 
 Helicoptero.prototype.postLoad = function(){
   var s = createjs.Sound.play('heliSound',{loop:1000});
-  s.volume = 1;//the fucking volume has to move from camera radius 
+  s.volume = 0.6;// volume has to move from camera radius
   this.mesh.rotation.y = -90;
   this.initPropeller();
+  this.initRudder();
+}
+
+Helicoptero.prototype.initRudder = function(){
+  this.rudder = new HeliRudder();
+  this.rudder.origin.y = this.altitude + 10;
+  this.rudder.origin.x = this.altitude + 10;
+  this.rudder.setGame(this.game);
+  this.rudder.loadModel("/cube/");
 }
 
 Helicoptero.prototype.initPropeller = function(){
@@ -48,4 +57,5 @@ Helicoptero.prototype.postRender = function(){
   this.propeller.mesh.position.x = this.mesh.position.x;
   this.propeller.mesh.position.z = this.mesh.position.z;
   this.propeller.onRender();
+  this.rudder.onRender(this.mesh.position.x,this.mesh.position.y,this.mesh.position.z);
 }
