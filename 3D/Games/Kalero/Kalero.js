@@ -94,8 +94,9 @@ Kalero.prototype.preRender = function(){
   //this.scene.getObjectByName('directional').color = new THREE.Color(0xffffff);
   if(this.tank.is_running){
       this.tank.muffler.onRender();
+      this.tank.Gun.onRender(this.tank.vehicleMesh.position.x,this.tank.vehicleMesh.position.y+24,this.tank.vehicleMesh.position.z+50,this.tank.vehicleMesh.rotation.y);
   }
-  this.tank.Gun.onRender(this.tank.vehicleMesh.position.x,this.tank.vehicleMesh.position.y,this.tank.vehicleMesh.position.z,this.tank.vehicleMesh.rotation.y);
+  //this.tank.Gun.onRender(this.tank.vehicleMesh.position.x,this.tank.vehicleMesh.position.y,this.tank.vehicleMesh.position.z,this.tank.vehicleMesh.rotation.y);
   this.bgHelicopter.onRender();
   this.condor.onRender();
 }

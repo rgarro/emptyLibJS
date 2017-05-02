@@ -15,7 +15,7 @@ D5tGun.prototype.loadModel = function(x,y,z,rotationY){
   if(this.gameIsSet){
     var material = new THREE.MeshBasicMaterial({color:this.color});
     //material.color.set(this.color);
-    this.geometry = new THREE.BoxGeometry(3,15,3);
+    this.geometry = new THREE.BoxGeometry(2,2,60);
     this.mesh = new THREE.Mesh(this.geometry,material);
     this.mesh.name = this.meshName;
     this.mesh.position.x = x;

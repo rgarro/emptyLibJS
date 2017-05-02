@@ -44,7 +44,7 @@ Tank.prototype.postInit = function(){
 
 Tank.prototype.initGun = function(){
   this.Gun.setGame(this.parent);
-  this.Gun.loadModel(0,10,0,0);
+  this.Gun.loadModel(0,24,50,0);
 }
 
 Tank.prototype.beforeForward = function(){
