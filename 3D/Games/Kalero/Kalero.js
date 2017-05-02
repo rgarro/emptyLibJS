@@ -58,6 +58,7 @@ Kalero.prototype.loadTank = function(){
   this.tank.setParent(this);
   this.tank.loadModel(this.tank.modelUrl);
   this.tank.init();
+  this.tank.initGun();
 }
 
 Kalero.prototype.setLights = function(){
@@ -94,6 +95,7 @@ Kalero.prototype.preRender = function(){
   if(this.tank.is_running){
       this.tank.muffler.onRender();
   }
+  this.tank.Gun.onRender(this.tank.vehicleMesh.position.x,this.tank.vehicleMesh.position.y,this.tank.vehicleMesh.position.z,this.tank.vehicleMesh.rotation.y);
   this.bgHelicopter.onRender();
   this.condor.onRender();
 }

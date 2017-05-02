@@ -9,6 +9,7 @@ function Tank(){
   this.parent = null;
   this.vehicleMeshName = "elTanque";
   this.modelUrl = "/emptyLibJS/3D/Games/Kalero/assets/T_34_85.json";
+  this.Gun = new D5tGun();
   this.pixelsPerSecond = 25;
   this.vehicleMesh = null;
   this.scale = 13;
@@ -39,6 +40,11 @@ Tank.prototype.preInit = function(){
 Tank.prototype.postInit = function(){
   this.propsRemover = new eO.Util.PropsRemover(this.parent.scene);
   this.muffler = new eO.Util.Props.SmokeEmitter(this.parent.scene);
+}
+
+Tank.prototype.initGun = function(){
+  this.Gun.setGame(this.parent);
+  this.Gun.loadModel(0,10,0,0);
 }
 
 Tank.prototype.beforeForward = function(){
