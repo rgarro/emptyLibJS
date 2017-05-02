@@ -2,8 +2,12 @@ function D5tGun(){
   this.mesh = null;
   this.game = null;
   this.gameIsSet = false;
-  this.color = 0x000000;
+  this.color = 0xFF8B53;
   this.geometry = null;
+  this.upElevKey = "z";
+  this.downElevKey = "x";
+  this.clockWise = true;
+  this.elevStep = 3;
 }
 
 D5tGun.prototype.setGame = function(game){
@@ -25,6 +29,31 @@ D5tGun.prototype.loadModel = function(x,y,z,rotationY){
     this.game.scene.add(this.mesh);
   }else{
     throw new Error("Needs a Game object");
+  }
+}
+
+D5tGun.prototype.initListeners = function(){
+  window.addEventListener("keypress",(function(e){
+    this.controlActions(e.key);
+  }).bind(this));
+  window.addEventListener("keydown",(function(e){
+    this.controlActions(e.key);
+  }).bind(this));
+}
+
+D5tGun.prototype.controlActions = function(keyCode){
+  var willRotate = false;
+  if(keyCode == this.upElevKey || keyCode == this.upElevKey.toUpperCase()){
+    willRotate = true;
+    this.clockWise = true;
+  }
+  if(keyCode == this.downElevKey || keyCode == this.downElevKey.toUpperCase()){
+    willRotate = true;
+    this.clockWise = false;
+  }
+  if(willRotate){
+    this.mesh.rotation.x = (this.clockWise ? this.mesh.rotation.x + this.elevStep : this.mesh.rotation.x - this.elevStep);
+    this.mesh.rotation.y = this.vehicleMesh.rotation.y + rg;
   }
 }
 

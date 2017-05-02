@@ -8,7 +8,8 @@
 function Tank(){
   this.parent = null;
   this.vehicleMeshName = "elTanque";
-  this.modelUrl = "/emptyLibJS/3D/Games/Kalero/assets/T_34_85.json";
+  //this.modelUrl = "/emptyLibJS/3D/Games/Kalero/assets/T_34_85.json";
+  this.modelUrl = "/emptyLibJS/3D/Games/Kalero/assets/T43B.json";//custom blended howitzer styled turret
   this.Gun = new D5tGun();
   this.pixelsPerSecond = 25;
   this.vehicleMesh = null;
@@ -44,7 +45,8 @@ Tank.prototype.postInit = function(){
 
 Tank.prototype.initGun = function(){
   this.Gun.setGame(this.parent);
-  this.Gun.loadModel(0,24,50,0);
+  this.Gun.loadModel(0,28,0,0);
+  this.Gun.initListeners();
 }
 
 Tank.prototype.beforeForward = function(){
@@ -67,6 +69,7 @@ Tank.prototype.beforeBackward = function(){
 Tank.prototype.beforeTurn = function(){
   var s = createjs.Sound.play('turnSound');
   s.volume = 0.04;
+  this.is_running = true;
 }
 
 Tank.prototype.drawTrack = function(trackDirection){
