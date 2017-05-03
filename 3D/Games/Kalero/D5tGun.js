@@ -54,17 +54,18 @@ D5tGun.prototype.controlActions = function(keyCode){
   }
   if(willRotate){
     this.mesh.rotation.x = (this.clockWise ? this.mesh.rotation.x + this.elevStep : this.mesh.rotation.x - this.elevStep);
-    //this.mesh.rotation.y = this.game.tank.vehicleMesh.rotation.y;
-   //this.lastRotation = this.mesh.rotation.x;
+
   }
 }
 
 D5tGun.prototype.onRender = function(x,y,z,rotationZ,rotationY){
   if(this.gameIsSet){
+    var delta = this.clock.getDelta(); 
     this.mesh.position.x = x;
     this.mesh.position.y = y;
     this.mesh.position.z = z;
     this.mesh.rotation.y = rotationY;
+    this.mesh.matrixAutoUpdate = true;
     //this.mesh.rotation.x = this.lastRotation;
 //console.log(rotationY);
   //this.mesh.rotation.z = rotationZ;

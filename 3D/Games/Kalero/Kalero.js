@@ -93,8 +93,7 @@ Kalero.prototype.preRender = function(){
   this.scene.getObjectByName('ambient').color = new THREE.Color(0x111111);
   //this.scene.getObjectByName('directional').color = new THREE.Color(0xffffff);
   if(this.tank.is_running){
-      this.tank.muffler.onRender();
-console.log(this.tank.vehicleMesh.rotation.x);      
+      this.tank.muffler.onRender();    
       this.tank.Gun.onRender(this.tank.vehicleMesh.position.x,this.tank.vehicleMesh.position.y+28,this.tank.vehicleMesh.position.z,this.tank.vehicleMesh.rotation.z,this.tank.vehicleMesh.rotation.y);
   }
   this.bgHelicopter.onRender();
