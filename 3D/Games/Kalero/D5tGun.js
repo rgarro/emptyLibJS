@@ -8,6 +8,7 @@ function D5tGun(){
   this.downElevKey = "x";
   this.clockWise = true;
   this.elevStep = 3;
+  this.lastRotation = 0;
 }
 
 D5tGun.prototype.setGame = function(game){
@@ -53,16 +54,20 @@ D5tGun.prototype.controlActions = function(keyCode){
   }
   if(willRotate){
     this.mesh.rotation.x = (this.clockWise ? this.mesh.rotation.x + this.elevStep : this.mesh.rotation.x - this.elevStep);
-    this.mesh.rotation.y = this.vehicleMesh.rotation.y + rg;
+    //this.mesh.rotation.y = this.game.tank.vehicleMesh.rotation.y;
+   //this.lastRotation = this.mesh.rotation.x;
   }
 }
 
-D5tGun.prototype.onRender = function(x,y,z,rotationY){
+D5tGun.prototype.onRender = function(x,y,z,rotationZ,rotationY){
   if(this.gameIsSet){
     this.mesh.position.x = x;
     this.mesh.position.y = y;
     this.mesh.position.z = z;
     this.mesh.rotation.y = rotationY;
+    //this.mesh.rotation.x = this.lastRotation;
+//console.log(rotationY);
+  //this.mesh.rotation.z = rotationZ;
   }else{
     throw new Error("Needs a Game object");
   }
