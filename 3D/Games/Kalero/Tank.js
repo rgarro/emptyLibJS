@@ -24,6 +24,7 @@ function Tank(){
   this.displaceLeftKey = "e";
   this.tracks = [];
   this.propsRemover = null;
+  this.group = new THREE.Object3D();
   TerrainVehicle.call(this.p);
   this.tools = new eO.Util._3DTools();
   this.muffler = null;
@@ -46,6 +47,9 @@ Tank.prototype.postInit = function(){
 Tank.prototype.initGun = function(){
   this.Gun.setGame(this.parent);
   this.Gun.loadModel(0,28,0,0);
+  this.group.add(this.vehicleMesh);
+  this.group.add(this.Gun.mesh);
+  this.parent.scene.add(this.group);
   this.Gun.initListeners();
 }
 

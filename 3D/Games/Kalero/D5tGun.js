@@ -58,9 +58,9 @@ D5tGun.prototype.controlActions = function(keyCode){
   }
 }
 
-D5tGun.prototype.onRender = function(x,y,z,rotationZ,rotationY){
-  if(this.gameIsSet){
-    var delta = this.clock.getDelta(); 
+D5tGun.prototype.onRender = function(x,y,z,rotationZ,rotationY){//let it go with the group
+  /*if(this.gameIsSet){
+    //var delta = this.clock.getDelta();
     this.mesh.position.x = x;
     this.mesh.position.y = y;
     this.mesh.position.z = z;
@@ -71,5 +71,5 @@ D5tGun.prototype.onRender = function(x,y,z,rotationZ,rotationY){
   //this.mesh.rotation.z = rotationZ;
   }else{
     throw new Error("Needs a Game object");
-  }
+  }*/
 }
