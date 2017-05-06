@@ -12,16 +12,17 @@ function Helicoptero(){
   this.gameIsSet = false;
   this.meshName = "helicopteroBody";
   this.centerMeshName = "";//this. will follow while turning
-  this.radiusLength = 250;
+  this.radiusLength = 200;
   this.altitude = 90;//y
   this.origin = {x:0,y:0,z:0};
   this.angle = 30;
-  this.speed = 0.5;
+  this.speed = 0.9;
   this.clockWise = true;
   this.modelLoaded = false;
   this.scale = 11;
   this.propeller = null;
   this.rudder = null;
+  this.group = new THREE.Object3D();
   createjs.Sound.registerSound("/mp3/Helicopt-Diode111-8858_hifi.mp3", 'heliSound');
   eO._3D.Util.AI.Orbitator.call(this.p);
 }
@@ -35,12 +36,17 @@ Helicoptero.prototype.postLoad = function(){
   this.mesh.rotation.y = -90;
   this.initPropeller();
   this.initRudder();
+  this.group.add(this.mesh);
+  this.group.add(this.propeller.mesh);
+  this.group.add(this.rudder.mesh);
+  this.game.scene.add(this.group);
 }
 
 Helicoptero.prototype.initRudder = function(){
   this.rudder = new HeliRudder();
   this.rudder.origin.y = this.altitude + 10;
-  this.rudder.origin.x = this.altitude + 10;
+  this.rudder.origin.x = 50;
+  this.rudder.origin.z = 28;
   this.rudder.setGame(this.game);
   this.rudder.loadModel("/cube/");
 }
@@ -53,9 +59,13 @@ Helicoptero.prototype.initPropeller = function(){
 }
 
 Helicoptero.prototype.postRender = function(){
-  this.mesh.rotation.y = this.mesh.rotation.y - 0.05;
+  //this.group.rotation.y = this.group.rotation.y - 0.05;
   this.propeller.mesh.position.x = this.mesh.position.x;
   this.propeller.mesh.position.z = this.mesh.position.z;
+  this.propeller.mesh.position.x = this.mesh.position.x;
+  this.group.position.z = this.mesh.position.z;
+  this.group.position.x = this.mesh.position.x;
+  this.group.position.y = this.mesh.position.y;
   this.propeller.onRender();
-  this.rudder.onRender(this.mesh.position.x,this.mesh.position.y,this.mesh.position.z);
+  this.rudder.onRender(this.mesh.position.x + 50,this.mesh.position.y,this.mesh.position.z + 28);
 }

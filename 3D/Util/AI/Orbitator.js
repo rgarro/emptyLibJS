@@ -56,7 +56,7 @@ var Orbitator = (function(){
   }
 
   Orbitator.prototype.postRender = function(){
-    
+
   }
 
   Orbitator.prototype.onRender = function(){

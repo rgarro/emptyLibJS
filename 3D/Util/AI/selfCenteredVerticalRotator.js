@@ -58,8 +58,8 @@ var selfCenteredVerticalRotator = (function(){
 
   selfCenteredVerticalRotator.prototype.onRender = function(x,y,z){
     if(this.modelLoaded){
-      this.mesh.position.z = z - 50;//parent mesh is turning ruder flies away from tail ask yoda ..
-      this.mesh.position.x = x + 50;
+      this.mesh.position.z = z;//parent mesh is turning ruder flies away from tail ask yoda ..
+      this.mesh.position.x = x;
       this.mesh.position.y = y;
       this.mesh.rotation.x = (this.clockWise ? this.mesh.rotation.x + this.speed : this.mesh.rotation.x - this.speed);
       this.postRender();
