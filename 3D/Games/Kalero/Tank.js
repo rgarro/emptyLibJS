@@ -73,6 +73,7 @@ Tank.prototype.beforeBackward = function(){
 Tank.prototype.beforeTurn = function(){
   var s = createjs.Sound.play('turnSound');
   s.volume = 0.04;
+  this.drawTrack('backward');
   this.is_running = true;
 }
 

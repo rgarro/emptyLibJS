@@ -9,6 +9,8 @@ function D5tGun(){
   this.clockWise = true;
   this.elevStep = 3;
   this.lastRotation = 0;
+  this.minElevationStep = -2;
+  this.maxElevationStep = 21;
 }
 
 D5tGun.prototype.setGame = function(game){
@@ -45,11 +47,15 @@ D5tGun.prototype.initListeners = function(){
 D5tGun.prototype.controlActions = function(keyCode){
   var willRotate = false;
   if(keyCode == this.upElevKey || keyCode == this.upElevKey.toUpperCase()){
-    willRotate = true;
+    if(this.mesh.rotation.x < this.maxElevationStep){
+      willRotate = true;
+    }
     this.clockWise = true;
   }
   if(keyCode == this.downElevKey || keyCode == this.downElevKey.toUpperCase()){
+    if(this.mesh.rotation.x > this.minElevationStep){
     willRotate = true;
+  }
     this.clockWise = false;
   }
   if(willRotate){
