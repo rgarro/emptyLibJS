@@ -48,5 +48,6 @@ eO._3D.Util.AI = {};
 eO._3D.Factories = {};
 eO.Util.Props = {};
 eO._3D.Util.Props = {};
+eO._3D.Util.Mechanics = {};
 eO.Util.Controlable = {};
 eO._3D.Templates = {};
