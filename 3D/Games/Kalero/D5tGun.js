@@ -11,6 +11,9 @@ function D5tGun(){
   this.lastRotation = 0;
   this.minElevationStep = -2;
   this.maxElevationStep = 21;
+  this.flyingShells = [];
+  this.shotKey = "u";
+  this.shots = 0;
 }
 
 D5tGun.prototype.setGame = function(game){
@@ -44,8 +47,20 @@ D5tGun.prototype.initListeners = function(){
   }).bind(this));
 }
 
+D5tGun.prototype.shot = function(){
+//console.log("shoting");
+//console.log(this.mesh.position.x);//use tank group x
+  var shell = new Shell(this.mesh.position.x,this.mesh.position.z,this.mesh.rotation.x);
+  shell.trigger();
+  this.flyingShells.unshift(shell);
+  this.game.scene.add(shell.mesh);
+}
+
 D5tGun.prototype.controlActions = function(keyCode){
   var willRotate = false;
+  if(keyCode == this.shotKey || keyCode == this.shotKey.toUpperCase()){
+    this.shot();
+  }
   if(keyCode == this.upElevKey || keyCode == this.upElevKey.toUpperCase()){
     if(this.mesh.rotation.x < this.maxElevationStep){
       willRotate = true;

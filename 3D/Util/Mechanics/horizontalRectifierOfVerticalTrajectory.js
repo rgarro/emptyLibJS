@@ -31,7 +31,7 @@ var horizontalRectifierOfVerticalTrajectory  = (function(){
 		this.speed = 25;
 		this.tim = 0;
 		this.k = 1;
-    this.position = {x=0,z=0};
+    this.position = {x:0,z:0};
     this.is_moving = false;
   }
 
