@@ -1,7 +1,7 @@
 
 function Shell(x,z,rotationX){
   this.mesh = null;
-  this.startY = 50;
+  this.startY = 28;
   this.startX = x;
   this.startZ = z;
   this.startRotationX = rotationX;
@@ -13,12 +13,12 @@ function Shell(x,z,rotationX){
 
 
 Shell.prototype.trigger = function(){
-  var geometry = new THREE.SphereGeometry( 5, 32, 32 );
-  var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+  var geometry = new THREE.SphereGeometry(3,12,12);
+  var material = new THREE.MeshBasicMaterial( {color: 0x2f2f35} );
   this.mesh = new THREE.Mesh(geometry,material);
   this.planePositionRectifier.setInitPos(this.startX,this.startZ,this.startRotationX);
-  this.mesh.position.x = this.planePositionRectifier.position.x;
-  this.mesh.position.z = this.planePositionRectifier.position.z;
+  this.mesh.position.x = this.startX;//this.planePositionRectifier.position.x - this.planePositionRectifier.xMove;
+  this.mesh.position.z = this.startZ;//this.planePositionRectifier.position.z - this.planePositionRectifier.yMove;
   this.mesh.position.y = this.startY;
   this.mesh.rotationX = this.startRotationX;
   this.is_trigguered = true;
@@ -26,6 +26,7 @@ Shell.prototype.trigger = function(){
 
 Shell.prototype.fly = function(){
   if(this.flyed < this.range){
+
     this.planePositionRectifier.onRender();
     this.mesh.position.x = this.planePositionRectifier.position.x;
     this.mesh.position.z = this.planePositionRectifier.position.z;

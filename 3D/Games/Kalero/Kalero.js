@@ -98,7 +98,7 @@ Kalero.prototype.preRender = function(){
       this.tank.group.position.y =  this.tank.vehicleMesh.position.y;
       this.tank.group.position.x =  this.tank.vehicleMesh.position.x;
       this.tank.group.position.z =  this.tank.vehicleMesh.position.z;
-      //this.tank.Gun.onRender(this.tank.vehicleMesh.position.x,this.tank.vehicleMesh.position.y+28,this.tank.vehicleMesh.position.z,this.tank.vehicleMesh.rotation.z,this.tank.vehicleMesh.rotation.y);
+      this.tank.Gun.onRender(this.tank.vehicleMesh.position.x,this.tank.vehicleMesh.position.y+28,this.tank.vehicleMesh.position.z,this.tank.vehicleMesh.rotation.z,this.tank.vehicleMesh.rotation.y);
   }
   this.bgHelicopter.onRender();
   this.condor.onRender();

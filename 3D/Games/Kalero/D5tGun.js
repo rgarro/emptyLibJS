@@ -48,11 +48,9 @@ D5tGun.prototype.initListeners = function(){
 }
 
 D5tGun.prototype.shot = function(){
-//console.log("shoting");
-//console.log(this.mesh.position.x);//use tank group x
-  var shell = new Shell(this.mesh.position.x,this.mesh.position.z,this.mesh.rotation.x);
+  var shell = new Shell(this.game.tank.group.position.x,this.game.tank.group.position.z,this.game.tank.group.rotation.x);
   shell.trigger();
-  this.flyingShells.unshift(shell);
+  this.flyingShells.push(shell);
   this.game.scene.add(shell.mesh);
 }
 
@@ -75,22 +73,14 @@ D5tGun.prototype.controlActions = function(keyCode){
   }
   if(willRotate){
     this.mesh.rotation.x = (this.clockWise ? this.mesh.rotation.x + this.elevStep : this.mesh.rotation.x - this.elevStep);
-
   }
 }
 
-D5tGun.prototype.onRender = function(x,y,z,rotationZ,rotationY){//let it go with the group
-  /*if(this.gameIsSet){
-    //var delta = this.clock.getDelta();
-    this.mesh.position.x = x;
-    this.mesh.position.y = y;
-    this.mesh.position.z = z;
-    this.mesh.rotation.y = rotationY;
-    this.mesh.matrixAutoUpdate = true;
-    //this.mesh.rotation.x = this.lastRotation;
-//console.log(rotationY);
-  //this.mesh.rotation.z = rotationZ;
-  }else{
-    throw new Error("Needs a Game object");
-  }*/
+D5tGun.prototype.onRender = function(x,y,z,rotationZ,rotationY){
+  if(this.flyingShells.length > 0){
+    for(var i=0;i<this.flyingShells.length;i++){
+      var shell = this.flyingShells[i];
+      shell.fly();
+    }
+  }
 }
