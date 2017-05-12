@@ -1,10 +1,10 @@
 
-function Shell(x,z,rotationX){
+function Shell(x,z,rotationY){
   this.mesh = null;
   this.startY = 28;
   this.startX = x;
   this.startZ = z;
-  this.startRotationX = rotationX;
+  this.startRotationY = rotationY;
   this.planePositionRectifier = new eO._3D.Util.Mechanics.horizontalRectifierOfVerticalTrajectory();
   this.is_trigguered = false;
   this.range = 300;
@@ -13,14 +13,15 @@ function Shell(x,z,rotationX){
 
 
 Shell.prototype.trigger = function(){
+console.log(this.startRotationY);  
   var geometry = new THREE.SphereGeometry(3,12,12);
   var material = new THREE.MeshBasicMaterial( {color: 0x2f2f35} );
   this.mesh = new THREE.Mesh(geometry,material);
-  this.planePositionRectifier.setInitPos(this.startX,this.startZ,this.startRotationX);
+  this.planePositionRectifier.setInitPos(this.startX,this.startZ,this.startRotationY);
   this.mesh.position.x = this.startX;//this.planePositionRectifier.position.x - this.planePositionRectifier.xMove;
   this.mesh.position.z = this.startZ;//this.planePositionRectifier.position.z - this.planePositionRectifier.yMove;
   this.mesh.position.y = this.startY;
-  this.mesh.rotationX = this.startRotationX;
+  this.mesh.rotationY = this.startRotationY;
   this.is_trigguered = true;
 }
 

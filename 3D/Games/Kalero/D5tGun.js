@@ -14,6 +14,7 @@ function D5tGun(){
   this.flyingShells = [];
   this.shotKey = "u";
   this.shots = 0;
+  createjs.Sound.registerSound("/mp3/idg-expl-intermed-779_hifi.mp3", 'shotSound');
 }
 
 D5tGun.prototype.setGame = function(game){
@@ -48,7 +49,9 @@ D5tGun.prototype.initListeners = function(){
 }
 
 D5tGun.prototype.shot = function(){
-  var shell = new Shell(this.game.tank.group.position.x,this.game.tank.group.position.z,this.game.tank.group.rotation.x);
+  var s = createjs.Sound.play('shotSound');
+  s.volume = 0.04;
+  var shell = new Shell(this.game.tank.group.position.x,this.game.tank.group.position.z,this.game.tank.group.rotation.y);
   shell.trigger();
   this.flyingShells.push(shell);
   this.game.scene.add(shell.mesh);
