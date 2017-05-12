@@ -49,9 +49,11 @@ D5tGun.prototype.initListeners = function(){
 }
 
 D5tGun.prototype.shot = function(){
-  var s = createjs.Sound.play('shotSound');
-  s.volume = 0.04;
-  var shell = new Shell(this.game.tank.group.position.x,this.game.tank.group.position.z,this.game.tank.group.rotation.y);
+  var gunBlast = createjs.Sound.play('shotSound');
+  gunBlast.volume = 0.04;
+  //compunding box fix from oposite orientation turret
+  var rectifiedYrotation = (180 + (2.7*this.game.tank.group.rotation.y));//col creighton abrams is from springfield, simpsons movie about threejs
+  var shell = new Shell(this.game.tank.group.position.x,this.game.tank.group.position.z,rectifiedYrotation);
   shell.trigger();
   this.flyingShells.push(shell);
   this.game.scene.add(shell.mesh);

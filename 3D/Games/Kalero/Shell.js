@@ -13,7 +13,7 @@ function Shell(x,z,rotationY){
 
 
 Shell.prototype.trigger = function(){
-console.log(this.startRotationY);  
+console.log(this.startRotationY);
   var geometry = new THREE.SphereGeometry(3,12,12);
   var material = new THREE.MeshBasicMaterial( {color: 0x2f2f35} );
   this.mesh = new THREE.Mesh(geometry,material);
