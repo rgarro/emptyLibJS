@@ -18,6 +18,7 @@ function Kalero(){
   this.floorTextureUrl = '/emptyLibJS/3D/Games/Kalero/assets/floorb.png';
   this.clearColor = 0xa5b6c5;
   this.l = new Light();
+  this.SkyBox = null;
   Game.call(this.p);
 }
 
@@ -77,6 +78,11 @@ Kalero.prototype.setLights = function(){
   light.position.set(0,250,0);
   this.scene.add(light);
 
+  this.SkyBox = eO._3D.Factories.SkyBoxFactory("images/dawnmountain-",".png",1200);
+  this.SkyBox.name = "cielo";
+  this.SkyBox.applyMatrix( new THREE.Matrix4().makeScale( 1, 1, - 1 ) );
+  this.scene.add(this.SkyBox);
+
   this.control = new function () {
       this.rotationSpeed = 0.001;
       this.ambientLightColor = ambientLight.color.getHex();
@@ -100,6 +106,7 @@ Kalero.prototype.preRender = function(){
       this.tank.group.position.z =  this.tank.vehicleMesh.position.z;
       this.tank.Gun.onRender(this.tank.vehicleMesh.position.x,this.tank.vehicleMesh.position.y+28,this.tank.vehicleMesh.position.z,this.tank.vehicleMesh.rotation.z,this.tank.vehicleMesh.rotation.y);
   }
+  //this.tank.Gun.onRender(this.tank.vehicleMesh.position.x,this.tank.vehicleMesh.position.y+28,this.tank.vehicleMesh.position.z,this.tank.vehicleMesh.rotation.z,this.tank.vehicleMesh.rotation.y);
   this.bgHelicopter.onRender();
   this.condor.onRender();
 }

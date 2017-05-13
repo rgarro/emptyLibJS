@@ -50,7 +50,7 @@ D5tGun.prototype.initListeners = function(){
 
 D5tGun.prototype.shot = function(){
   var gunBlast = createjs.Sound.play('shotSound');
-  gunBlast.volume = 0.04;
+  gunBlast.volume = 0.08;
   //compunding box fix from oposite orientation turret
   var rectifiedYrotation = (180 + (2.7*this.game.tank.group.rotation.y));//col creighton abrams is from springfield, simpsons movie about threejs
   var shell = new Shell(this.game.tank.group.position.x,this.game.tank.group.position.z,rectifiedYrotation);
@@ -62,7 +62,9 @@ D5tGun.prototype.shot = function(){
 D5tGun.prototype.controlActions = function(keyCode){
   var willRotate = false;
   if(keyCode == this.shotKey || keyCode == this.shotKey.toUpperCase()){
-    this.shot();
+    if(this.game.tank.is_running){
+      this.shot();
+    }
   }
   if(keyCode == this.upElevKey || keyCode == this.upElevKey.toUpperCase()){
     if(this.mesh.rotation.x < this.maxElevationStep){
