@@ -1,0 +1,3 @@
+describe("QuadTree",function(){
+
+});

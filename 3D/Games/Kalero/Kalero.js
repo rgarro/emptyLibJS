@@ -19,6 +19,7 @@ function Kalero(){
   this.clearColor = 0xa5b6c5;
   this.l = new Light();
   this.SkyBox = null;
+  this.labelMaker = new eO._3D.Util.Screen.InfoLabel(this);
   Game.call(this.p);
 }
 
@@ -37,6 +38,10 @@ Kalero.prototype.postInit = function(){
   this.setLights();
   var axisHelper = new THREE.AxisHelper( 5 );
 this.scene.add(axisHelper);
+}
+
+Kalero.prototype.loadLabels = function(){
+  this.labelMaker.add("Kalero",{x:0,y:300,z:0},"kalero");
 }
 
 Kalero.prototype.loadCondor = function(){

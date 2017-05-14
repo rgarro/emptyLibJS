@@ -13,9 +13,9 @@ function Shell(x,z,rotationY){
 
 
 Shell.prototype.trigger = function(){
-console.log(this.startRotationY);
   var geometry = new THREE.SphereGeometry(3,12,12);
   var material = new THREE.MeshBasicMaterial( {color: 0x2f2f35} );
+  //will need turret elevation to init ballistic render
   this.mesh = new THREE.Mesh(geometry,material);
   this.planePositionRectifier.setInitPos(this.startX,this.startZ,this.startRotationY);
   this.mesh.position.x = this.startX;//this.planePositionRectifier.position.x - this.planePositionRectifier.xMove;
@@ -27,7 +27,7 @@ console.log(this.startRotationY);
 
 Shell.prototype.fly = function(){
   if(this.flyed < this.range){
-
+    //place ballistic render here will return y correction from game planet object and shell physic object
     this.planePositionRectifier.onRender();
     this.mesh.position.x = this.planePositionRectifier.position.x;
     this.mesh.position.z = this.planePositionRectifier.position.z;

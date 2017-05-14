@@ -43,6 +43,7 @@
 var eO = {};
 eO._3D = {};
 eO.Util = {};
+eO._3D.DataObjects = {};
 eO._3D.Util = {};
 eO._3D.Util.Screen = {};
 eO._3D.Util.AI = {};
