@@ -51,10 +51,15 @@ var TerrainVehicle = (function(){
         this.vehicleMesh.scale.set(this.scale,this.scale,this.scale);
         this.parent.scene.add(this.vehicleMesh);
         //this.vehicleMesh.rotation.y = -360;
+        this.postLoaded();
       }).bind(this));
     }else{
       throw new Error("Needs a Game parent object");
     }
+  }
+
+  TerrainVehicle.prototype.postLoaded = function(){
+
   }
 
   TerrainVehicle.prototype.initListeners = function(){

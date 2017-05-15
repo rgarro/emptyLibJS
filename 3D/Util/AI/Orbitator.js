@@ -39,7 +39,7 @@ var Orbitator = (function(){
   Orbitator.prototype.loadModel = function(modelUrl){
     var loader = new THREE.JSONLoader();
     loader.load(modelUrl,(function(model,materials){
-      var texture = THREE.ImageUtils.loadTexture(this.textureUrl);
+      var texture = new THREE.TextureLoader().load(this.textureUrl);
       var material = new THREE.MeshBasicMaterial({map:texture});
       this.mesh = new THREE.Mesh(model, material);
       this.mesh.name = this.meshName;

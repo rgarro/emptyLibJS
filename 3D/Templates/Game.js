@@ -9,6 +9,7 @@ var Game = (function(){
     this.clearColor = 0xa3e1ff;
     this.floorTextureUrl = '/emptyLibJS/3D/Games/Kalero/assets/checkerboard.jpg';
     Basic_3D_Template.call(this.p);
+    this.floorTexture = null;
   }
 
   Game.prototype = Object.create(eO._3D.Templates.Basic_3D_Template.prototype);
@@ -17,10 +18,10 @@ var Game = (function(){
 
   Game.prototype.floorAndSky = function(){
     // FLOOR
-  	var floorTexture = new THREE.ImageUtils.loadTexture(this.floorTextureUrl);
-  	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-  	floorTexture.repeat.set( 10, 10 );
-  	var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
+    this.floorTexture = new THREE.TextureLoader().load(this.floorTextureUrl);
+  	this.floorTexture.wrapS = this.floorTexture.wrapT = THREE.RepeatWrapping;
+  	this.floorTexture.repeat.set( 10, 10 );
+  	var floorMaterial = new THREE.MeshBasicMaterial( { map: this.floorTexture, side: THREE.DoubleSide } );
   	var floorGeometry = new THREE.PlaneGeometry(1000, 1000, 10, 10);
   	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
     floor.name = "floor";
@@ -28,10 +29,10 @@ var Game = (function(){
   	floor.rotation.x = Math.PI / 2;
   	this.scene.add(floor);
     //sky
-    var skyboxGeometry = new THREE.BoxGeometry(10000, 10000, 10000);
+  /*  var skyboxGeometry = new THREE.BoxGeometry(10000, 10000, 10000);
     var skyboxMaterial = new THREE.MeshBasicMaterial({ color: 0xa3e1ff, side: THREE.BackSide });
     var skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial);
-    this.scene.add(skybox);
+    this.scene.add(skybox);*/
   }
 
   return Game;

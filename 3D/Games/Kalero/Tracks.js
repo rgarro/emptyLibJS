@@ -22,7 +22,8 @@ Tracks.prototype = Object.create(TimedFadeable.prototype);
 Tracks.prototype.constructor = Tracks;
 
 Tracks.prototype.loadProp = function(width,height,x,y,z,rotationY,rotationX){
-  var trackTexture = new THREE.ImageUtils.loadTexture(this.trackTextureUrl);
+  //var trackTexture = new THREE.ImageUtils.loadTexture(this.trackTextureUrl);
+  var trackTexture = new THREE.TextureLoader().load(this.trackTextureUrl);
   trackTexture.wrapS = trackTexture.wrapT = THREE.RepeatWrapping;
   //trackTexture.repeat.set( 10, 10 );
   this.material = new THREE.MeshBasicMaterial( { map: trackTexture, side: THREE.DoubleSide } );

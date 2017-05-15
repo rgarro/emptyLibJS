@@ -49,7 +49,7 @@
        this.renderer = new THREE.WebGLRenderer();
        this.renderer.setClearColor(this.clearColor, 1.0);
        this.renderer.setSize(window.innerWidth, window.innerHeight);
-       this.renderer.shadowMapEnabled = true;
+       this.renderer.shadowMap.enabled = true;
        this.postInit();
        document.body.appendChild(this.renderer.domElement);
        if(this.show_control_gui){
