@@ -1,9 +1,10 @@
 
-function Shell(x,z,rotationY){
+function Shell(x,z,rotationY,gunRotationX){
   this.mesh = null;
   this.startY = 28;
   this.startX = x;
   this.startZ = z;
+  this.gunRotationX = gunRotationX;
   this.startRotationY = rotationY;
   this.planePositionRectifier = new eO._3D.Util.Mechanics.horizontalRectifierOfVerticalTrajectory();
   this.is_trigguered = false;
@@ -18,8 +19,8 @@ Shell.prototype.trigger = function(){
   //will need turret elevation to init ballistic render
   this.mesh = new THREE.Mesh(geometry,material);
   this.planePositionRectifier.setInitPos(this.startX,this.startZ,this.startRotationY);
-  this.mesh.position.x = this.startX;//this.planePositionRectifier.position.x - this.planePositionRectifier.xMove;
-  this.mesh.position.z = this.startZ;//this.planePositionRectifier.position.z - this.planePositionRectifier.yMove;
+  this.mesh.position.x = this.startX;
+  this.mesh.position.z = this.startZ;
   this.mesh.position.y = this.startY;
   this.mesh.rotationY = this.startRotationY;
   this.is_trigguered = true;
@@ -27,10 +28,12 @@ Shell.prototype.trigger = function(){
 
 Shell.prototype.fly = function(){
   if(this.flyed < this.range){
-    //place ballistic render here will return y correction from game planet object and shell physic object
     this.planePositionRectifier.onRender();
     this.mesh.position.x = this.planePositionRectifier.position.x;
     this.mesh.position.z = this.planePositionRectifier.position.z;
+    //hook physics engine helper here, remove the Vertical sin
+    this.mesh.position.y += (this.gunRotationX*Math.sin(this.gunRotationX));//Kaddafi has underground facilities never found ...
+    //this.mesh.position.y += (100*Math.sin(this.gunRotationX));
     this.flyed ++;
   }else{
     this.planePositionRectifier.is_moving = false;

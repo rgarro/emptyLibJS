@@ -47,20 +47,22 @@ var SmokeEmitter = (function(){
   }
 
   SmokeEmitter.prototype.onRender = function(){
+    this.clock = new THREE.Clock();
     var delta = this.clock.getDelta();
     this.smokeParticles = this.smokeClouds[0];
 	  var particleCount = this.smokeParticles.vertices.length;
 	   while (particleCount--) {
 		     var particle = this.smokeParticles.vertices[particleCount];
 		     particle.y += delta * 50;
-		     if (particle.y >= 230) {
+//console.log(particle.y);
+		     if (particle.y >= 100) {
 			        particle.y = Math.random() * 16;
 			        particle.x = Math.random() * 32 - 16;
 			        particle.z = Math.random() * 32 - 16;
 		     }
 	   }
 	   this.smokeParticles.__dirtyVertices = true;
-     if(this.smokeClouds.length > 2){
+     if(this.smokeClouds.length > 1){
        this.smokeClouds.pop();
        var cloud = (this.smokeCloudsPS.pop()).name;
        var fadingCloud = this.scene.getObjectByName(cloud);

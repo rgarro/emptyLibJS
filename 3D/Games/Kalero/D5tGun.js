@@ -53,7 +53,7 @@ D5tGun.prototype.shot = function(){
   gunBlast.volume = 0.08;
   //compunding box fix from oposite orientation turret
   var rectifiedYrotation = (180 + (2.7*this.game.tank.group.rotation.y));//col creighton abrams is from springfield, simpsons movie about threejs
-  var shell = new Shell(this.game.tank.group.position.x,this.game.tank.group.position.z,rectifiedYrotation);
+  var shell = new Shell(this.game.tank.group.position.x,this.game.tank.group.position.z,rectifiedYrotation,this.mesh.rotation.x);
   shell.trigger();
   this.flyingShells.push(shell);
   this.game.scene.add(shell.mesh);
