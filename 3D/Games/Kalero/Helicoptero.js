@@ -1,5 +1,8 @@
 /**
  *  mario sotela tenia un helicoptero para ir a surfear ...
+ * "liberen a los esclavos", decian los grafitis en los 80's,
+ * en aquel pais tercermundista donde practican el secuestro transexual.
+ * muchos huetares de toyopan renunciaron a ser esclavos de creer a los hombres , mujer.
  *
  * @author Rolando <rolando@emptyart.xyz>
  */
@@ -11,7 +14,7 @@ function Helicoptero(){
   this.mesh = null;
   this.gameIsSet = false;
   this.meshName = "helicopteroBody";
-  this.centerMeshName = "";//this. will follow while turning
+  this.centerMeshName = "";//follow and surround will need it
   this.radiusLength = 200;
   this.altitude = 90;//y
   this.origin = {x:0,y:0,z:0};
@@ -27,7 +30,7 @@ function Helicoptero(){
   eO._3D.Util.AI.Orbitator.call(this.p);
 }
 
-Helicoptero.prototype = Object.create(eO._3D.Util.AI.Orbitator.prototype);
+Helicoptero.prototype = Object.create(eO._3D.Util.AI.Orbitator.prototype);//replace when |distancefromcenter/√centerMeshName^2|
 Helicoptero.prototype.constructor = Helicoptero;
 
 Helicoptero.prototype.postLoad = function(){
