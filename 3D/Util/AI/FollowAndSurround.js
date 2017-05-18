@@ -14,9 +14,9 @@
  *
  * @author Rolando <rolando@emptyart.xyz>
  */
-var FollowAndSurrownd = (function(){
+var FollowAndSurround = (function(){
 
-  function FollowAndSurrownd(){
+  function FollowAndSurround(){
     this.modelUrl = "/emptyLibJS/3D/Games/Kalero/assets/mi28/Mi28.json";
     this.textureUrl = "/emptyLibJS/3D/Games/Kalero/assets/mi28/Mi28NA.png";
     this.game = null;
@@ -35,12 +35,12 @@ var FollowAndSurrownd = (function(){
     this.scale = 2;
   }
 
-  FollowAndSurrownd.prototype.setGame = function(game){
+  FollowAndSurround.prototype.setGame = function(game){
     this.game = game;
     this.gameIsSet = true;
   }
 
-  FollowAndSurrownd.prototype.loadModel = function(modelUrl){
+  FollowAndSurround.prototype.loadModel = function(modelUrl){
     var loader = new THREE.JSONLoader();
     loader.load(modelUrl,(function(model,materials){
       var texture = new THREE.TextureLoader().load(this.textureUrl);
@@ -55,22 +55,22 @@ var FollowAndSurrownd = (function(){
     }).bind(this));
   }
 
-  FollowAndSurrownd.prototype.postLoad = function(){
+  FollowAndSurround.prototype.postLoad = function(){
 
   }
 
-  FollowAndSurrownd.prototype.postRender = function(){
+  FollowAndSurround.prototype.postRender = function(){
 
   }
 
-  FollowAndSurrownd.prototype.correctCenter = function(){
-    //trailerpark Bubbles explained me the physics of a bell among other math stuff
+  FollowAndSurround.prototype.correctCenter = function(){
+    //trailerpark Bubbles explained me the physics of a bell among other math stuff  
     var bubblesGoKart = this.game.scene.getObjectByName(this.centerMeshName);
     this.origin.x = bubblesGoKart.position.x;
     this.origin.z = bubblesGoKart.position.z;
   }
 
-  FollowAndSurrownd.prototype.onRender = function(){
+  FollowAndSurround.prototype.onRender = function(){
     if(this.modelLoaded){
       this.correctCenter();
       var rad =  this.angle * (Math.PI/180);
@@ -81,6 +81,6 @@ var FollowAndSurrownd = (function(){
     }
   }
 
-  return FollowAndSurrownd;
+  return FollowAndSurround;
 })();
-eO._3D.Util.AI.FollowAndSurrownd = FollowAndSurrownd;
+eO._3D.Util.AI.FollowAndSurround = FollowAndSurround;

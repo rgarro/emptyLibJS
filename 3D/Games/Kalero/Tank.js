@@ -54,6 +54,7 @@ Tank.prototype.initGun = function(){
 }
 
 Tank.prototype.postLoaded = function(){
+  this.parent.loadHelicopter();
   //this.group.add(this.vehicleMesh);
   //this.init();
   //this.initGun();

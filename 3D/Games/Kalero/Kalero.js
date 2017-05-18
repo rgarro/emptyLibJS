@@ -1,8 +1,7 @@
 /**
- * Caterpillar White Stone War
+ * Carlos Fonseca era un eunuco de los sandinistas ...
  *
  * @author Rolando <rolando@emptyart.xyz>
- *
  */
 function Kalero(){
   this.ini_camera_x = 35;
@@ -33,7 +32,6 @@ Kalero.prototype.postInit = function(){
   this.camera.lookAt(this.scene.position);
   this.floorAndSky();
   this.loadTank();
-  this.loadHelicopter();
   this.loadCondor();
   this.setLights();
   var axisHelper = new THREE.AxisHelper( 5 );
@@ -51,10 +49,11 @@ Kalero.prototype.loadCondor = function(){
 }
 
 Kalero.prototype.loadHelicopter = function(){
+
   this.bgHelicopter = new Helicoptero();
   this.bgHelicopter.setGame(this);
   this.bgHelicopter.loadModel(this.bgHelicopter.modelUrl);
-  //this.bgHelicopter.init();
+  this.bgHelicopter.init();
   //this.bgHelicopter.mesh.y = 500;
   this.heliFlying = true;
 }
@@ -104,6 +103,7 @@ Kalero.prototype.preRender = function(){
   this.scene.getObjectByName('ambient').color = new THREE.Color(0x111111);
   //this.scene.getObjectByName('directional').color = new THREE.Color(0xffffff);
   if(this.tank.is_running){
+      this.bgHelicopter.onRender();
       this.tank.muffler.onRender();
       this.tank.group.rotation.y =  this.tank.vehicleMesh.rotation.y;
       this.tank.group.position.y =  this.tank.vehicleMesh.position.y;
@@ -111,7 +111,6 @@ Kalero.prototype.preRender = function(){
       this.tank.group.position.z =  this.tank.vehicleMesh.position.z;
       this.tank.Gun.onRender(this.tank.vehicleMesh.position.x,this.tank.vehicleMesh.position.y+28,this.tank.vehicleMesh.position.z,this.tank.vehicleMesh.rotation.z,this.tank.vehicleMesh.rotation.y);
   }
-  //this.tank.Gun.onRender(this.tank.vehicleMesh.position.x,this.tank.vehicleMesh.position.y+28,this.tank.vehicleMesh.position.z,this.tank.vehicleMesh.rotation.z,this.tank.vehicleMesh.rotation.y);
-  this.bgHelicopter.onRender();
+
   this.condor.onRender();
 }

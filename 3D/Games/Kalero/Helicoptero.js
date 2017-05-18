@@ -14,8 +14,8 @@ function Helicoptero(){
   this.mesh = null;
   this.gameIsSet = false;
   this.meshName = "helicopteroBody";
-  this.centerMeshName = "";//follow and surround will need it
-  this.radiusLength = 200;
+  this.centerMeshName = "elTanque";
+  this.radiusLength = 100;
   this.altitude = 90;//y
   this.origin = {x:0,y:0,z:0};
   this.angle = 30;
@@ -27,15 +27,17 @@ function Helicoptero(){
   this.rudder = null;
   this.group = new THREE.Object3D();
   createjs.Sound.registerSound("/mp3/Helicopt-Diode111-8858_hifi.mp3", 'heliSound');
-  eO._3D.Util.AI.Orbitator.call(this.p);
+  //eO._3D.Util.AI.Orbitator.call(this.p);
+  eO._3D.Util.AI.FollowAndSurround.call(this.p);
 }
 
-Helicoptero.prototype = Object.create(eO._3D.Util.AI.Orbitator.prototype);//replace when |distancefromcenter/√centerMeshName^2|
+//Helicoptero.prototype = Object.create(eO._3D.Util.AI.Orbitator.prototype);
+Helicoptero.prototype = Object.create(eO._3D.Util.AI.FollowAndSurround.prototype);
 Helicoptero.prototype.constructor = Helicoptero;
 
 Helicoptero.prototype.postLoad = function(){
   var s = createjs.Sound.play('heliSound',{loop:1000});
-  s.volume = 0.6;// volume has to move from camera radius
+  s.volume = 0.3;
   this.mesh.rotation.y = -90;
   this.initPropeller();
   this.initRudder();
