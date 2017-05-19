@@ -19,6 +19,7 @@ function Kalero(){
   this.l = new Light();
   this.SkyBox = null;
   this.labelMaker = new eO._3D.Util.Screen.InfoLabel(this);
+  this.enable_shadows = true;
   Game.call(this.p);
 }
 
@@ -53,7 +54,7 @@ Kalero.prototype.loadHelicopter = function(){
   this.bgHelicopter = new Helicoptero();
   this.bgHelicopter.setGame(this);
   this.bgHelicopter.loadModel(this.bgHelicopter.modelUrl);
-  this.bgHelicopter.init();
+//  this.bgHelicopter.init();
   //this.bgHelicopter.mesh.y = 500;
   this.heliFlying = true;
 }
@@ -70,6 +71,11 @@ Kalero.prototype.setLights = function(){
   // now add some better lighting
   var ambientLight = new THREE.AmbientLight(0xF47a42);
   ambientLight.name='ambient';
+  if(this.enable_shadows){
+    //ambientLight.castShadow = true;
+//this.scene.add(new THREE.CameraHelper( ambientLight.shadow.camera ));
+    //ambientLight.shadowCameraVisible = true;
+  }
   this.scene.add(ambientLight);
 
    //add sunlight (light
@@ -80,6 +86,14 @@ Kalero.prototype.setLights = function(){
 
   var light = new THREE.PointLight(0xffffff);
   light.position.set(0,250,0);
+  /*if(this.enable_shadows){
+    light.castShadow = true;
+    light.shadow.camera.visible = true;
+    light.shadow.camera.right     =  5;
+    light.shadow.camera.left     = -5;
+    light.shadow.camera.top      =  5;
+    light.shadow.camera.bottom   = -5;
+  }*/
   this.scene.add(light);
 
   this.SkyBox = eO._3D.Factories.SkyBoxFactory("images/dawnmountain-",".png",1200);

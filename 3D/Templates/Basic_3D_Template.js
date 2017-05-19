@@ -18,6 +18,7 @@
      this.show_stats = false;
      this.ds = null;//datastats object
      this.clearColor = 0x000000;
+     this.enable_shadows = true;
      this.l = new Light();
      if(typeof arguments[0] != 'undefined'){
        this.setContainer(arguments[0]);
@@ -49,7 +50,11 @@
        this.renderer = new THREE.WebGLRenderer();
        this.renderer.setClearColor(this.clearColor, 1.0);
        this.renderer.setSize(window.innerWidth, window.innerHeight);
-       this.renderer.shadowMap.enabled = true;
+       this.renderer.shadowMap.enabled = this.enable_shadows;
+       if(this.renderer.shadowMap.enabled){
+         //this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+         this.renderer.shadowMap.type = THREE.BasicShadowMap;
+       }
        this.postInit();
        document.body.appendChild(this.renderer.domElement);
        if(this.show_control_gui){

@@ -41,6 +41,9 @@ Helicoptero.prototype.postLoad = function(){
   this.mesh.rotation.y = -90;
   this.initPropeller();
   this.initRudder();
+  if(this.game.enable_shadows){
+    this.mesh.castShadow = true;
+  }
   this.group.add(this.mesh);
   this.group.add(this.propeller.mesh);
   this.group.add(this.rudder.mesh);

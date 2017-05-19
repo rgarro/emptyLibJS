@@ -54,6 +54,9 @@ Tank.prototype.initGun = function(){
 
 Tank.prototype.postLoaded = function(){
   this.parent.loadHelicopter();
+  if(this.parent.enable_shadows){
+    this.vehicleMesh.castShadow = true;
+  }
 }
 
 Tank.prototype.beforeForward = function(){

@@ -8,6 +8,7 @@ var Game = (function(){
   function Game(){
     this.clearColor = 0xa3e1ff;
     this.floorTextureUrl = '/emptyLibJS/3D/Games/Kalero/assets/checkerboard.jpg';
+    this.enable_shadows = true;
     Basic_3D_Template.call(this.p);
     this.floorTexture = null;
   }
@@ -27,6 +28,9 @@ var Game = (function(){
     floor.name = "floor";
   	floor.position.y = -0.5;
   	floor.rotation.x = Math.PI / 2;
+    if(this.enable_shadows){
+      floor.receiveShadow = true;
+    }
   	this.scene.add(floor);
     //sky
   /*  var skyboxGeometry = new THREE.BoxGeometry(10000, 10000, 10000);

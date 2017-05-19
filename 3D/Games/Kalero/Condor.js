@@ -28,6 +28,9 @@ Condor.prototype.constructor = Condor;
 
 Condor.prototype.postLoad = function(){
   this.mesh.rotation.y = -90;
+  if(this.game.enable_shadows){
+    this.mesh.castShadow = true;
+  }
 }
 
 Condor.prototype.postRender = function(){
