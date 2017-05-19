@@ -47,7 +47,6 @@ Tank.prototype.postInit = function(){
 Tank.prototype.initGun = function(){
   this.Gun.setGame(this.parent);
   this.Gun.loadModel(0,28,0,0);
-//  this.group.add(this.vehicleMesh);
   this.group.add(this.Gun.mesh);
   this.parent.scene.add(this.group);
   this.Gun.initListeners();
@@ -55,9 +54,6 @@ Tank.prototype.initGun = function(){
 
 Tank.prototype.postLoaded = function(){
   this.parent.loadHelicopter();
-  //this.group.add(this.vehicleMesh);
-  //this.init();
-  //this.initGun();
 }
 
 Tank.prototype.beforeForward = function(){

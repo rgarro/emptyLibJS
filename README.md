@@ -1,15 +1,19 @@
 emptyLibJS
 =======
 
-html5,javascript and css did and oath to live and die together for the glory of the Huawei ..
+Nobody knows their real position in the universe ..
+Tug1 cant go faster than Sun Rays in the solar system,
+the entry angle of the galactic centre, is a cone out
+from the end of the times ...
+  'Nos veremos en el Infierno Teniente' - El Rojo.
 
 ```html
 
 
 <script type="text/javascript">
 			$(document).ready(function(){
-        var app = new Kalero();
-        app.init();
+				var clock = new THREE.Clock();
+		    var delta = this.clock.getDelta();
 			});
 </script>		
 
@@ -17,4 +21,4 @@ html5,javascript and css did and oath to live and die together for the glory of 
 
 
 
-[![Maneje Despacio](https://raw.githubusercontent.com/rgarro/emptyLibJS/master/3D/Games/Kalero/assets/KaleroScreenShot.png)]
+[![que no se resistieran, por que sino los mataban ... ](https://raw.githubusercontent.com/rgarro/emptyLibJS/master/gengis-kan.jpg)]

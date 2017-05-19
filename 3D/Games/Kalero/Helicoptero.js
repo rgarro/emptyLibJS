@@ -64,7 +64,6 @@ Helicoptero.prototype.initPropeller = function(){
 }
 
 Helicoptero.prototype.postRender = function(){
-  //this.group.rotation.y = this.group.rotation.y - 0.05;
   this.propeller.mesh.position.x = this.mesh.position.x;
   this.propeller.mesh.position.z = this.mesh.position.z;
   this.propeller.mesh.position.x = this.mesh.position.x;

@@ -54,7 +54,6 @@ var SmokeEmitter = (function(){
 	   while (particleCount--) {
 		     var particle = this.smokeParticles.vertices[particleCount];
 		     particle.y += delta * 50;
-//console.log(particle.y);
 		     if (particle.y >= 100) {
 			        particle.y = Math.random() * 16;
 			        particle.x = Math.random() * 32 - 16;
