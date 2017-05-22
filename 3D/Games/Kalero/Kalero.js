@@ -19,7 +19,7 @@ function Kalero(){
   this.l = new Light();
   this.SkyBox = null;
   this.labelMaker = new eO._3D.Util.Screen.InfoLabel(this);
-  this.planet = new Wo.Planet();
+  this.planet = new Wo.Planet();//Wo Hookable Rendered Physics
   this.enable_shadows = true;
   Game.call(this.p);
 }
@@ -117,6 +117,7 @@ Kalero.prototype.preRender = function(){
   this.cameraControl.update();
   this.scene.getObjectByName('ambient').color = new THREE.Color(0x111111);
   //this.scene.getObjectByName('directional').color = new THREE.Color(0xffffff);
+  this.Planet.eventHorizon.waving();
   if(this.tank.is_running){
       this.bgHelicopter.onRender();
       this.tank.muffler.onRender();
