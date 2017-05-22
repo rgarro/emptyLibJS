@@ -1,8 +1,5 @@
 /**
  *  mario sotela tenia un helicoptero para ir a surfear ...
- * "liberen a los esclavos", decian los grafitis en los 80's,
- * en aquel pais tercermundista donde practican el secuestro transexual.
- * muchos huetares de toyopan renunciaron a ser esclavos de creer a los hombres , mujer.
  *
  * @author Rolando <rolando@emptyart.xyz>
  */
@@ -25,7 +22,9 @@ function Helicoptero(){
   this.scale = 11;
   this.propeller = null;
   this.rudder = null;
+  this.dropKey = "y";//testing Wo FallingBouncer
   this.group = new THREE.Object3D();
+  this.ball_fell = false;
   createjs.Sound.registerSound("/mp3/Helicopt-Diode111-8858_hifi.mp3", 'heliSound');
   //eO._3D.Util.AI.Orbitator.call(this.p);
   eO._3D.Util.AI.FollowAndSurround.call(this.p);
@@ -48,6 +47,31 @@ Helicoptero.prototype.postLoad = function(){
   this.group.add(this.propeller.mesh);
   this.group.add(this.rudder.mesh);
   this.game.scene.add(this.group);
+  this.initListeners();
+}
+
+Helicoptero.prototype.initListeners = function(){
+  window.addEventListener("keypress",(function(e){
+    this.controlActions(e.key);
+  }).bind(this));
+  window.addEventListener("keydown",(function(e){
+    this.controlActions(e.key);
+  }).bind(this));
+}
+
+Helicoptero.prototype.controlActions = function(keyCode){
+  if(keyCode == this.dropKey || keyCode == this.dropKey.toUpperCase()){
+    if(this.game.tank.is_running){
+      var basketball = new FallingBall();
+      basketball.FallingBouncer.setPlanet(this.game.planet);
+      basketball.drop(this.mesh.position.x,this.mesh.position.y,this.mesh.position.z);
+      basketball.FallingBouncer.start(this.mesh.position.x,this.mesh.position.y,this.mesh.position.z);
+      this.game.scene.add(basketball.mesh);
+      basketball.is_thrown = true;
+      this.game.planet.eventHorizon.lineUp(basketball.fall);
+    }
+  }
+
 }
 
 Helicoptero.prototype.initRudder = function(){
