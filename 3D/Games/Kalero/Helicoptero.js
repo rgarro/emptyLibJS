@@ -64,11 +64,11 @@ Helicoptero.prototype.controlActions = function(keyCode){
     if(this.game.tank.is_running){
       var basketball = new FallingBall();
       basketball.FallingBouncer.setPlanet(this.game.planet);
-      basketball.drop(this.mesh.position.x,this.mesh.position.y,this.mesh.position.z);
-      basketball.FallingBouncer.start(this.mesh.position.x,this.mesh.position.y,this.mesh.position.z);
+      basketball.drop(this.group.position.x,this.group.position.y,this.group.position.z);
+      basketball.FallingBouncer.start(this.group.position.x,this.group.position.y,this.group.position.z);
       this.game.scene.add(basketball.mesh);
       basketball.is_thrown = true;
-      this.game.planet.eventHorizon.lineUp(basketball.fall);
+      this.game.planet.eventHorizon.lineUp((function(e){basketball.fall();}).bind(this));
     }
   }
 
