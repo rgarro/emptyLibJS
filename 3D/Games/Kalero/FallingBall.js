@@ -21,7 +21,7 @@ FallingBall.prototype.drop = function(x,y,z){
 }
 
 FallingBall.prototype.fall = function(){
-  if(this.is_thrown){
+  if(this.is_thrown){    
     this.FallingBouncer.ocurring();
     this.mesh.position.x = this.FallingBouncer.physicObject.position.x;
     this.mesh.position.z = this.FallingBouncer.physicObject.position.z;
