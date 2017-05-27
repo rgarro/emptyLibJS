@@ -64,11 +64,21 @@ Helicoptero.prototype.controlActions = function(keyCode){
     if(this.game.tank.is_running){
       var basketball = new FallingBall();
       basketball.FallingBouncer.setPlanet(this.game.planet);
-      basketball.drop(this.group.position.x,this.altitude,this.group.position.z);
-      basketball.FallingBouncer.start(this.group.position.x,this.altitude,this.group.position.z);
+      basketball.FallingBouncer.rotationY = this.game.tank.vehicleMesh.rotation.y;
+      basketball.drop(this.group.position.x,this.altitude+50,this.group.position.z);
+      basketball.FallingBouncer.start(this.group.position.x,this.altitude+50,this.group.position.z);
       this.game.scene.add(basketball.mesh);
       basketball.is_thrown = true;
-      this.game.planet.eventHorizon.lineUp((function(e){basketball.fall();}).bind(this));
+      this.game.planet.eventHorizon.lineUp((function(e){
+        if(basketball.FallingBouncer.started){
+          basketball.fall();
+        }else{
+          if(basketball.not_removed){
+            this.game.scene.remove(this.game.scene.getObjectByName(basketball.meshName));
+            basketball.not_removed = false;
+          }
+        }//auto call way out of line up once depleted
+        }).bind(this));
     }
   }
 
