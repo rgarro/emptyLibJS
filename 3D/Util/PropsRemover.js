@@ -11,8 +11,6 @@
 
    PropsRemover.prototype.remove = function(propMeshName){
      var prop = this.scene.getObjectByName(propMeshName);
-     //prop._physijs = {};
-     //prop._physijs.id = -1; 
      this.scene.remove(prop);
    }
    return PropsRemover;

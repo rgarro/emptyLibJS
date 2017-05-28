@@ -25,6 +25,8 @@ function Helicoptero(){
   this.dropKey = "y";//testing Wo FallingBouncer
   this.group = new THREE.Object3D();
   this.ball_fell = false;
+  this.balls = [];
+  this.PropsRemover = null;
   createjs.Sound.registerSound("/mp3/Helicopt-Diode111-8858_hifi.mp3", 'heliSound');
   //eO._3D.Util.AI.Orbitator.call(this.p);
   eO._3D.Util.AI.FollowAndSurround.call(this.p);
@@ -47,6 +49,7 @@ Helicoptero.prototype.postLoad = function(){
   this.group.add(this.propeller.mesh);
   this.group.add(this.rudder.mesh);
   this.game.scene.add(this.group);
+  this.PropsRemover = new eO.Util.PropsRemover(this.game.scene);
   this.initListeners();
 }
 
@@ -69,16 +72,8 @@ Helicoptero.prototype.controlActions = function(keyCode){
       basketball.FallingBouncer.start(this.group.position.x,this.altitude+50,this.group.position.z);
       this.game.scene.add(basketball.mesh);
       basketball.is_thrown = true;
-      this.game.planet.eventHorizon.lineUp((function(e){
-        if(basketball.FallingBouncer.started){
-          basketball.fall();
-        }else{
-          if(basketball.not_removed){
-            this.game.scene.remove(this.game.scene.getObjectByName(basketball.meshName));
-            basketball.not_removed = false;
-          }
-        }//auto call way out of line up once depleted
-        }).bind(this));
+      this.game.planet.eventHorizon.lineUp(basketball.FallingBouncer);
+      this.balls.push(basketball);
     }
   }
 
@@ -100,7 +95,23 @@ Helicoptero.prototype.initPropeller = function(){
   this.propeller.loadModel("/cube/");
 }
 
+Helicoptero.prototype.ballsLoop = function(){
+  if(this.balls.length > 0){
+    for(var i =0; i > this.balls.length;i++){
+      var ball = this.balls[i];
+      if(ball.FallingBouncer.started){
+        ball.fall();
+      }else{
+        this.PropsRemover.remove(this.game.scene.getObjectByName(ball.meshName))
+        this.balls.splice(i,1);//atlantic city police arrested 3 with Heroin
+        i --;
+      }
+    }
+  }
+}
+
 Helicoptero.prototype.postRender = function(){
+  this.ballsLoop();
   this.propeller.mesh.position.x = this.mesh.position.x;
   this.propeller.mesh.position.z = this.mesh.position.z;
   this.propeller.mesh.position.x = this.mesh.position.x;
