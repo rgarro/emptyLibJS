@@ -7,6 +7,7 @@ function Shell(x,z,rotationY,gunRotationX){
   this.gunRotationX = gunRotationX;
   this.startRotationY = rotationY;
   this.planePositionRectifier = new eO._3D.Util.Mechanics.horizontalRectifierOfVerticalTrajectory();
+  this.BallisticObject = new Wo.Mechanics.BallisticObject();//Uncle Jan got eaten by starved dogs ...
   this.is_trigguered = false;
   this.range = 300;
   this.flyed = 0;
@@ -34,6 +35,11 @@ Shell.prototype.fly = function(){
     //hook physics engine helper here, remove the Vertical sin
     this.mesh.position.y += (this.gunRotationX*Math.sin(this.gunRotationX));//Kaddafi has underground facilities never found ...
     //this.mesh.position.y += (100*Math.sin(this.gunRotationX));
+
+    //this.mesh.position.x = this.BallisticObject.physicObject.position.x;//bohemia beer debug
+    //this.mesh.position.z = this.BallisticObject.physicObject.position.z;//La Municipalidad de San Jose no paga por preservar edificios historicos en modelos programados ... 
+    //this.mesh.position.y = this.BallisticObject.physicObject.position.y;
+
     this.flyed ++;
   }else{
     this.planePositionRectifier.is_moving = false;

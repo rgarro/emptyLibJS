@@ -52,8 +52,13 @@ D5tGun.prototype.shot = function(){
   var gunBlast = createjs.Sound.play('shotSound');
   gunBlast.volume = 0.08;
   //compunding box fix from oposite orientation turret
-  var rectifiedYrotation = (180 + (2.7*this.game.tank.group.rotation.y));//col creighton abrams is from springfield, simpsons movie about threejs
+  var rectifiedYrotation = (180 + (2.7*this.game.tank.group.rotation.y));//col creighton abrams is from springfield
   var shell = new Shell(this.game.tank.group.position.x,this.game.tank.group.position.z,rectifiedYrotation,this.mesh.rotation.x);
+
+  shell.BallisticObject.setPlanet(this.game.planet);//test tomorrow with a beer object
+  shell.BallisticObject.start(this.game.tank.group.position.x,this.game.tank.group.position.y,this.game.tank.group.position.z);
+  this.game.planet.eventHorizon.lineUp(shell.BallisticObject);
+
   shell.trigger();
   this.flyingShells.push(shell);
   this.game.scene.add(shell.mesh);

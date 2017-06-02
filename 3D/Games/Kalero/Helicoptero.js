@@ -76,7 +76,6 @@ Helicoptero.prototype.controlActions = function(keyCode){
       this.balls.push(basketball);
     }
   }
-
 }
 
 Helicoptero.prototype.initRudder = function(){
@@ -97,7 +96,7 @@ Helicoptero.prototype.initPropeller = function(){
 
 Helicoptero.prototype.ballsLoop = function(){
   if(this.balls.length > 0){
-    for(var i =0; i > this.balls.length;i++){
+    for(var i =0; i < this.balls.length;i++){
       var ball = this.balls[i];
       if(ball.FallingBouncer.started){
         ball.fall();
