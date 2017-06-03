@@ -35,7 +35,7 @@ var horizontalRectifierOfVerticalTrajectory  = (function(){
     this.is_moving = false;
   }
 
- //pero me dices tu nombre y adonde iba el contrabando ...
+ 
   horizontalRectifierOfVerticalTrajectory.prototype.setInitPos = function(x,z,angle){
     var angleb = 0;
 		var xComponent = 0;
@@ -50,7 +50,7 @@ var horizontalRectifierOfVerticalTrajectory  = (function(){
     this.is_moving = true;//como lo habia prometido el Rojo se les fugo ..
   }
 
-  //ahora que estamos parejos te noto que estas temblando ...
+
   horizontalRectifierOfVerticalTrajectory.prototype.onRender = function(x,z,angle){
     if(this.is_moving){//vale mas que oprima bien la espoleta , sino revienta ...
       this.position.x += this.xMove;
