@@ -52,13 +52,9 @@ D5tGun.prototype.shot = function(){
   var gunBlast = createjs.Sound.play('shotSound');
   gunBlast.volume = 0.08;
   //compunding box fix from oposite orientation turret
-  var rectifiedYrotation = (180 + (2.7*this.game.tank.group.rotation.y));//col creighton abrams is from springfield
-  var z = this.game.tank.vehicleMesh.position.z;
-  var x = this.game.tank.vehicleMesh.position.x;
-  var shell = new Shell(x,z,this.game.tank.vehicleMesh.rotation.y,this.mesh.rotation.x);
-  shell.BallisticObject.setPlanet(this.game.planet);
+  var rectifiedYrotation = (180 + (2.7*this.game.tank.group.rotation.y));
+  var shell = new Shell(this.game.tank.group.position.x,this.game.tank.group.position.z,rectifiedYrotation,this.mesh.rotation.x);
   shell.trigger();
-this.game.planet.eventHorizon.lineUp(shell.BallisticObject);
   this.flyingShells.push(shell);
   this.game.scene.add(shell.mesh);
 }

@@ -1,4 +1,3 @@
-
 function Shell(x,z,rotationY,gunRotationX){
   this.mesh = null;
   this.startY = 28;
@@ -7,7 +6,6 @@ function Shell(x,z,rotationY,gunRotationX){
   this.gunRotationX = gunRotationX;
   this.startRotationY = rotationY;
   this.planePositionRectifier = new eO._3D.Util.Mechanics.horizontalRectifierOfVerticalTrajectory();
-  this.BallisticObject = new Wo.Mechanics.BallisticObject();//Uncle Jan got eaten by starved dogs ...
   this.is_trigguered = false;
   this.range = 300;
   this.flyed = 0;
@@ -20,7 +18,6 @@ Shell.prototype.trigger = function(){
   //will need turret elevation to init ballistic render
   this.mesh = new THREE.Mesh(geometry,material);
   this.planePositionRectifier.setInitPos(this.startX,this.startZ,this.startRotationY);
-  this.BallisticObject.start(this.startX,this.startY,this.startZ,this.gunRotationX,this.startRotationY);
   this.mesh.position.x = this.startX;
   this.mesh.position.z = this.startZ;
   this.mesh.position.y = this.startY;
@@ -31,16 +28,11 @@ Shell.prototype.trigger = function(){
 Shell.prototype.fly = function(){
   if(this.flyed < this.range){
     this.planePositionRectifier.onRender();
-//this.mesh.position.x = this.planePositionRectifier.position.x;
-//this.mesh.position.z = this.planePositionRectifier.position.z;
+    this.mesh.position.x = this.planePositionRectifier.position.x;
+    this.mesh.position.z = this.planePositionRectifier.position.z;
     //hook physics engine helper here, remove the Vertical sin
-  //this.mesh.position.y += (this.gunRotationX*Math.sin(this.gunRotationX));//Kaddafi has underground facilities never found ...
+    this.mesh.position.y += (this.gunRotationX*Math.sin(this.gunRotationX));//Kaddafi has underground facilities never found ...
     //this.mesh.position.y += (100*Math.sin(this.gunRotationX));
-
-    this.mesh.position.x = this.BallisticObject.physicObject.position.x;
-    this.mesh.position.z = this.BallisticObject.physicObject.position.z;
-    this.mesh.position.y = this.BallisticObject.physicObject.position.y;
-
     this.flyed ++;
   }else{
     this.planePositionRectifier.is_moving = false;
