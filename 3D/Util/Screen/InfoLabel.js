@@ -8,7 +8,7 @@ var InfoLabel = (function(){
     this.curveSegments = 1;
     this.font = null;
     this.loader = new THREE.FontLoader();
-    this.loader.load( 'fonts/gentilis_regular.typeface.json', (function ( font ) {
+    this.loader.load( 'fonts/gentilis_regular.typeface.json', (function (font){
 				this.font = font;
 			}).bind(this));
   }

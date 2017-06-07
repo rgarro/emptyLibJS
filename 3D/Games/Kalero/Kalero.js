@@ -18,7 +18,7 @@ function Kalero(){
   this.clearColor = 0xa5b6c5;
   this.l = new Light();
   this.SkyBox = null;
-  this.labelMaker = new eO._3D.Util.Screen.InfoLabel(this);
+  this.labelMaker = null;
   this.planet = new Wo.Planet();
   this.enable_shadows = true;
   Game.call(this.p);
@@ -36,11 +36,20 @@ Kalero.prototype.postInit = function(){
   this.loadTank();
   this.loadCondor();
   this.setLights();
-  var axisHelper = new THREE.AxisHelper( 5 );
+  //this.loadLabels();
+  this.loadInstructions();
+  var axisHelper = new THREE.AxisHelper(5);
 this.scene.add(axisHelper);
 }
 
+Kalero.prototype.loadInstructions = function(){
+  console.log(";alksdjf");
+  var html = "<div id='gameInfo'><B>Press S to Start<br>S Forward<br>W BackWard<br>A TurnLeft<br>D TurnRight<br>U Shoots<br>Y Drops BasketBall</B></div>";
+  $("body").append(html);
+}
+
 Kalero.prototype.loadLabels = function(){
+  //this.labelMaker = new eO._3D.Util.Screen.InfoLabel(this);
   this.labelMaker.add("Kalero",{x:0,y:300,z:0},"kalero");
 }
 
