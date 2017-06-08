@@ -21,6 +21,7 @@ function Kalero(){
   this.labelMaker = null;
   this.planet = new Wo.Planet();
   this.enable_shadows = true;
+  this.targets = [];
   Game.call(this.p);
 }
 
@@ -40,6 +41,10 @@ Kalero.prototype.postInit = function(){
   this.loadInstructions();
   var axisHelper = new THREE.AxisHelper(5);
 this.scene.add(axisHelper);
+}
+
+Kalero.prototype.loadTargets = function(){
+  
 }
 
 Kalero.prototype.loadInstructions = function(){
@@ -64,7 +69,7 @@ Kalero.prototype.loadHelicopter = function(){
   this.bgHelicopter = new Helicoptero();
   this.bgHelicopter.setGame(this);
   this.bgHelicopter.loadModel(this.bgHelicopter.modelUrl);
-//  this.bgHelicopter.init();
+  //this.bgHelicopter.init();
   //this.bgHelicopter.mesh.y = 500;
   this.heliFlying = true;
 }
@@ -83,7 +88,7 @@ Kalero.prototype.setLights = function(){
   ambientLight.name='ambient';
   if(this.enable_shadows){
     //ambientLight.castShadow = true;
-//this.scene.add(new THREE.CameraHelper( ambientLight.shadow.camera ));
+    //this.scene.add(new THREE.CameraHelper( ambientLight.shadow.camera ));
     //ambientLight.shadowCameraVisible = true;
   }
   this.scene.add(ambientLight);
