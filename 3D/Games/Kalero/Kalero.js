@@ -36,15 +36,12 @@ Kalero.prototype.postInit = function(){
   this.floorAndSky();
   this.loadTank();
   this.loadCondor();
+  this.loadTargets();
   this.setLights();
   //this.loadLabels();
   this.loadInstructions();
   var axisHelper = new THREE.AxisHelper(5);
 this.scene.add(axisHelper);
-}
-
-Kalero.prototype.loadTargets = function(){
-  
 }
 
 Kalero.prototype.loadInstructions = function(){
@@ -62,6 +59,12 @@ Kalero.prototype.loadCondor = function(){
   this.condor = new Condor();
   this.condor.setGame(this);
   this.condor.loadModel(this.condor.modelUrl);
+}
+
+Kalero.prototype.loadTargets = function(){
+  var target = new TestTarget();
+  target.game = this;
+  target.loadModel(target.trailerModelURL);
 }
 
 Kalero.prototype.loadHelicopter = function(){
