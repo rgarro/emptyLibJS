@@ -45,7 +45,6 @@ this.scene.add(axisHelper);
 }
 
 Kalero.prototype.loadInstructions = function(){
-  console.log(";alksdjf");
   var html = "<div id='gameInfo'><B>Press S to Start<br>S Forward<br>W BackWard<br>A TurnLeft<br>D TurnRight<br>U Shoots<br>Y Drops BasketBall</B></div>";
   $("body").append(html);
 }
@@ -63,12 +62,20 @@ Kalero.prototype.loadCondor = function(){
 
 Kalero.prototype.loadTargets = function(){
   var target = new TestTarget();
-  target.game = this;
+  target.setGame(this);
   target.loadModel(target.trailerModelURL);
+  this.targets.push(target);
+}
+
+Kalero.prototype.targetCollitions = function(){
+  for(var i = 0; i < this.targets.length;i++){
+    var target = this.targets[i];
+console.log(target);
+    //target.onRender();
+  }
 }
 
 Kalero.prototype.loadHelicopter = function(){
-
   this.bgHelicopter = new Helicoptero();
   this.bgHelicopter.setGame(this);
   this.bgHelicopter.loadModel(this.bgHelicopter.modelUrl);
@@ -143,6 +150,7 @@ Kalero.prototype.preRender = function(){
       this.tank.group.position.x =  this.tank.vehicleMesh.position.x;
       this.tank.group.position.z =  this.tank.vehicleMesh.position.z;
       this.tank.Gun.onRender(this.tank.vehicleMesh.position.x,this.tank.vehicleMesh.position.y+28,this.tank.vehicleMesh.position.z,this.tank.vehicleMesh.rotation.z,this.tank.vehicleMesh.rotation.y);
+      this.targetCollitions();
   }
 
   this.condor.onRender();

@@ -1,5 +1,6 @@
 function Shell(x,z,rotationY,gunRotationX){
   this.mesh = null;
+  this.geometry = null;
   this.startY = 28;
   this.startX = x;
   this.startZ = z;
@@ -13,10 +14,10 @@ function Shell(x,z,rotationY,gunRotationX){
 
 
 Shell.prototype.trigger = function(){
-  var geometry = new THREE.SphereGeometry(3,12,12);
+  this.geometry = new THREE.SphereGeometry(3,12,12);
   var material = new THREE.MeshBasicMaterial( {color: 0x2f2f35} );
   //will need turret elevation to init ballistic render
-  this.mesh = new THREE.Mesh(geometry,material);
+  this.mesh = new THREE.Mesh(this.geometry,material);
   this.planePositionRectifier.setInitPos(this.startX,this.startZ,this.startRotationY);
   this.mesh.position.x = this.startX;
   this.mesh.position.z = this.startZ;
