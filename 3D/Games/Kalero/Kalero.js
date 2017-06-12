@@ -71,7 +71,7 @@ Kalero.prototype.targetCollitions = function(){
   for(var i = 0; i < this.targets.length;i++){
     var target = this.targets[i];
 console.log(target);
-    //target.onRender();
+    target.onRender();
   }
 }
 
