@@ -49,9 +49,9 @@ TestTarget.prototype.checkCollition = function(shell){
 		var globalVertex = localVertex.applyMatrix4(shell.mesh.matrix);
 		var directionVector = globalVertex.sub(shell.mesh.position);
 
-		var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize() );
-		var collisionResults = ray.intersectObjects( collidableMeshList );
-		if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ){
+		var ray = new THREE.Raycaster(shell.mesh.position, directionVector.clone().normalize() );
+		var collisionResults = ray.intersectObjects(this.game.tank.Gun.flyingShells);
+		if(collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()){
       this.triggerExplotion();
     }
 	}
@@ -59,6 +59,7 @@ TestTarget.prototype.checkCollition = function(shell){
 
 TestTarget.prototype.onRender = function(){
   for(var shell in this.game.tank.Gun.flyingShells){
-    console.log(shell);
+    //console.log(shell);//Ghost in a shell ...
+    this.checkCollition();//somebody put an apoteke above from where jfk gave a speech ..
   }
 }
