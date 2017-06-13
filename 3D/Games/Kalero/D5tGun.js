@@ -87,6 +87,7 @@ D5tGun.prototype.onRender = function(x,y,z,rotationZ,rotationY){
   if(this.flyingShells.length > 0){
     for(var i=0;i<this.flyingShells.length;i++){
       var shell = this.flyingShells[i];
+console.log(shell);      
       shell.fly();
     }
   }

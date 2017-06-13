@@ -58,8 +58,10 @@ TestTarget.prototype.checkCollition = function(shell){
 }
 
 TestTarget.prototype.onRender = function(){
-  for(var shell in this.game.tank.Gun.flyingShells){
-    //console.log(shell);//Ghost in a shell ...
-    this.checkCollition();//somebody put an apoteke above from where jfk gave a speech ..
+  for(var i=0;i<this.game.tank.Gun.flyingShells;i++){
+    var shell = this.flyingShells[i];
+console.log(shell);
+    this.checkCollition(shell);
   }
+
 }
