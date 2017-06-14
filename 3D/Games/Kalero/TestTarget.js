@@ -42,15 +42,17 @@ TestTarget.prototype.triggerExplotion = function(){
   console.log("Cafetalito Town Hit ...");
 }
 
-TestTarget.prototype.checkCollition = function(shell){
-  for (var vertexIndex = 0; vertexIndex < shell.geometry.vertices.length; vertexIndex++)
+TestTarget.prototype.checkCollition = function(meshO){
+  var originPoint = this.mesh.position.clone();
+  for (var vertexIndex = 0; vertexIndex < meshO.geometry.vertices.length; vertexIndex++)
 	{
-		var localVertex = shell.geometry.vertices[vertexIndex].clone();
-		var globalVertex = localVertex.applyMatrix4(shell.mesh.matrix);
-		var directionVector = globalVertex.sub(shell.mesh.position);
+		var localVertex = meshO.geometry.vertices[vertexIndex].clone();
+		var globalVertex = localVertex.applyMatrix4(meshO.matrix);
+		var directionVector = globalVertex.sub(meshO.position);
 
-		var ray = new THREE.Raycaster(shell.mesh.position, directionVector.clone().normalize() );
-		var collisionResults = ray.intersectObjects(this.game.tank.Gun.flyingShells);
+		var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize() );
+		var collisionResults = ray.intersectObject(meshO);
+console.log(collisionResults);
 		if(collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()){
       this.triggerExplotion();
     }
@@ -58,10 +60,9 @@ TestTarget.prototype.checkCollition = function(shell){
 }
 
 TestTarget.prototype.onRender = function(){
-  for(var i=0;i<this.game.tank.Gun.flyingShells;i++){
-    var shell = this.flyingShells[i];
-console.log(shell);
-    this.checkCollition(shell);
+  for(var i=0;i<this.game.tank.Gun.flyingShells.length;i++){
+    var shell = this.game.tank.Gun.flyingShells[i];
+    this.checkCollition(shell.mesh);
   }
 
 }

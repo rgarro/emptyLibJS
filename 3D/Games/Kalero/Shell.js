@@ -31,8 +31,7 @@ Shell.prototype.fly = function(){
     this.planePositionRectifier.onRender();
     this.mesh.position.x = this.planePositionRectifier.position.x;
     this.mesh.position.z = this.planePositionRectifier.position.z;
-    //hook physics engine helper here, remove the Vertical sin
-    this.mesh.position.y += (this.gunRotationX*Math.sin(this.gunRotationX));//Kaddafi has underground facilities never found ...
+    this.mesh.position.y += (this.gunRotationX*Math.sin(this.gunRotationX));
     //this.mesh.position.y += (100*Math.sin(this.gunRotationX));
     this.flyed ++;
   }else{
