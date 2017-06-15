@@ -19,6 +19,7 @@ function D5tGun(){
 
 D5tGun.prototype.setGame = function(game){
     this.game = game;
+    this.gravityCurver.setPlanet(this.game.planet);
     this.gameIsSet = true;
 }
 
@@ -55,6 +56,9 @@ D5tGun.prototype.shot = function(){
   var rectifiedYrotation = (180 + (2.7*this.game.tank.group.rotation.y));
   var shell = new Shell(this.game.tank.group.position.x,this.game.tank.group.position.z,rectifiedYrotation,this.mesh.rotation.x);
   shell.trigger();
+  shell.curver = new eO._3D.Util.Mechanics.ObeyGravity();
+  shell.curver.setPlanet(this.game.planet);
+  shell.curver.start(this.game.tank.group.position.x,this.game.tank.group.position.y,this.game.tank.group.position.z);
   this.flyingShells.push(shell);
   this.game.scene.add(shell.mesh);
 }
@@ -86,8 +90,10 @@ D5tGun.prototype.controlActions = function(keyCode){
 D5tGun.prototype.onRender = function(x,y,z,rotationZ,rotationY){
   if(this.flyingShells.length > 0){
     for(var i=0;i<this.flyingShells.length;i++){
-      var shell = this.flyingShells[i];      
+      var shell = this.flyingShells[i];
       shell.fly();
+      shell.curver.ocurring();
+      shell.mesh.position.y += shell.curver.physicObject.position.y;
     }
   }
 }

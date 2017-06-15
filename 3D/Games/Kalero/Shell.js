@@ -10,6 +10,7 @@ function Shell(x,z,rotationY,gunRotationX){
   this.is_trigguered = false;
   this.range = 300;
   this.flyed = 0;
+  this.curver = null;
 }
 
 
@@ -28,11 +29,12 @@ Shell.prototype.trigger = function(){
 
 Shell.prototype.fly = function(){
   if(this.flyed < this.range){
+    this.gravityCurver.ocurring();
     this.planePositionRectifier.onRender();
     this.mesh.position.x = this.planePositionRectifier.position.x;
     this.mesh.position.z = this.planePositionRectifier.position.z;
     this.mesh.position.y += (this.gunRotationX*Math.sin(this.gunRotationX));
-    //this.mesh.position.y += (100*Math.sin(this.gunRotationX));
+    this.mesh.position.y += (100*Math.sin(this.gunRotationX));
     this.flyed ++;
   }else{
     this.planePositionRectifier.is_moving = false;
