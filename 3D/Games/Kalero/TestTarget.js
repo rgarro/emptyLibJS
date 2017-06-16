@@ -52,7 +52,7 @@ TestTarget.prototype.checkCollition = function(meshO){
 
 		var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize() );
 		var collisionResults = ray.intersectObject(meshO);
-console.log(collisionResults);
+//console.log(collisionResults);
 		if(collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()){
       this.triggerExplotion();
     }
