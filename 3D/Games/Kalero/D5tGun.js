@@ -19,7 +19,6 @@ function D5tGun(){
 
 D5tGun.prototype.setGame = function(game){
     this.game = game;
-    this.gravityCurver.setPlanet(this.game.planet);
     this.gameIsSet = true;
 }
 
@@ -56,7 +55,7 @@ D5tGun.prototype.shot = function(){
   var rectifiedYrotation = (180 + (2.7*this.game.tank.group.rotation.y));
   var shell = new Shell(this.game.tank.group.position.x,this.game.tank.group.position.z,rectifiedYrotation,this.mesh.rotation.x);
   shell.trigger();
-  shell.curver = new eO._3D.Util.Mechanics.ObeyGravity();
+  shell.curver = new Wo.Mechanics.ObeyGravity();
   shell.curver.setPlanet(this.game.planet);
   shell.curver.start(this.game.tank.group.position.x,this.game.tank.group.position.y,this.game.tank.group.position.z);
   this.flyingShells.push(shell);

@@ -63,6 +63,7 @@ TestTarget.prototype.onRender = function(){
   for(var i=0;i<this.game.tank.Gun.flyingShells.length;i++){
     var shell = this.game.tank.Gun.flyingShells[i];
     this.checkCollition(shell.mesh);
+//clean array index on depleted shell here    
   }
 
 }

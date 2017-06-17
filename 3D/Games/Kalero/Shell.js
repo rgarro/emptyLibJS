@@ -29,12 +29,12 @@ Shell.prototype.trigger = function(){
 
 Shell.prototype.fly = function(){
   if(this.flyed < this.range){
-    this.gravityCurver.ocurring();
+    this.curver.ocurring();
     this.planePositionRectifier.onRender();
     this.mesh.position.x = this.planePositionRectifier.position.x;
     this.mesh.position.z = this.planePositionRectifier.position.z;
     this.mesh.position.y += (this.gunRotationX*Math.sin(this.gunRotationX));
-    this.mesh.position.y += (100*Math.sin(this.gunRotationX));
+    this.mesh.position.y += this.curver.physicObject.position.y;
     this.flyed ++;
   }else{
     this.planePositionRectifier.is_moving = false;
