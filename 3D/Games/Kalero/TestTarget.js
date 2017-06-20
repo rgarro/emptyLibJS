@@ -44,6 +44,7 @@ TestTarget.prototype.triggerExplotion = function(){
 
 TestTarget.prototype.checkCollition = function(meshO){
   var originPoint = this.mesh.position.clone();
+console.log(originPoint);
   for (var vertexIndex = 0; vertexIndex < meshO.geometry.vertices.length; vertexIndex++)
 	{
 		var localVertex = meshO.geometry.vertices[vertexIndex].clone();
@@ -52,7 +53,8 @@ TestTarget.prototype.checkCollition = function(meshO){
 
 		var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize() );
 		var collisionResults = ray.intersectObject(meshO);
-//console.log(collisionResults);
+console.log(this.game.tank.Gun.flyingShells.length);    
+console.log(collisionResults);
 		if(collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()){
       this.triggerExplotion();
     }
@@ -63,7 +65,6 @@ TestTarget.prototype.onRender = function(){
   for(var i=0;i<this.game.tank.Gun.flyingShells.length;i++){
     var shell = this.game.tank.Gun.flyingShells[i];
     this.checkCollition(shell.mesh);
-//clean array index on depleted shell here    
   }
 
 }

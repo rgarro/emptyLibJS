@@ -93,6 +93,10 @@ D5tGun.prototype.onRender = function(x,y,z,rotationZ,rotationY){
       shell.fly();
       shell.curver.ocurring();
       shell.mesh.position.y += shell.curver.physicObject.position.y;
+console.log(shell.is_trigguered);      
+      if(!shell.is_trigguered){
+        this.flyingShells.splice(i,1);//empty machigun belt ....
+      }
     }
   }
 }
