@@ -18,7 +18,7 @@ function Ardilla(){
 
   this.planet = new Wo.Planet();
   this.enable_shadows = true;
-
+  this.Helicoptero = null;
   Game.call(this.p);
 }
 
@@ -27,5 +27,5 @@ Ardilla.prototype = Object.create(eO._3D.Templates.Game.prototype);
 Ardilla.prototype.constructor = Ardilla;
 
 Ardilla.prototype.postInit = function(){
-  
+  this.Helicoptero = new Helicoptero();
 }
