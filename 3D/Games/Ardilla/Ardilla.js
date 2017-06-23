@@ -19,6 +19,7 @@ function Ardilla(){
   this.planet = new Wo.Planet();
   this.enable_shadows = true;
   this.Helicoptero = null;
+  this.cameraControl = null;
   Game.call(this.p);
 }
 
@@ -27,5 +28,20 @@ Ardilla.prototype = Object.create(eO._3D.Templates.Game.prototype);
 Ardilla.prototype.constructor = Ardilla;
 
 Ardilla.prototype.postInit = function(){
+  this.floorAndSky();
   this.Helicoptero = new Helicoptero();
+  this.Helicoptero.setGame(this);
+  this.Helicoptero.loadModel(this.Helicoptero.modelUrl);
+}
+
+Ardilla.prototype.setControl = function(){
+  this.cameraControl = new THREE.OrbitControls(this.camera);
+}
+
+Ardilla.prototype.preRender = function(){
+  this.cameraControl.update();
+//  this.scene.getObjectByName('ambient').color = new THREE.Color(0x111111);
+  //this.scene.getObjectByName('directional').color = new THREE.Color(0xffffff);
+  this.planet.onRender();
+
 }

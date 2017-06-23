@@ -25,12 +25,13 @@ function Helicoptero(){
   this.group = new THREE.Object3D();
   this.PropsRemover = null;
   createjs.Sound.registerSound("/mp3/Helicopt-Diode111-8858_hifi.mp3", 'heliSound');
-  //eO._3D.Util.AI.Orbitator.call(this.p);
-  //eO._3D.Util.AI.FollowAndSurround.call(this.p);
 }
 
-//Helicoptero.prototype = Object.create(eO._3D.Util.AI.Orbitator.prototype);
-//Helicoptero.prototype = Object.create(eO._3D.Util.AI.FollowAndSurround.prototype);
+Helicoptero.prototype.setGame = function(game){
+  this.game = game;
+  this.gameIsSet = true;
+}
+
 Helicoptero.prototype.constructor = Helicoptero;
 
 Helicoptero.prototype.postLoad = function(){
@@ -72,6 +73,25 @@ Helicoptero.prototype.initRudder = function(){
   this.rudder.origin.z = 28;
   this.rudder.setGame(this.game);
   this.rudder.loadModel("/cube/");
+}
+
+Helicoptero.prototype.loadModel = function(modelUrl){
+  var loader = new THREE.JSONLoader();
+  loader.load(modelUrl,(function(model,materials){
+    var texture = new THREE.TextureLoader().load(this.textureUrl);
+    var material = new THREE.MeshBasicMaterial({map:texture});
+    this.mesh = new THREE.Mesh(model, material);
+    this.mesh.name = this.meshName;
+    this.mesh.scale.set(this.scale,this.scale,this.scale);
+    this.mesh.position.y = this.altitude;
+    this.game.scene.add(this.mesh);
+    this.modelLoaded = true;
+    this.postLoad();
+  }).bind(this));
+}
+
+Helicoptero.prototype.postLoad = function(){
+
 }
 
 Helicoptero.prototype.initPropeller = function(){
