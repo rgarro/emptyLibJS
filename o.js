@@ -47,6 +47,7 @@ eO._3D.DataObjects = {};
 eO._3D.Util = {};
 eO._3D.Util.Screen = {};
 eO._3D.Util.AI = {};
+eO._3D.Util.Plot = {};
 eO._3D.Factories = {};
 eO.Util.Props = {};
 eO._3D.Util.Props = {};
