@@ -55,9 +55,9 @@ D5tGun.prototype.shot = function(){
   var rectifiedYrotation = (180 + (2.7*this.game.tank.group.rotation.y));
   var shell = new Shell(this.game.tank.group.position.x,this.game.tank.group.position.z,rectifiedYrotation,this.mesh.rotation.x);
   shell.trigger();
-  shell.curver = new Wo.Mechanics.ObeyGravity();
-  shell.curver.setPlanet(this.game.planet);
-  shell.curver.start(this.game.tank.group.position.x,this.game.tank.group.position.y,this.game.tank.group.position.z);
+  //shell.curver = new Wo.Mechanics.ObeyGravity();
+  //shell.curver.setPlanet(this.game.planet);
+  //shell.curver.start(this.game.tank.group.position.x,this.game.tank.group.position.y,this.game.tank.group.position.z);
   this.flyingShells.push(shell);
   this.game.scene.add(shell.mesh);
 }
@@ -91,9 +91,8 @@ D5tGun.prototype.onRender = function(x,y,z,rotationZ,rotationY){
     for(var i=0;i<this.flyingShells.length;i++){
       var shell = this.flyingShells[i];
       shell.fly();
-      shell.curver.ocurring();
-      shell.mesh.position.y += shell.curver.physicObject.position.y;
-console.log(shell.is_trigguered);      
+      //shell.curver.ocurring();
+      //shell.mesh.position.y += shell.curver.physicObject.position.y;
       if(!shell.is_trigguered){
         this.flyingShells.splice(i,1);//empty machigun belt ....
       }

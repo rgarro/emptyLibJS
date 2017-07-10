@@ -10,6 +10,7 @@ function TestTarget(){
   this.game = null;
   this.gameIsSet = false;
   this.scale = 30;
+  this.hits = 0;
 }
 
 TestTarget.prototype.setGame = function(game){
@@ -39,12 +40,13 @@ TestTarget.prototype.loadModel = function(modelUrl){
 }
 
 TestTarget.prototype.triggerExplotion = function(){
-  console.log("Cafetalito Town Hit ...");
+  this.hits = this.hits + 1;
+  console.log("Cafetalito Town Hit "+ this.hits + " ...");
 }
 
 TestTarget.prototype.checkCollition = function(meshO){
   var originPoint = this.mesh.position.clone();
-console.log(originPoint);
+  this.game.scene.updateMatrixWorld();
   for (var vertexIndex = 0; vertexIndex < meshO.geometry.vertices.length; vertexIndex++)
 	{
 		var localVertex = meshO.geometry.vertices[vertexIndex].clone();
@@ -53,9 +55,9 @@ console.log(originPoint);
 
 		var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize() );
 		var collisionResults = ray.intersectObject(meshO);
-console.log(this.game.tank.Gun.flyingShells.length);    
-console.log(collisionResults);
-		if(collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()){
+//console.log(collisionResults);
+//if(collisionResults.length > 0 && collisionResults[0].distance < directionVector.length())
+    if(collisionResults.length > 0){
       this.triggerExplotion();
     }
 	}
