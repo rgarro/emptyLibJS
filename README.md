@@ -2,10 +2,8 @@ emptyLibJS
 =======
 
 Nobody knows their real position in the universe ..
-Tug1 cant go faster than Sun Rays in the solar system,
-the entry angle of the galactic centre, is a cone out
-from the end of the times ...
-  'Nos veremos en el Infierno Teniente' - El Rojo.
+just the Pepsi can in the next Back to the Future...
+
 
 ```html
 
@@ -21,4 +19,4 @@ from the end of the times ...
 
 
 
-[![que no se resistieran, por que sino los mataban ... ](https://raw.githubusercontent.com/rgarro/emptyLibJS/master/gengis-kan.jpg)]
+[![que no se resistieran, por que sino los mataban ... ](https://raw.githubusercontent.com/rgarro/emptyLibJS/master/3D/Games/Kalero/assets/KaleroScreenShot.png)]
