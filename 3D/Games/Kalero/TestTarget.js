@@ -1,7 +1,9 @@
 //High Plains Drifts ... the good citizens of Lago slashed Bubbles and cut his balls in 1877...
 function TestTarget(){
-  this.trailerModelURL = "/emptyLibJS/3D/Games/Kalero/assets/myBMP.json";
-  this.textureUrl = "/emptyLibJS/3D/Games/Kalero/assets/myBMP.png";
+  this.trailerModelURL = "/emptyLibJS/3D/Games/Kalero/assets/bmp/bmpBody.json";
+  this.turretModelURL = "/emptyLibJS/3D/Games/Kalero/assets/bmp/bmpTurret.json";
+  this.textureUrl = "/emptyLibJS/3D/Games/Kalero/assets/bmp/myBMP.png";
+  this.group = new THREE.Object3D();
   this.mesh = null;
   this.meshName = "testTarget";
   this.geometry = null;
@@ -9,13 +11,17 @@ function TestTarget(){
   this.modelLoaded = false;
   this.game = null;
   this.gameIsSet = false;
-  this.scale = 30;
+  this.scale = 15;
   this.hits = 0;
 }
 
 TestTarget.prototype.setGame = function(game){
   this.game = game;
   this.gameIsSet = true;
+}
+
+TestTarget.prototype.loadTurretModel = function(modelUrl){
+
 }
 
 TestTarget.prototype.loadModel = function(modelUrl){
