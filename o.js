@@ -50,6 +50,7 @@ eO._3D.Util.AI = {};
 eO._3D.Util.Plot = {};
 eO._3D.Factories = {};
 eO.Util.Props = {};
+eO.Util.Props.Explotions = {};
 eO._3D.Util.Props = {};
 eO._3D.Util.Mechanics = {};
 eO.Util.Controlable = {};

@@ -47,7 +47,7 @@ TestTarget.prototype.loadModel = function(modelUrl){
 
 TestTarget.prototype.triggerExplotion = function(){
   this.hits = this.hits + 1;
-  console.log("Cafetalito Town Hit "+ this.hits + " ...");
+  console.log("Cafetalito Town Hit "+ this.hits + " ...");//Bombetazo here ...
 }
 
 TestTarget.prototype.checkCollition = function(meshO){
