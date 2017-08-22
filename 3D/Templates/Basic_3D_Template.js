@@ -56,7 +56,8 @@
          this.renderer.shadowMap.type = THREE.BasicShadowMap;
        }
        this.postInit();
-       document.body.appendChild(this.renderer.domElement);
+       //document.body.appendChild(this.renderer.domElement);
+       $("#gameContainer").append(this.renderer.domElement);
        if(this.show_control_gui){
          control = new function () {
              this.rotationSpeed = 0.001;
