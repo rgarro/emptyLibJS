@@ -12,4 +12,12 @@ class ControllableModel {
   }
 
   //setGame(gameObjs){}
+
+  loadFBXModel() {
+    const objs = [];
+    const loader = new THREE.FBXLoader();
+    console.log(loader);
+  }
+
+  loadModel() {}
 }
