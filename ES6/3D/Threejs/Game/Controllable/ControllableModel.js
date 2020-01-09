@@ -20,7 +20,8 @@ class ControllableModel {
   loadFBXModel() {
     var loader = new THREE.FBXLoader(); //new FBXLoader();
     console.log(loader);
-    console.log("here we go ...");
+    console.log("Polinaris Presidente ...");
+    console.log(this.FbxModelUrl);
     loader.load(
       this.FbxModelUrl,
       function(object3d) {
@@ -30,5 +31,28 @@ class ControllableModel {
     );
   }
 
-  loadModel() {}
+  loadModel() {
+    //var loader = new THREE.JSONLoader();
+    var loader = new THREE.ObjectLoader();
+    console.log(this.modelUrl);
+    console.log(this.scene);
+    console.log(loader);
+    console.log("Polinaris Presidente xxxy");
+    loader.load(
+      this.modelUrl,
+      function(model, materials) {
+        var material = new THREE.MeshPhongMaterial();
+        //var material = new THREE.MeshBasicMaterial();
+        material.color.set(this.vehicleColor);
+        this.vehicleMesh = new THREE.Mesh(model, material);
+        this.vehicleMesh.name = this.vehicleMeshName;
+        //this.vehicleMesh.scale.set(this.scale, this.scale, this.scale);
+        this.scene.add(this.vehicleMesh);
+        //this.vehicleMesh.rotation.y = -360;
+        this.postLoaded();
+      }.bind(this)
+    );
+  }
+
+  postLoaded() {}
 }
