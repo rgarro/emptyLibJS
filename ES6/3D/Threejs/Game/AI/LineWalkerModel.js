@@ -24,4 +24,8 @@ class LineWalkerModel {
     this.balls = [];
     this.PropsRemover = null;
   }
+
+  init() {}
+
+  loadModel() {}
 }

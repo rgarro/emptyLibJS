@@ -33,13 +33,15 @@ class ControllableModel {
 
   loadModel() {
     //var loader = new THREE.JSONLoader();
+    //var loader = new LegacyJSONLoader(THREE);
     var loader = new THREE.ObjectLoader();
+    console.log(this.ObjModelUrl);
     console.log(this.modelUrl);
+    console.log(this.FbxModelUrl);
     console.log(this.scene);
-    console.log(loader);
-    console.log("Polinaris Presidente xxxy");
+    console.log("Polinaris Presidente ...");
     loader.load(
-      this.modelUrl,
+      this.ObjModelUrl,
       function(model, materials) {
         var material = new THREE.MeshPhongMaterial();
         //var material = new THREE.MeshBasicMaterial();
