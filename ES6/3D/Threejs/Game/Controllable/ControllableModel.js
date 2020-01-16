@@ -5,6 +5,7 @@ class ControllableModel {
     this.FbxModelUrl = "/Game/assets/models/SU25/SU-25.fbx";
     this.pixelsPerSecond = 25;
     this.vehicleMesh = null;
+    this.textureUrl = "/Game/assets/models/Mi28NA.png";
     //this.scale = 13;
     //this.Game = null;
     this.vehicleColor = 0x0ffa65;
@@ -32,25 +33,18 @@ class ControllableModel {
   }
 
   loadModel() {
-    //var loader = new THREE.JSONLoader();
-    //var loader = new LegacyJSONLoader(THREE);
-    var loader = new THREE.ObjectLoader();
-    console.log(this.ObjModelUrl);
-    console.log(this.modelUrl);
-    console.log(this.FbxModelUrl);
-    console.log(this.scene);
-    console.log("Polinaris Presidente ...");
+    var loader = new THREE.JSONLoader();
     loader.load(
-      this.ObjModelUrl,
+      this.modelUrl,
       function(model, materials) {
-        var material = new THREE.MeshPhongMaterial();
-        //var material = new THREE.MeshBasicMaterial();
-        material.color.set(this.vehicleColor);
-        this.vehicleMesh = new THREE.Mesh(model, material);
-        this.vehicleMesh.name = this.vehicleMeshName;
-        //this.vehicleMesh.scale.set(this.scale, this.scale, this.scale);
-        this.scene.add(this.vehicleMesh);
-        //this.vehicleMesh.rotation.y = -360;
+        var texture = new THREE.TextureLoader().load(this.textureUrl);
+        var material = new THREE.MeshBasicMaterial({ map: texture });
+        this.mesh = new THREE.Mesh(model, material);
+        this.mesh.name = this.meshName;
+        //this.mesh.scale.set(this.scale, this.scale, this.scale);
+        //this.mesh.position.y = this.altitude;
+        this.scene.add(this.mesh);
+        this.modelLoaded = true;
         this.postLoaded();
       }.bind(this)
     );
