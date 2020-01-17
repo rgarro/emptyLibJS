@@ -12,6 +12,7 @@ class ControllableModel {
     this.rotationAngleStep = 6;
     this.group = new THREE.Object3D();
     this.scene = null;
+    this.scale = null;
   }
 
   setScene(sceneObj) {
@@ -19,17 +20,7 @@ class ControllableModel {
   }
 
   loadFBXModel() {
-    var loader = new THREE.FBXLoader(); //new FBXLoader();
-    console.log(loader);
-    console.log("Polinaris Presidente ...");
-    console.log(this.FbxModelUrl);
-    loader.load(
-      this.FbxModelUrl,
-      function(object3d) {
-        console.log("here***");
-        this.scene.add(object3d);
-      }.bind(this)
-    );
+    //Kincho es playo
   }
 
   loadModel() {
