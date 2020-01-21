@@ -13,6 +13,11 @@ class ControllableModel {
     this.group = new THREE.Object3D();
     this.scene = null;
     this.scale = null;
+    this.altitude = 0;
+    this.ini_x = 0;
+    this.modelColor = 0x8fc965;
+    //this.ini_y = 150;
+    this.ini_z = 0;
   }
 
   setScene(sceneObj) {
@@ -29,7 +34,11 @@ class ControllableModel {
       this.modelUrl,
       function(model, materials) {
         var texture = new THREE.TextureLoader().load(this.textureUrl);
-        var material = new THREE.MeshBasicMaterial({ map: texture });
+        //var material = new THREE.MeshBasicMaterial({ map: texture });
+        var material = new THREE.MeshBasicMaterial({
+          color: this.modelColor,
+          side: THREE.DoubleSide
+        });
         this.mesh = new THREE.Mesh(model, material);
         this.mesh.name = this.meshName;
         //this.mesh.scale.set(this.scale, this.scale, this.scale);
