@@ -28,6 +28,17 @@ class ControllableModel {
     //Kincho es playo
   }
 
+  loadObjModel() {
+    var loader = new THREE.ObjectLoader();
+    loader.load(
+      this.modelUrl,
+      function(obj) {
+        console.log("loading objet ..");
+        this.scene.add(obj);
+      }.bind(this)
+    );
+  }
+
   loadModel() {
     var loader = new THREE.JSONLoader();
     loader.load(
