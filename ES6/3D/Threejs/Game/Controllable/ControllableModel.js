@@ -18,10 +18,16 @@ class ControllableModel {
     this.modelColor = 0x8fc965;
     //this.ini_y = 150;
     this.ini_z = 0;
+    this.gameIsSet = false;
   }
 
   setScene(sceneObj) {
     this.scene = sceneObj;
+  }
+
+  setGame(game) {
+    this.game = game;
+    this.gameIsSet = true;
   }
 
   loadFBXModel() {
@@ -54,7 +60,7 @@ class ControllableModel {
         this.mesh.name = this.meshName;
         //this.mesh.scale.set(this.scale, this.scale, this.scale);
         //this.mesh.position.y = this.altitude;
-        this.scene.add(this.mesh);
+        //this.scene.add(this.mesh);
         this.modelLoaded = true;
         this.postLoaded();
       }.bind(this)
