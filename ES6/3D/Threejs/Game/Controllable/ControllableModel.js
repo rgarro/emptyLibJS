@@ -19,6 +19,7 @@ class ControllableModel {
     //this.ini_y = 150;
     this.ini_z = 0;
     this.gameIsSet = false;
+    this.is_textured_material = false;
   }
 
   setScene(sceneObj) {
@@ -50,12 +51,15 @@ class ControllableModel {
     loader.load(
       this.modelUrl,
       function(model, materials) {
-        var texture = new THREE.TextureLoader().load(this.textureUrl);
-        //var material = new THREE.MeshBasicMaterial({ map: texture });
-        var material = new THREE.MeshBasicMaterial({
-          color: this.modelColor,
-          side: THREE.DoubleSide
-        });
+        if(this.is_textured_material){
+          var texture = new THREE.TextureLoader().load(this.textureUrl);
+          var material = new THREE.MeshBasicMaterial({ map: texture });
+        }else{
+          var material = new THREE.MeshBasicMaterial({
+            color: this.modelColor,
+            side: THREE.DoubleSide
+          });
+        }
         this.mesh = new THREE.Mesh(model, material);
         this.mesh.name = this.meshName;
         //this.mesh.scale.set(this.scale, this.scale, this.scale);
