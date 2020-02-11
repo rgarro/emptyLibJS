@@ -62,9 +62,6 @@ class ControllableModel {
         }
         this.mesh = new THREE.Mesh(model, material);
         this.mesh.name = this.meshName;
-        //this.mesh.scale.set(this.scale, this.scale, this.scale);
-        //this.mesh.position.y = this.altitude;
-        //this.scene.add(this.mesh);
         this.modelLoaded = true;
         this.postLoaded();
       }.bind(this)
@@ -72,4 +69,12 @@ class ControllableModel {
   }
 
   postLoaded() {}
+
+  onRender(){
+    this.postRender();
+  }
+
+  postRender(){
+
+  }
 }
