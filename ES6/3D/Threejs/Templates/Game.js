@@ -19,6 +19,7 @@ class Game {
     this.ds = null; //datastats object
     this.clearColor = 0x000000;
     this.enable_shadows = true;
+    this.game_is_started = false;
     //this.l = new Light();
     /*if (typeof arguments[0] != "undefined") {
       this.setContainer(arguments[0]);
