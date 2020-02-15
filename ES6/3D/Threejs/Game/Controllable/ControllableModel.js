@@ -20,6 +20,11 @@ class ControllableModel {
     this.ini_z = 0;
     this.gameIsSet = false;
     this.is_textured_material = false;
+    this.controll = null;
+  }
+
+  setHelicopterControll(){
+    this.controll = new HelicopterController();
   }
 
   setScene(sceneObj) {
