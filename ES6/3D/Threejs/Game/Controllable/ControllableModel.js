@@ -37,7 +37,7 @@ class ControllableModel {
   }
 
   loadFBXModel() {
-    //Kincho es playo
+
   }
 
   loadObjModel() {
