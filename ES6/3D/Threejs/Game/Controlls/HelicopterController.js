@@ -1,6 +1,6 @@
 class HelicopterController {
   constructor(){
-console.log("helicopter controller started");
+//console.log("helicopter controller started");
     this.group = null;
     this.is_controllable = false;
     this.group_is_set = false;
@@ -43,16 +43,16 @@ console.log("helicopter controller started");
 
   enableControl(){
     this.is_controllable = true;
-console.log(this.is_controllable);
+//console.log(this.is_controllable);
   }
 
   disableControl(){
     this.is_controllable = false;
-console.log(this.is_controllable);    
+//console.log(this.is_controllable);
   }
 
   initListeners(){
-console.log("the fatal sound of broken dreams ...");
+//console.log("the fatal sound of broken dreams ...");
   }
 
 }

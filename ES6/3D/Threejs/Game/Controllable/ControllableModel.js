@@ -1,3 +1,7 @@
+/**
+ * A model with controll setters
+ *
+ */
 class ControllableModel {
   constructor() {
     this.vehicleMeshName = "meshNames";
