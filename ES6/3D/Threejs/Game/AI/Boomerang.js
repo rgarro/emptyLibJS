@@ -1,6 +1,6 @@
 /**
- *    _o         >
- *   //\_    <
+ *    _o         >             %
+ *   //\_   % <
  *   /\
  *  / /
  * continuos Boomerang behavior on object3d Z axis
